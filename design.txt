@@ -1,0 +1,23 @@
+Functionality:
+    - Create workspaces
+        - Groups of windows
+        - Savable
+        - Switchable
+    - Create windows
+        - Contains some data of a single type
+            - note
+            - list
+            - table
+            - etc.
+
+Item types:
+    - Table
+        - headers
+        - add/remove
+        - sortable
+        - strikable
+        - editable
+    - List
+        - items draggable
+        - add/remove
+        - strikable
