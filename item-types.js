@@ -168,6 +168,36 @@ itemTypes.table = (function() {
                 
                 self.render();
             };
+        },
+        makeAddColumnHandler = function(e)
+        {
+            var self = this;
+
+            return function(e)
+            {
+                var header = prompt('Please enter header text for your column');
+                self.addColumn(header);
+                return false;
+            }
+        },
+        makeAddRowHandler = function(e)
+        {
+            var self = this;
+
+            return function(e)
+            {
+                self.addRow();
+            }
+        },
+        makeDeleteRowHandler = function(i)
+        {
+            var self = this;
+
+            return function(e)
+            {
+                self.data.body.splice(i, 1);
+                self.render();
+            }
         };
 
     tableObject.load = function(data)
@@ -202,17 +232,17 @@ itemTypes.table = (function() {
             headerLength = this.data.headers.length,
             bodyLength = this.data.body.length,
             rowLength,
-            table,
-            head,
-            body,
-            row,
-            cell;
-
-        table = dom.create('table');
-        head = dom.create('thead');
-        body = dom.create('tbody');
-        row = dom.create('tr');
-        row.appendChild(dom.create('th'));
+            container = dom.create('div'),
+            table = dom.create('table'),
+            head = dom.create('thead'),
+            body = dom.create('tbody'),
+            row = dom.create('tr'),
+            cell = dom.create('th'),
+            addRow = dom.create('input'),
+            addColumn = dom.create('input');
+        
+        row.appendChild(cell);
+        row.appendChild(cell.cloneNode());
 
         for (i = 0; i < headerLength; i++)
         {
@@ -220,6 +250,11 @@ itemTypes.table = (function() {
             cell.appendChild(dom.text(this.data.headers[i]));
             cell.addEventListener('click', makeSortHandler.call(this, i));
             row.appendChild(cell);
+
+            if (typeof this.sortOrder[i] !== 'undefined')
+            {
+                cell.className = this.sortOrder[i];
+            }
         }
 
         head.appendChild(row);
@@ -237,6 +272,12 @@ itemTypes.table = (function() {
             cell = dom.create('td');
             cell.className = 'mark';
             cell.addEventListener('click', makeMarkHandler.call(this, i));
+            cell.appendChild(dom.text('M'));
+            row.appendChild(cell);
+
+            cell = dom.create('td');
+            cell.className = 'delete';
+            cell.addEventListener('click', makeDeleteRowHandler.call(this, i));
             cell.appendChild(dom.text('X'));
             row.appendChild(cell);
 
@@ -251,11 +292,24 @@ itemTypes.table = (function() {
             body.appendChild(row);
         }
 
+        addRow.className = 'add-row control';
+        addRow.type = 'button';
+        addRow.value = 'Add Row';
+        addRow.addEventListener('click', makeAddRowHandler.call(this));
+
+        addColumn.className = 'add-row control';
+        addColumn.type = 'button';
+        addColumn.value = 'Add Column';
+        addColumn.addEventListener('click', makeAddColumnHandler.call(this));
+
         table.appendChild(head);
         table.appendChild(body);
-        parent.appendChild(table);
+        container.appendChild(table);
+        container.appendChild(addRow);
+        container.appendChild(addColumn);
+        parent.appendChild(container);
 
-        this.element = table;
+        this.element = container;
     };
 
     tableObject.addRow = function(data)
