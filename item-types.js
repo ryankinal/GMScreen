@@ -1,28 +1,303 @@
-(function() {
-    var itemTypes = {};
-    itemTypes.base = {
-        save: function() {
-            // save to local storage
+var itemTypes = {},
+    dom = {
+        create: function(tagName, context)
+        {
+            context = context || document;
+
+            return context.createElement(tagName)
         },
-        load: function(data) {
-            // load from local storage
+        text: function(value, context)
+        {
+            context = context || document;
+            value = value || '';
+
+            return context.createTextNode(value);
         },
-        render: function() {
-            // default rendering code
+        bind: function(element, type, listener)
+        {
+            return element.addEventListener(type, listener);
+        },
+        empty: function(element)
+        {
+            while (element.childNodes.length)
+            {
+                element.removeChild(element.firstChild);
+            }
         }
     };
 
-    itemTypes.table = Object.create(itemTypes.base);
-    itemTypes.table.create = function(data) {
+itemTypes.base = {
+    load: function(data) {
+        if (data.charAt)
+        {
+            data = JSON.parse(data);
+        }
 
-    };
-    itemTypes.table.render = function() {
-        // table rendering code
-    };
-    itemTypes.table.sort = function(colIndex) {
+        this.data = data;
+    },
+    stringify: function()
+    {
+        return JSON.stringify(this.data);
+    }
+};
 
-    };
-    itemTypes.table.addRow = function(data) {
+itemTypes.table = (function() { 
+    var tableObject = Object.create(itemTypes.base);
 
+    var makeStartEditCell = function(i, j)
+        {
+            var self = this;
+
+            return function(e) {
+                e = e || window.event;
+
+                var target = e.target || e.srcElement,
+                    value = self.data.body[i][j],
+                    input = dom.create('input');
+
+                input.type = 'text';
+                input.value = value;
+                dom.empty(target);
+                target.appendChild(input);
+
+                input.addEventListener('keypress', makeEndEditCell.call(self, i, j));
+                input.addEventListener('keypress', makeCancelEditCell.call(self, i, j));
+                input.addEventListener('blur', makeBlurEditCell.call(self, i, j));
+                input.focus();
+            };
+        },
+        makeEndEditCell = function(i, j)
+        {
+            var self = this;
+
+            return function(e) {
+                e = e || window.event;
+
+                var target = e.target || e.srcElement,
+                    key = e.keyCode || e.which,
+                    value = target.value;
+
+                if (key === 13)
+                {
+                    self.data.body[i][j] = value;
+                    self.render();
+                    return false;
+                }
+            };
+        },
+        makeCancelEditCell = function(i, j)
+        {
+            var self = this;
+
+            return function(e) {
+                e = e || window.event;
+
+                var key = e.keyCode || e.which;
+
+                if (key === 27)
+                {
+                    self.render();
+                    return false;
+                }
+            };
+        },
+        makeBlurEditCell = function(i, j)
+        {
+            var self = this;
+
+            return function(e) {
+                self.render();
+            };
+        },
+        makeMarkHandler = function(i)
+        {
+            var self = this;
+
+            return function(e) {
+                e = e || window.event;
+
+                var target = e.target || e.srcElement,
+                    parentRow = e.target.parentNode;
+
+                self.data.body[i].marked = !self.data.body[i].marked;
+
+                if (self.data.body[i].marked)
+                {
+                    parentRow.className = 'marked';
+                }
+                else
+                {
+                    parentRow.className = '';
+                }
+            };
+        },
+        makeSortHandler = function(colIndex)
+        {
+            var self = this;
+
+            return function(e) {
+                e = e || window.event;
+
+                var target = e.target || e.srcElement;
+
+                if (typeof self.sortOrder[colIndex] === 'undefined')
+                {
+                    self.sortOrder[colIndex] = 'desc';
+                }
+                else if (self.sortOrder[colIndex] === 'desc')
+                {
+                    self.sortOrder[colIndex] = 'asc';
+                }
+                else
+                {
+                    self.sortOrder[colIndex] = 'desc';
+                }
+
+                if (self.sortOrder[colIndex] === 'desc')
+                {
+                    self.data.body.sort(function(x, y) {
+                        return x[colIndex] < y[colIndex] ? 1 : -1;
+                    });
+                }
+                else
+                {
+                    self.data.body.sort(function(x, y) {
+                        return x[colIndex] < y[colIndex] ? -1 : 1;
+                    });   
+                }
+                
+                self.render();
+            };
+        };
+
+    tableObject.load = function(data)
+    {
+        itemTypes.base.load.call(this, data);
+
+        if (typeof data.headers === 'undefined')
+        {
+            throw('A table must contain headers');
+            return false;
+        }
+
+        if (typeof data.body === 'undefined')
+        {
+            data.body = [];
+        }
+
+        this.sortOrder = [];
+    }
+
+    tableObject.render = function(parent)
+    {
+        if (this.element)
+        {
+            this.element.parentNode.removeChild(this.element);
+        }
+
+        parent = parent || document.body;
+
+        var i,
+            j,
+            headerLength = this.data.headers.length,
+            bodyLength = this.data.body.length,
+            rowLength,
+            table,
+            head,
+            body,
+            row,
+            cell;
+
+        table = dom.create('table');
+        head = dom.create('thead');
+        body = dom.create('tbody');
+        row = dom.create('tr');
+        row.appendChild(dom.create('th'));
+
+        for (i = 0; i < headerLength; i++)
+        {
+            cell = dom.create('th');
+            cell.appendChild(dom.text(this.data.headers[i]));
+            cell.addEventListener('click', makeSortHandler.call(this, i));
+            row.appendChild(cell);
+        }
+
+        head.appendChild(row);
+
+        for (i = 0; i < bodyLength; i++)
+        {
+            rowLength = this.data.body[i].length;
+            row = dom.create('tr');
+
+            if (this.data.body[i].marked)
+            {
+                row.className = 'marked';
+            }
+
+            cell = dom.create('td');
+            cell.className = 'mark';
+            cell.addEventListener('click', makeMarkHandler.call(this, i));
+            cell.appendChild(dom.text('X'));
+            row.appendChild(cell);
+
+            for (j = 0; j < rowLength; j++)
+            {
+                cell = dom.create('td');
+                cell.appendChild(dom.text(this.data.body[i][j]));
+                cell.addEventListener('click', makeStartEditCell.call(this, i, j));
+                row.appendChild(cell);
+            }
+
+            body.appendChild(row);
+        }
+
+        table.appendChild(head);
+        table.appendChild(body);
+        parent.appendChild(table);
+
+        this.element = table;
     };
+
+    tableObject.addRow = function(data)
+    {
+        if (data)
+        {
+            if (data.length !== this.data.headers.length)
+            {
+                throw('Number of data elements must be the same as the number of headers');
+                return false;
+            }
+
+            this.data.body.push(data);
+        }
+        else
+        {
+            this.data.body.push(new Array(this.data.headers.length));
+        }
+        
+        this.render();
+    };
+
+    tableObject.addColumn = function(header)
+    {
+        var i,
+            bodyLength = this.data.body.length;
+
+        if (!header)
+        {
+            throw('Header value is required when adding a column to a table');
+            return false;
+        }
+
+        this.data.headers.push(header);
+        
+        for (i = 0; i < bodyLength; i++)
+        {
+            this.data.body[i].push('');
+        }
+
+        this.render();
+    }
+
+    return tableObject;
 })();
