@@ -56,7 +56,7 @@ itemTypes.table = (function() {
                     input = dom.create('input');
 
                 input.type = 'text';
-                input.value = value;
+                input.value = value || '';
                 dom.empty(target);
                 target.appendChild(input);
 
