@@ -23,3 +23,25 @@ newTable.load({
 });
 
 newTable.render();
+
+newList = Object.create(itemTypes.orderedList);
+
+newList.load([
+    'testing some good stuff here',
+    'moar testing please!',
+    'I can totally believe it\'s not butter'
+]);
+
+newList.render();
+
+/*var textarea = document.createElement('textarea');
+
+textarea.addEventListener('blur', function() {
+    console.log('blurred');
+});
+
+document.body.appendChild(textarea);
+
+textarea.focus();
+
+document.body.removeChild(textarea);*/
