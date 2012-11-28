@@ -44,37 +44,35 @@ UIWindowSet = (function() {
 		}
 	}
 
+	windowSetObj.callOnAll = function(functionName)
+	{
+		var i, win;
+
+		for (i = 0; i < this.windows.length; i++)
+		{
+			win = this.windows[i];
+			win[functionName].apply(win, Array.prototype.slice.call(arguments, 1));
+		}
+	}
+
 	windowSetObj.render = function()
 	{
-		var i,
-			numberOfWindows = this.windows.length;
-
-		for (i = 0; i < numberOfWindows; i++)
-		{
-			this.windows[i].render();
-		}
+		this.callOnAll('render');
 	}
 
 	windowSetObj.hide = function()
 	{
-		var i,
-			numberOfWindows = this.windows.length;
-
-		for (i = 0; i < numberOfWindows; i++)
-		{
-			this.windows[i].hide();
-		}
+		this.callOnAll('hide');
 	}
 
 	windowSetObj.show = function()
 	{
-		var i,
-			numberOfWindows = this.windows.length;
+		this.callOnAll('show');
+	}
 
-		for (i = 0; i < numberOfWindows; i++)
-		{
-			this.windows[i].show();
-		}
+	windowSetObj.snap = function(value)
+	{
+		this.callOnAll('snap');
 	}
 
 	return windowSetObj;

@@ -27,7 +27,9 @@ UIWindow = (function() {
 		mouseUpHandler = function(e)
 		{
 			lastPosition = null;
+			currentMover.update();
 			window.removeEventListener('mousemove', moveHandler);
+			window.removeEventListener('mouseup', mouseUpHandler);
 		},
 		moveHandler = function(e)
 		{
@@ -46,6 +48,8 @@ UIWindow = (function() {
 
 	windowObject.init = function(title, parent)
 	{
+		this.snapTo = true;
+
 		this.width = 500;
 		this.height = 300;
 		
@@ -87,6 +91,12 @@ UIWindow = (function() {
 
 	windowObject.update = function()
 	{
+		if (!lastPosition && this.snapTo)
+		{
+			this.x = Math.round(this.x / 10) * 10;
+			this.y = Math.round(this.y / 10) * 10;
+		}
+
 		this.container.style.left = this.x + 'px';
 		this.container.style.top = this.y + 'px';
 		this.container.style.zIndex = this.z;
@@ -100,6 +110,18 @@ UIWindow = (function() {
 	windowObject.show = function()
 	{
 		this.container.style.display = 'block';
+	}
+
+	windowObject.snap = function(value)
+	{
+		if (typeof value === 'undefined')
+		{
+			this.snapTo = !this.snapTo;
+		}
+		else
+		{
+			this.snapTo = value;
+		}
 	}
 
 	return windowObject;
