@@ -25,6 +25,12 @@ body
 	cursor: move;
 }
 
+.shaded .ui-header
+{
+	border-radius: 10px;
+	border-bottom: none;
+}
+
 .ui-content
 {
 	padding: 10px;

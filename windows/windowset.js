@@ -72,7 +72,12 @@ UIWindowSet = (function() {
 
 	windowSetObj.snap = function(value)
 	{
-		this.callOnAll('snap');
+		this.callOnAll('snap', value);
+	}
+
+	windowSetObj.shade = function()
+	{
+		this.callOnAll('shade');
 	}
 
 	return windowSetObj;

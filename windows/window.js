@@ -124,5 +124,21 @@ UIWindow = (function() {
 		}
 	}
 
+	windowObject.shade = function()
+	{
+		if (this.shaded)
+		{
+			this.container.className = this.container.className.replace(/\s*\bshaded\b\s*/g, '');
+			this.content.style.display = 'block';
+			this.shaded = false;
+		}
+		else
+		{
+			this.container.className += ' shaded';
+			this.content.style.display = 'none';
+			this.shaded = true;
+		}
+	}
+
 	return windowObject;
 })();
