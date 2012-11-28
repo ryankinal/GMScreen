@@ -37,9 +37,6 @@ UIWindow = (function() {
 
 			if (currentMover && lastPosition)
 			{
-				console.dir(position);
-				console.dir(lastPosition);
-				console.dir(currentMover);
 				currentMover.x += (position.x - lastPosition.x);
 				currentMover.y += (position.y - lastPosition.y);
 				lastPosition = position;
@@ -70,11 +67,19 @@ UIWindow = (function() {
 
 		this.header.addEventListener('mousedown', makeMouseDownHandler.call(this));
 
+		this.title = title;
 		this.parent = parent || document.body;
 	};
 
 	windowObject.render = function()
 	{
+		if (currentMover)
+		{
+			currentMover.z = 1;
+			currentMover.update();
+		}
+
+		this.z = 200;
 		this.container.style.position = 'absolute';
 		this.parent.appendChild(this.container);
 		this.update();
@@ -85,6 +90,16 @@ UIWindow = (function() {
 		this.container.style.left = this.x + 'px';
 		this.container.style.top = this.y + 'px';
 		this.container.style.zIndex = this.z;
+	}
+
+	windowObject.hide = function()
+	{
+		this.container.style.display = 'none';
+	}
+
+	windowObject.show = function()
+	{
+		this.container.style.display = 'block';
 	}
 
 	return windowObject;
