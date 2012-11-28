@@ -61,8 +61,16 @@ itemTypes.list = (function() {
 				target.appendChild(text);
 
 				text.addEventListener('keypress', makeEndEditHandler.call(self, i));
-				text.addEventListener('keypress', makeCancelEditHandler.call(self, i));
-				text.addEventListener('blur', makeBlurEditHandler.call(self, i));
+				text.addEventListener('keyup', makeCancelEditHandler.call(self, i));
+				text.addEventListener('click', function(e) {
+					e = e || window.event;
+					e.cancelBubble = true;
+					if (e.stopPropagation)
+					{
+						e.stopPropagation();
+					}
+				});
+				text.focus();
 
 				return false;
 			}
@@ -104,15 +112,6 @@ itemTypes.list = (function() {
 				}
 			}
 		},
-		makeBlurEditHandler = function(i)
-		{
-			var self = this;
-
-			return function(e)
-			{
-				self.render();
-			}
-		},
 		makeDeleteHandler = function(i)
 		{
 			var self = this;
@@ -130,7 +129,32 @@ itemTypes.list = (function() {
 
 			return function(e)
 			{
-				self.addItem();
+				self.addItem.call(self);
+				return false;
+			}
+		},
+		makeMarkHandler = function(i)
+		{
+			var self = this;
+
+			return function(e)
+			{
+				e = e || window.event;
+
+				var target = e.target || e.srcElement,
+					marked = self.data[i].marked;
+
+				if (marked)
+				{
+					self.data[i].marked = false;
+
+				}
+				else
+				{
+					self.data[i].marked = true;
+				}
+
+				self.render();
 				return false;
 			}
 		};
@@ -138,22 +162,14 @@ itemTypes.list = (function() {
 	listObject.load = function(data)
 	{
 		itemTypes.base.load.call(this, data);
-
-		if (typeof this.data === 'undefined')
-		{
-			this.data = [];
-		}
-		else if (this.data.length)
-		{
-			this.data = '';
-		}
 	}
 
 	listObject.render = function(parent)
 	{
-		if (this.element)
+		if (this.element && dom.inDocument(this.element))
 		{
 			this.element.parentNode.removeChild(this.element);
+			this.element = null;
 		}
 
 		parent = parent || document.body;
@@ -167,22 +183,24 @@ itemTypes.list = (function() {
 			addItem = dom.create('input'),
 			moveUp,
 			moveDown,
+			markItem,
 			deleteItem,
 			controls;
 
 		for (i = 0; i < dataLength; i++)
 		{
 			item = dom.create('li');
-			itemText = dom.create('span');
+			itemText = dom.create('div');
 			itemText.appendChild(dom.text(this.data[i]));
 			item.appendChild(itemText);
+			itemText.addEventListener('click', makeStartEditHandler.call(this, i));
 
 			if (this.data[i].marked)
 			{
 				itemText.className = 'marked';
 			}
 
-			controls = dom.create('span');
+			controls = dom.create('div');
 
 			moveUp = dom.create('input');
 			moveUp.className = 'move-up';
@@ -196,6 +214,12 @@ itemTypes.list = (function() {
 			moveDown.value = 'Down';
 			moveDown.addEventListener('click', makeMoveDownHandler.call(this, i));
 
+			markItem = dom.create('input');
+			markItem.className = 'mark';
+			markItem.type = 'button';
+			markItem.value = 'Mark';
+			markItem.addEventListener('click', makeMarkHandler.call(this, i));
+
 			deleteItem = dom.create('input');
 			deleteItem.className = 'delete';
 			deleteItem.type = 'button';
@@ -206,7 +230,7 @@ itemTypes.list = (function() {
 			controls.appendChild(moveDown);
 			controls.appendChild(deleteItem);
 
-			list.appendChild(controls);
+			item.appendChild(controls);
 			list.appendChild(item);
 		}
 
@@ -218,8 +242,6 @@ itemTypes.list = (function() {
 
 		container.appendChild(list);
 		container.appendChild(addItem);
-
-		container.appendChild(list);
 		parent.appendChild(container);
 
 		this.element = container;
@@ -227,11 +249,14 @@ itemTypes.list = (function() {
 
 	listObject.addItem = function(data)
 	{
-		if (!data.charAt)
+		if (typeof data === 'undefined')
 		{
-			this.data.push(data);
+			data = '[click to edit]';
 		}
 
+		this.data.push(data);
 		this.render();
 	}
+
+	return listObject;
 })();
