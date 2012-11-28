@@ -9,15 +9,23 @@ UIWindow = (function() {
 			return function(e)
 			{
 				e = e || window.event;
+				
+				if (currentMover)
+				{
+					currentMover.z = 1;
+					currentMover.update();
+				}
+
 				currentMover = self;
 				lastPosition = dom.mousePosition(e);
+				currentMover.z = 200;
+				currentMover.update();
 				window.addEventListener('mousemove', moveHandler);
 				window.addEventListener('mouseup', mouseUpHandler);
 			}
 		},
 		mouseUpHandler = function(e)
 		{
-			currentMover = null;
 			lastPosition = null;
 			window.removeEventListener('mousemove', moveHandler);
 		},
@@ -46,6 +54,7 @@ UIWindow = (function() {
 		
 		this.x = window.innerWidth / 2 - 250;
 		this.y = window.innerHeight / 2 - 150;
+		this.z = 1;
 
 		this.container = dom.create('div');
 		this.header = dom.create('div');
@@ -76,6 +85,7 @@ UIWindow = (function() {
 		this.container.style.left = this.x + 'px';
 		this.container.style.top = this.y + 'px';
 		this.container.style.width = this.width + 'px';
+		this.container.style.zIndex = this.z;
 	}
 
 	return windowObject;
