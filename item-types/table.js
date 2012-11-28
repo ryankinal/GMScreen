@@ -18,8 +18,7 @@ itemTypes.table = (function() {
                 target.appendChild(input);
 
                 input.addEventListener('keypress', makeEndEditCell.call(self, i, j));
-                input.addEventListener('keypress', makeCancelEditCell.call(self, i, j));
-                input.addEventListener('blur', makeBlurEditCell.call(self, i, j));
+                input.addEventListener('keyup', makeCancelEditCell.call(self, i, j));
                 input.focus();
             };
         },
