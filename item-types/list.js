@@ -172,7 +172,7 @@ itemTypes.list = (function() {
 			this.element = null;
 		}
 
-		parent = parent || document.body;
+		parent = parent || this.parent || document.body;
 
 		var i,
 			dataLength = this.data.length,
@@ -202,35 +202,40 @@ itemTypes.list = (function() {
 
 			controls = dom.create('div');
 
-			moveUp = dom.create('input');
-			moveUp.className = 'move-up';
-			moveUp.type = 'button';
-			moveUp.value = 'Up';
-			moveUp.addEventListener('click', makeMoveUpHandler.call(this, i));
+			if (i !== 0)
+			{
+				moveUp = dom.create('input');
+				moveUp.className = 'move-up';
+				moveUp.type = 'button';
+				moveUp.value = 'Up';
+				moveUp.addEventListener('click', makeMoveUpHandler.call(this, i));
+				controls.appendChild(moveUp);
+			}
 
-			moveDown = dom.create('input');
-			moveDown.className = 'move-down';
-			moveDown.type = 'button';
-			moveDown.value = 'Down';
-			moveDown.addEventListener('click', makeMoveDownHandler.call(this, i));
+			if (i !== dataLength - 1)
+			{
+				moveDown = dom.create('input');
+				moveDown.className = 'move-down';
+				moveDown.type = 'button';
+				moveDown.value = 'Down';
+				moveDown.addEventListener('click', makeMoveDownHandler.call(this, i));		
+				controls.appendChild(moveDown);
+			}
 
 			markItem = dom.create('input');
 			markItem.className = 'mark';
 			markItem.type = 'button';
 			markItem.value = 'Mark';
 			markItem.addEventListener('click', makeMarkHandler.call(this, i));
+			controls.appendChild(markItem);
 
 			deleteItem = dom.create('input');
 			deleteItem.className = 'delete';
 			deleteItem.type = 'button';
 			deleteItem.value = 'Delete';
 			deleteItem.addEventListener('click', makeDeleteHandler.call(this, i))
-
-			controls.appendChild(moveUp);
-			controls.appendChild(moveDown);
-			controls.appendChild(markItem);
 			controls.appendChild(deleteItem);
-
+			
 			item.appendChild(controls);
 			list.appendChild(item);
 		}
@@ -246,6 +251,7 @@ itemTypes.list = (function() {
 		parent.appendChild(container);
 
 		this.element = container;
+		this.parent = parent;
 	}
 
 	listObject.addItem = function(data)
