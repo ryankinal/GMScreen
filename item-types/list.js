@@ -142,16 +142,15 @@ itemTypes.list = (function() {
 				e = e || window.event;
 
 				var target = e.target || e.srcElement,
-					marked = self.data[i].marked;
+					marked = self.marked[i];
 
 				if (marked)
 				{
-					self.data[i].marked = false;
-
+					self.marked[i] = false;
 				}
 				else
 				{
-					self.data[i].marked = true;
+					self.marked[i] = true;
 				}
 
 				self.render();
@@ -162,6 +161,7 @@ itemTypes.list = (function() {
 	listObject.load = function(data)
 	{
 		itemTypes.base.load.call(this, data);
+		this.marked = [];
 	}
 
 	listObject.render = function(parent)
@@ -195,7 +195,7 @@ itemTypes.list = (function() {
 			item.appendChild(itemText);
 			itemText.addEventListener('click', makeStartEditHandler.call(this, i));
 
-			if (this.data[i].marked)
+			if (this.marked[i])
 			{
 				itemText.className = 'marked';
 			}
@@ -228,6 +228,7 @@ itemTypes.list = (function() {
 
 			controls.appendChild(moveUp);
 			controls.appendChild(moveDown);
+			controls.appendChild(markItem);
 			controls.appendChild(deleteItem);
 
 			item.appendChild(controls);
