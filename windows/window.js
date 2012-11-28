@@ -84,7 +84,6 @@ UIWindow = (function() {
 	{
 		this.container.style.left = this.x + 'px';
 		this.container.style.top = this.y + 'px';
-		this.container.style.width = this.width + 'px';
 		this.container.style.zIndex = this.z;
 	}
 
