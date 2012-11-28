@@ -2,6 +2,15 @@ UIWindow = (function() {
 	var windowObject = {},
 		currentMover,
 		lastPosition,
+		makeShadeHandler = function()
+		{
+			var self = this;
+
+			return function(e)
+			{
+				self.shade();
+			}
+		},
 		makeMouseDownHandler = function()
 		{
 			var self = this;
@@ -60,16 +69,22 @@ UIWindow = (function() {
 		this.container = dom.create('div');
 		this.header = dom.create('div');
 		this.content = dom.create('div');
+		this.shader = dom.create('div');
 
 		this.container.className = 'ui-window';
 		this.header.className = 'ui-header';
 		this.content.className = 'ui-content';
+		this.shader.className = 'ui-shader';
 
 		this.header.appendChild(dom.text(title));
+		this.shader.appendChild(dom.text('^'));
+
 		this.container.appendChild(this.header);
 		this.container.appendChild(this.content);
+		this.container.appendChild(this.shader);
 
 		this.header.addEventListener('mousedown', makeMouseDownHandler.call(this));
+		this.shader.addEventListener('click', makeShadeHandler.call(this));
 
 		this.title = title;
 		this.parent = parent || document.body;

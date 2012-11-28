@@ -21,8 +21,33 @@ body
 	border-bottom: solid #999 1px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	padding: 5px 10px;
+	padding: 5px 39px 5px 10px;
 	cursor: move;
+}
+
+.ui-shader, .ui-closer
+{
+	background-color: #777;
+	color: #FFF;
+	font-weight: bold;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.ui-shader
+{
+	top: 7px;
+	right: 27px;
+}
+
+.ui-closer
+{
+	top: 7px;
+	right: 7px;
 }
 
 .shaded .ui-header
