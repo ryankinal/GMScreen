@@ -1,6 +1,15 @@
-var newTable = Object.create(itemTypes.table);
+var table = Object.create(itemTypes.table),
+    tableWindow = Object.create(UIWindow),
+    list = Object.create(itemTypes.unorderedList),
+    listWindow = Object.create(UIWindow);
 
-newTable.load({
+tableWindow.init('Initiative Order');
+tableWindow.render();
+
+listWindow.init('Shopping List');
+listWindow.render();
+
+table.load({
     headers:
     [
         'Character Name',
@@ -22,26 +31,14 @@ newTable.load({
     ]
 });
 
-newTable.render();
+table.render(tableWindow.content);
 
-newList = Object.create(itemTypes.orderedList);
-
-newList.load([
-    'testing some good stuff here',
-    'moar testing please!',
-    'I can totally believe it\'s not butter'
+list.load([
+    'Milk',
+    'Eggs',
+    'Rice',
+    'Apples',
+    'Tofu'
 ]);
 
-newList.render();
-
-/*var textarea = document.createElement('textarea');
-
-textarea.addEventListener('blur', function() {
-    console.log('blurred');
-});
-
-document.body.appendChild(textarea);
-
-textarea.focus();
-
-document.body.removeChild(textarea);*/
+list.render(listWindow.content);
