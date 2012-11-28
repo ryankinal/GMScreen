@@ -1,6 +1,7 @@
 UIWindow = (function() {
 	var windowObject = {},
 		currentMover,
+		lastPosition,
 		makeMouseDownHandler = function()
 		{
 			var self = this;
@@ -9,19 +10,33 @@ UIWindow = (function() {
 			{
 				e = e || window.event;
 				currentMover = self;
-				document.addEventListener('mousemove', moveHandler);
+				lastPosition = dom.mousePosition(e);
+				window.addEventListener('mousemove', moveHandler);
+				window.addEventListener('mouseup', mouseUpHandler);
 			}
 		},
-		mousUpHandler = function(e)
+		mouseUpHandler = function(e)
 		{
 			currentMover = null;
-			document.removeEventListener('mousemove', moveHandler);
+			lastPosition = null;
+			window.removeEventListener('mousemove', moveHandler);
 		},
 		moveHandler = function(e)
 		{
 			e = e || window.event;
 
-			// do mouse move shit
+			var position = dom.mousePosition(e);
+
+			if (currentMover && lastPosition)
+			{
+				console.dir(position);
+				console.dir(lastPosition);
+				console.dir(currentMover);
+				currentMover.x += (position.x - lastPosition.x);
+				currentMover.y += (position.y - lastPosition.y);
+				lastPosition = position;
+				currentMover.update();
+			}
 		};
 
 	windowObject.init = function(title, parent)
@@ -29,8 +44,8 @@ UIWindow = (function() {
 		this.width = 500;
 		this.height = 300;
 		
-		this.x = document.body.offsetWidth / 2 - 250;
-		this.y = document.body.offsetHeight / 2 - 150;
+		this.x = window.innerWidth / 2 - 250;
+		this.y = window.innerHeight / 2 - 150;
 
 		this.container = dom.create('div');
 		this.header = dom.create('div');
@@ -44,16 +59,24 @@ UIWindow = (function() {
 		this.container.appendChild(this.header);
 		this.container.appendChild(this.content);
 
+		this.header.addEventListener('mousedown', makeMouseDownHandler.call(this));
+
 		this.parent = parent || document.body;
 	};
 
-	windowObject.render = function(parent)
+	windowObject.render = function()
 	{
-		this.container.style.left = this.x;
-		this.container.style.top = this.y;
-		this.container.style.width = this.width;
-		this.container.style.height = this.height;
+		this.container.style.position = 'absolute';
 		this.parent.appendChild(this.container);
+		this.update();
+	}
+
+	windowObject.update = function()
+	{
+		this.container.style.left = this.x + 'px';
+		this.container.style.top = this.y + 'px';
+		this.container.style.width = this.width + 'px';
+		this.container.style.height = this.height + 'px';
 	}
 
 	return windowObject;
