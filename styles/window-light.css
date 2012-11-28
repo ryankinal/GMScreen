@@ -1,0 +1,27 @@
+body
+{
+	background-color: #FFF;
+	color: #000;
+	font-size: 16px;
+	font-family: Arial, sans-serif;
+}
+
+.ui-window
+{
+	box-shadow: 0 5px 5px #AAA;
+	border: solid #999 1px;
+	border-radius: 10px;
+	background-color: #FFF;
+}
+
+.ui-header
+{
+	border-bottom: solid #999 1px;
+	padding: 3px 5px;
+	cursor: move;
+}
+
+.ui-content
+{
+	padding: 10px;
+}
