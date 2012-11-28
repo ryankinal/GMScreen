@@ -8,7 +8,7 @@ body
 
 .ui-window
 {
-	box-shadow: 0 5px 5px #AAA;
+	box-shadow: 0 5px 15px #DDD;
 	border: solid #999 1px;
 	border-radius: 10px;
 	background-color: #FFF;
@@ -17,7 +17,7 @@ body
 .ui-header
 {
 	border-bottom: solid #999 1px;
-	padding: 3px 5px;
+	padding: 5px 10px;
 	cursor: move;
 }
 
