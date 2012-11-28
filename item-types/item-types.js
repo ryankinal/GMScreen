@@ -23,6 +23,18 @@ var itemTypes = {},
             {
                 element.removeChild(element.firstChild);
             }
+        },
+        inDocument: function(element)
+        {
+            do 
+            {
+                if (element === document)
+                {
+                    return true;
+                }
+            } while (element = element.parentNode);
+
+            return false;
         }
     };
 
