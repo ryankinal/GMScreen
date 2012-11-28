@@ -183,7 +183,7 @@ itemTypes.table = (function() {
             this.element.parentNode.removeChild(this.element);
         }
 
-        parent = parent || document.body;
+        parent = parent || this.parent || document.body;
 
         var i,
             j,
@@ -268,6 +268,7 @@ itemTypes.table = (function() {
         parent.appendChild(container);
 
         this.element = container;
+        this.parent = parent;
     };
 
     tableObject.addRow = function(data)
