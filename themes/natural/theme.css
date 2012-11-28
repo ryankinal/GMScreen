@@ -1,0 +1,75 @@
+body
+{
+	background: #FFF url(../patterns/retina_wood/retina_wood.png);
+	color: #000;
+	font-size: 16px;
+	font-family: Arial, sans-serif;
+}
+
+.ui-window
+{
+	box-shadow: 0 5px 15px #963;
+	border-radius: 10px;
+	background: #FFF url(../patterns/natural_paper/natural_paper.png);
+}
+
+.ui-header
+{
+	background: #EEE url(../patterns/low_contrast_linen/low_contrast_linen.png);
+	color: #FFF;
+	font-weight: bold;
+	border-bottom: solid #999 1px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 5px 10px;
+	cursor: move;
+}
+
+.ui-content
+{
+	padding: 10px;
+	overflow: hidden;
+}
+
+.ui-content ul
+{
+	padding: 0;
+	margin: -11px -10px 10px -10px;
+	list-style-type: none;
+	border-top: solid #999 1px;
+}
+
+.ui-content ul li
+{
+	padding: 5px 10px;
+	border-bottom: solid #999 1px;
+}
+
+.ui-content ul .marked
+{
+	text-decoration: line-through;
+}
+
+.ui-content table
+{
+	margin: -11px -11px 10px -11px;
+	border-collapse: collapse;
+}
+
+.ui-content td, .ui-content th
+{
+	border: solid #999 1px;
+	padding: 5px 10px;
+}
+
+.ui-content th, .ui-content table .mark, .ui-content table .delete
+{
+	cursor: pointer;
+}
+
+.ui-content table .marked
+{
+	background-color: #EEE;
+	opacity: 0.5;
+}
+
