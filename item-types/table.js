@@ -24,7 +24,8 @@ itemTypes.table = (function() {
         },
         makeEndEditCell = function(i, j)
         {
-            var self = this;
+            var self = this,
+                numCheck = /[\d]+\.?[\d]+/;
 
             return function(e) {
                 e = e || window.event;
@@ -35,7 +36,15 @@ itemTypes.table = (function() {
 
                 if (key === 13)
                 {
-                    self.data.body[i][j] = value;
+                    if (value.match(numCheck))
+                    {
+                        self.data.body[i][j] = parseFloat(value);
+                    }
+                    else
+                    {
+                        self.data.body[i][j] = value;
+                    }
+                    
                     self.render();
                     return false;
                 }
