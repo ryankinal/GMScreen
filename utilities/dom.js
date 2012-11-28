@@ -34,5 +34,25 @@ dom = {
         } while (element = element.parentNode);
 
         return false;
+    },
+    mousePosition: function(e)
+    {
+        var position = {
+                x: 0,
+                y: 0
+            };
+
+        if (e.pageX || e.pageY)
+        {
+            position.x = e.pageX;
+            position.y = e.pageY;
+        }
+        else if (e.clientX || e.clientY)
+        {
+            position.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            position.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+        }
+
+        return position;
     }
 }
