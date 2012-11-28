@@ -1,13 +1,16 @@
-var table = Object.create(itemTypes.table),
+var windowSet = Object.create(UIWindowSet),
+    table = Object.create(itemTypes.table),
     tableWindow = Object.create(UIWindow),
     list = Object.create(itemTypes.unorderedList),
     listWindow = Object.create(UIWindow);
 
+windowSet.init('Fuck You, That\'s Why');
 tableWindow.init('Initiative Order');
-tableWindow.render();
-
 listWindow.init('Shopping List');
-listWindow.render();
+
+windowSet.addWindow(tableWindow);
+windowSet.addWindow(listWindow);
+windowSet.render();
 
 table.load({
     headers:
