@@ -197,7 +197,7 @@ itemTypes.list = (function() {
 
 			if (this.marked[i])
 			{
-				itemText.className = 'marked';
+				item.className = 'marked';
 			}
 
 			controls = dom.create('div');

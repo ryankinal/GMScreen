@@ -45,11 +45,6 @@ body
 	border-bottom: solid #999 1px;
 }
 
-.ui-content ul .marked
-{
-	text-decoration: line-through;
-}
-
 .ui-content table
 {
 	margin: -11px -11px 10px -11px;
@@ -67,9 +62,9 @@ body
 	cursor: pointer;
 }
 
-.ui-content table .marked
+.ui-content .marked
 {
-	background-color: #EEE;
+	background-color: #CCC;
 	opacity: 0.5;
 }
 
