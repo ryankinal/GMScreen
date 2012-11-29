@@ -77,6 +77,18 @@ body
 	border-bottom: solid #999 1px;
 }
 
+.ui-content ol
+{
+	margin: -6px -10px 10px -10px;
+	border-bottom: solid #999 1px;
+}
+
+.ui-content ol li
+{
+	padding: 5px 10px 5px 0;
+	margin: 0;
+}
+
 .ui-content table
 {
 	margin: -11px -11px 10px -11px;
