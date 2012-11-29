@@ -114,6 +114,7 @@ UIWindow = (function() {
 		}
 
 		this.z = 200;
+		currentMover = this;
 		this.container.style.position = 'absolute';
 		this.parent.appendChild(this.container);
 		this.update();
