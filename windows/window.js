@@ -2,6 +2,16 @@ UIWindow = (function() {
 	var windowObject = {},
 		currentMover,
 		lastPosition,
+		makeCloseHandler = function()
+		{
+			var self = this;
+
+			return function(e)
+			{
+				self.hide();
+				delete self;
+			}
+		},
 		makeShadeHandler = function()
 		{
 			var self = this;
@@ -70,21 +80,26 @@ UIWindow = (function() {
 		this.header = dom.create('div');
 		this.content = dom.create('div');
 		this.shader = dom.create('div');
+		this.closer = dom.create('div');
 
 		this.container.className = 'ui-window';
 		this.header.className = 'ui-header';
 		this.content.className = 'ui-content';
 		this.shader.className = 'ui-shader';
+		this.closer.className = 'ui-closer';
 
 		this.header.appendChild(dom.text(title));
 		this.shader.appendChild(dom.text('^'));
+		this.closer.appendChild(dom.text('X'));
 
 		this.container.appendChild(this.header);
 		this.container.appendChild(this.content);
 		this.container.appendChild(this.shader);
+		this.container.appendChild(this.closer);
 
 		this.header.addEventListener('mousedown', makeMouseDownHandler.call(this));
 		this.shader.addEventListener('click', makeShadeHandler.call(this));
+		this.closer.addEventListener('click', makeCloseHandler.call(this));
 
 		this.title = title;
 		this.parent = parent || document.body;

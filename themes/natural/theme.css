@@ -21,7 +21,7 @@ body
 	border-bottom: solid #999 1px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	padding: 5px 39px 5px 10px;
+	padding: 5px 48px 5px 10px;
 	cursor: move;
 }
 
@@ -36,6 +36,7 @@ body
 	text-align: center;
 	border-radius: 3px;
 	cursor: pointer;
+	font-size: .8em;
 }
 
 .ui-shader
