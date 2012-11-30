@@ -266,7 +266,7 @@ itemTypes.table = (function() {
         addRow.value = 'Add Row';
         addRow.addEventListener('click', makeAddRowHandler.call(this));
 
-        addColumn.className = 'add-row control';
+        addColumn.className = 'add-column control';
         addColumn.type = 'button';
         addColumn.value = 'Add Column';
         addColumn.addEventListener('click', makeAddColumnHandler.call(this));
