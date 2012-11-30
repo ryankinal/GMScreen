@@ -2,9 +2,39 @@
 <html lang="en">
     <head>
         <title>Testing GM Screen</title>
-        <link rel="stylesheet" type="text/css" href="themes/office/theme.css" />
+        <link rel="stylesheet" type="text/css" href="themes/office/theme.css" />\
+        <link rel="alternate stylesheet" type="text/css" href="themes/natural/theme.css" />
     </head>
     <body>
+        <div id="controlBar" class="control-bar">
+            <div id="windowSets" class="menu">
+                Current Screen
+                <ul>
+                    <li>Testing <input type="button" value="delete" class="delete" /></li>
+                    <li>Testing Testing <input type="button" value="delete" class="delete" /></li>
+                    <li>Testing <input type="button" value="delete" class="delete" /></li>
+                    <li><a href="#" class="new">New Screen...</a></li>
+                </ul>
+            </div>
+            <div id="windows">
+                <a class="new" href="#">New Window...</a>
+            </div>
+            <div id="settings" class="menu">
+                <a href="#">Settings</a>
+                <ul>
+                    <li class="menu">
+                        Themes
+                        <ul>
+                            <li>Office</li>
+                            <li>Natural</li>
+                        </ul>
+                    </li>
+                    <li>Snap To</li>
+                    <li>Auto Save</li>
+                </ul>
+            </div>
+        </div>
+
     	<script type="text/javascript" src="utilities/dom.js"></script>
 
         <script type="text/javascript" src="item-types/item-types.js"></script>
@@ -16,5 +46,7 @@
         <script type="text/javascript" src="windows/windowset.js"></script>
         <script type="text/javascript" src="windows/window.js"></script>
         <script type="text/javascript" src="testing.js"></script>
+
+        <script type="text/javascript" src="app/controls.js"></script>
     </body>
 </html>
