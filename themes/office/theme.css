@@ -1,6 +1,6 @@
 body
 {
-	background: #FFF url(../patterns/retina_wood/retina_wood.png);
+	background: #FFF url(../patterns/office/office.png);
 	color: #000;
 	font-size: 16px;
 	font-family: Arial, sans-serif;
@@ -8,19 +8,16 @@ body
 
 .ui-window
 {
-	box-shadow: 0 5px 15px #963;
-	border-radius: 10px;
-	background: #FFF url(../patterns/natural_paper/natural_paper.png);
+	box-shadow: 0 5px 15px #000;
+	background: #FFF url(../patterns/lightpaperfibers/lightpaperfibers.png);
 }
 
 .ui-header
 {
-	background: #EEE url(../patterns/low_contrast_linen/low_contrast_linen.png);
-	color: #FFF;
+	background: #EEE url(../patterns/nasty_fabric/nasty_fabric.png);
+	color: #000;
 	font-weight: bold;
 	border-bottom: solid #999 1px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
 	padding: 5px 48px 5px 10px;
 	cursor: move;
 }
@@ -56,7 +53,6 @@ body
 
 .shaded .ui-header
 {
-	border-radius: 10px;
 	border-bottom: none;
 }
 
@@ -104,8 +100,14 @@ body
 	padding: 5px 10px;
 }
 
+.ui-content th:empty
+{
+	border: none;
+}
+
 .ui-content th, .ui-content table .mark, .ui-content table .delete
 {
+	width: 6px;
 	cursor: pointer;
 }
 
@@ -123,6 +125,6 @@ body
 
 .ui-content .marked
 {
-	opacity: 0.5;
+	opacity: 0.25;
 }
 
