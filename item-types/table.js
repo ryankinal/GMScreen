@@ -237,12 +237,14 @@ itemTypes.table = (function() {
             }
 
             cell = dom.create('td');
+            cell.title = 'Mark item';
             cell.className = 'mark';
             cell.addEventListener('click', makeMarkHandler.call(this, i));
             cell.appendChild(dom.text('M'));
             row.appendChild(cell);
 
             cell = dom.create('td');
+            cell.title = 'Delete item';
             cell.className = 'delete';
             cell.addEventListener('click', makeDeleteRowHandler.call(this, i));
             cell.appendChild(dom.text('X'));
