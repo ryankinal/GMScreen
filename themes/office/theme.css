@@ -6,6 +6,7 @@ body
 	font-family: Arial, sans-serif;
 }
 
+/* window styles */
 .ui-window
 {
 	box-shadow: 0 5px 15px #000;
@@ -62,6 +63,12 @@ body
 	overflow: hidden;
 }
 
+.ui-content .marked
+{
+	opacity: 0.25;
+}
+
+/* list styles */
 .ui-content ul
 {
 	padding: 0;
@@ -88,6 +95,43 @@ body
 	margin: 0;
 }
 
+.ui-content .list .controls
+{
+	margin: 5px 0;
+}
+
+.ui-content .controls input
+{
+	border: none;
+	background: transparent 50% 50% no-repeat;
+	text-indent: -9999px;
+	width: 15px;
+	height: 15px;
+	margin: 0px 2px;
+	cursor: pointer;
+}
+
+.ui-content .list .move-down
+{
+	background-image: url(../icons/monotone_arrow_down.png);
+}
+
+.ui-content .list .move-up
+{
+	background-image: url(../icons/monotone_arrow_up.png);
+}
+
+.ui-content .list .mark
+{
+	background-image: url(../icons/monotone_check_inverted.png);
+}
+
+.ui-content .list .delete
+{
+	background-image: url(../icons/monotone_close.png);
+}
+
+/* table styles */
 .ui-content table
 {
 	margin: -11px -11px 10px -11px;
@@ -122,9 +166,3 @@ body
 	text-indent: -9999px;
 	background: url(../icons/monotone_close.png) 50% 50% no-repeat;
 }
-
-.ui-content .marked
-{
-	opacity: 0.25;
-}
-

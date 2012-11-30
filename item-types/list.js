@@ -201,10 +201,12 @@ itemTypes.list = (function() {
 			}
 
 			controls = dom.create('div');
+			controls.className = 'controls';
 
 			if (i !== 0)
 			{
 				moveUp = dom.create('input');
+				moveUp.title = 'Move item up';
 				moveUp.className = 'move-up';
 				moveUp.type = 'button';
 				moveUp.value = 'Up';
@@ -216,6 +218,7 @@ itemTypes.list = (function() {
 			{
 				moveDown = dom.create('input');
 				moveDown.className = 'move-down';
+				moveDown.title = 'Move item down';
 				moveDown.type = 'button';
 				moveDown.value = 'Down';
 				moveDown.addEventListener('click', makeMoveDownHandler.call(this, i));		
@@ -223,6 +226,7 @@ itemTypes.list = (function() {
 			}
 
 			markItem = dom.create('input');
+			markItem.title = 'Mark item';
 			markItem.className = 'mark';
 			markItem.type = 'button';
 			markItem.value = 'Mark';
@@ -230,6 +234,7 @@ itemTypes.list = (function() {
 			controls.appendChild(markItem);
 
 			deleteItem = dom.create('input');
+			deleteItem.title = 'Delete item';
 			deleteItem.className = 'delete';
 			deleteItem.type = 'button';
 			deleteItem.value = 'Delete';
@@ -246,9 +251,11 @@ itemTypes.list = (function() {
 		addItem.value = 'Add Item';
 		addItem.addEventListener('click', makeAddHandler.call(this));
 
+		container.className = 'list';
 		container.appendChild(list);
 		container.appendChild(addItem);
 		parent.appendChild(container);
+
 
 		this.element = container;
 		this.parent = parent;
