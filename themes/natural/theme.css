@@ -4,6 +4,113 @@ body
 	color: #000;
 	font-size: 16px;
 	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+/* control interface styles */
+.control-bar
+{
+	background: #EEE url(../patterns/natural_paper/natural_paper.png);
+	box-shadow: 0 5px 15px #963;
+	height: 39px;
+	color: #000;
+	padding: 0 10px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 20000;
+	width: 100%;
+}
+
+.control-bar a
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.control-bar > div
+{
+	float: left;
+	padding: 10px 10px;
+	border: solid #333 1px;
+	border-width: 0 1px;
+	margin-left: -1px;
+	cursor: pointer;
+}
+
+.control-bar .settings
+{
+	float: right;
+}
+
+.menu
+{
+	cursor: pointer;
+}
+
+.menu ul
+{
+	position: absolute;
+	background: #000 url(../patterns/low_contrast_linen/low_contrast_linen.png);
+	list-style-type: none;
+	margin: 10px 0 0 -10px;
+	padding: 0;
+	box-shadow: 0 7px 10px #963;
+	display: none;
+}
+
+.control-bar > div:hover
+{
+	background: #000 url(../patterns/low_contrast_linen/low_contrast_linen.png);
+	color: #FFF;
+}
+
+.control-bar > div:hover a
+{
+	color: #FFF;
+}
+
+.menu:hover ul
+{
+	display: block;
+}
+
+.menu li
+{
+	padding: 10px 10px;
+	border-bottom: solid #666 1px;
+	position: relative;
+	padding-right: 30px;
+}
+
+.menu li:last-child
+{
+	border: none;
+}
+
+.menu li:hover
+{
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.menu li .delete
+{
+	position: absolute;
+	top: 12px;
+	right: 5px;
+	width: 15px;
+	height: 15px;
+	border: none;
+	text-indent: -9999px;
+	overflow: hidden;
+	background: transparent url(../icons/monotone_close.png) 50% 50% no-repeat;
+	cursor: pointer;
+}
+
+.control-bar .settings > ul
+{
+	right: 0;
 }
 
 /* window styles */
