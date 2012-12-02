@@ -33,3 +33,19 @@ var controller = Object.create(ScreenController),
         '...',
         'Profit'
     ]);
+
+efence.sub('WindowAdded', function(data) {
+    console.log('Window added!');
+});
+
+efence.sub('SetAdded', function(data) {
+    console.log('Set Added');
+});
+
+newWindow = controller.addTable('moar tables', {
+    headers: [
+        'condition',
+        'modifier'
+    ]
+})
+newSet = controller.addWindowSet('Moar Windoze');
