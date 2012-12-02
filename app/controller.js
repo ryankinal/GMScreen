@@ -1,7 +1,8 @@
-ScreenController = (function(parent) {
+ScreenController = (function(parent, pubsub) {
 	var screenController = {},
 		windowSets = [],
 		currentSet = -1,
+		eventSubscriptions = {},
 		addWindow = function(name, item)
 		{
 			if (currentSet < 0 || !windowSets[currentSet])
@@ -18,6 +19,8 @@ ScreenController = (function(parent) {
 			newWindow.render();
 			set.addWindow(newWindow);
 
+			pubsub.pub('WindowAdded');
+
 			return newWindow;
 		};
 
@@ -26,6 +29,7 @@ ScreenController = (function(parent) {
 		windowSets.unshift(Object.create(UIWindowSet));
 		windowSets[0].init(name, theme);
 		currentSet = 0;
+		pubsub.pub('SetAdded');
 		return windowSets[0];
 	}
 
@@ -37,6 +41,7 @@ ScreenController = (function(parent) {
 		}
 
 		currentSet = index;
+		pubsub.pub('SetChanged');
 
 		return sets[currentSet];
 	}
@@ -47,6 +52,9 @@ ScreenController = (function(parent) {
 		{
 			throw('Window set out of range');
 		}
+
+		currentSet = 0;
+		pubsub.pub('SetRemoved');
 
 		return windowSets.splice(index, 1);
 	}
@@ -73,4 +81,4 @@ ScreenController = (function(parent) {
 	}
 
 	return screenController;
-})(dom.getById('screen'));
+})(dom.getById('screen'), efence);
