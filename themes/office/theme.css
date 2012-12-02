@@ -113,6 +113,12 @@ body
 	right: 0;
 }
 
+.screen
+{
+	margin-top: 40px;
+	position: relative;
+}
+
 /* window styles */
 .ui-window
 {

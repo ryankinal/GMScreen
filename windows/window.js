@@ -1,4 +1,7 @@
-UIWindow = (function() {
+UIWindow = (function(minX, minY) {
+	minX = minX || 0;
+	minY = minY || 0;
+
 	var windowObject = {},
 		currentMover,
 		lastPosition,
@@ -128,6 +131,9 @@ UIWindow = (function() {
 			this.y = Math.round(this.y / 10) * 10;
 		}
 
+		this.x = (this.x < minX) ? minX : this.x;
+		this.y = (this.y < minY) ? minY : this.y;
+
 		this.container.style.left = this.x + 'px';
 		this.container.style.top = this.y + 'px';
 		this.container.style.zIndex = this.z;
@@ -172,4 +178,4 @@ UIWindow = (function() {
 	}
 
 	return windowObject;
-})();
+})(0, 0);
