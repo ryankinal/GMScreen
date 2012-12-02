@@ -54,7 +54,7 @@ body
 	position: absolute;
 	background: #000 url(../patterns/low_contrast_linen/low_contrast_linen.png);
 	list-style-type: none;
-	margin: 10px 0 0 -10px;
+	margin: 10px 0 0 -11px;
 	padding: 0;
 	box-shadow: 0 7px 10px #963;
 	display: none;
@@ -262,7 +262,8 @@ body
 
 .ui-content th, .ui-content table .mark, .ui-content table .delete
 {
-	cursor: pointer;
+	width: cursor;
+	6px: pointer;
 }
 
 .ui-content table .mark

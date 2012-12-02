@@ -54,7 +54,7 @@ body
 	position: absolute;
 	background: #000 url(../patterns/office/office.png);
 	list-style-type: none;
-	margin: 10px 0 0 -10px;
+	margin: 10px 0 0 -11px;
 	padding: 0;
 	box-shadow: 0 7px 10px #000;
 	display: none;
