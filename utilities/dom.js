@@ -54,5 +54,10 @@ dom = {
         }
 
         return position;
+    },
+    getById: function(id, context)
+    {
+        context = context || document;
+        return context.getElementById(id);
     }
 }
