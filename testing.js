@@ -7,9 +7,9 @@ var windowSet = Object.create(UIWindowSet),
     list2Window = Object.create(UIWindow);
 
 windowSet.init('Fuck You, That\'s Why');
-tableWindow.init('Initiative Order');
-listWindow.init('Shopping List');
-list2Window.init('Steps to success');
+tableWindow.init('Initiative Order', dom.getById('screen'));
+listWindow.init('Shopping List', dom.getById('screen'));
+list2Window.init('Steps to success', dom.getById('screen'));
 
 windowSet.addWindow(tableWindow);
 windowSet.addWindow(listWindow);
