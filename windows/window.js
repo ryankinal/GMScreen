@@ -71,15 +71,12 @@ UIWindow = (function(minX, minY, pubsub) {
 			}
 		};
 
-	windowObject.init = function(title, parent)
+	windowObject.init = function(name, parent)
 	{
 		this.snapTo = true;
-
-		this.width = 500;
-		this.height = 300;
 		
-		this.x = window.innerWidth / 2 - 250;
-		this.y = window.innerHeight / 2 - 150;
+		this.x = 10;
+		this.y = 10;
 		this.z = 1;
 
 		this.container = dom.create('div');
@@ -94,7 +91,7 @@ UIWindow = (function(minX, minY, pubsub) {
 		this.shader.className = 'ui-shader';
 		this.closer.className = 'ui-closer';
 
-		this.header.appendChild(dom.text(title));
+		this.header.appendChild(dom.text(name));
 		this.shader.appendChild(dom.text('^'));
 		this.closer.appendChild(dom.text('X'));
 
@@ -107,7 +104,7 @@ UIWindow = (function(minX, minY, pubsub) {
 		this.shader.addEventListener('click', makeShadeHandler.call(this));
 		this.closer.addEventListener('click', makeCloseHandler.call(this));
 
-		this.title = title;
+		this.name = name;
 		this.parent = parent || document.body;
 	};
 
