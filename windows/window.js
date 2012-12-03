@@ -91,6 +91,9 @@ UIWindow = (function(minX, minY, pubsub) {
 		this.shader.className = 'ui-shader';
 		this.closer.className = 'ui-closer';
 
+		this.shader.title = 'Shade this window';
+		this.closer.title = 'Close this window';
+
 		this.header.appendChild(dom.text(name));
 		this.shader.appendChild(dom.text('^'));
 		this.closer.appendChild(dom.text('X'));
@@ -171,6 +174,7 @@ UIWindow = (function(minX, minY, pubsub) {
 	{
 		if (this.shaded)
 		{
+			this.shader.title = 'Shade this window';
 			this.container.className = this.container.className.replace(/\s*\bshaded\b\s*/g, '');
 			this.content.style.display = 'block';
 			this.shaded = false;
@@ -180,6 +184,7 @@ UIWindow = (function(minX, minY, pubsub) {
 		}
 		else
 		{
+			this.shader.title = 'Unshade this window';
 			this.container.className += ' shaded';
 			this.content.style.display = 'none';
 			this.shaded = true;
