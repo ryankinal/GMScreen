@@ -1,8 +1,8 @@
 ScreenController = (function(parent, pubsub) {
 	var screenController = {},
 		windowSets = [],
+		items = {},
 		currentSet = -1,
-		eventSubscriptions = {},
 		addWindow = function(name, item)
 		{
 			if (currentSet < 0 || !windowSets[currentSet])
@@ -13,6 +13,8 @@ ScreenController = (function(parent, pubsub) {
 
 			var set = windowSets[currentSet],
 				newWindow = Object.create(UIWindow);
+
+			items[name] = item;
 
 			newWindow.init(name, parent);
 			item.render(newWindow.content);
@@ -27,11 +29,21 @@ ScreenController = (function(parent, pubsub) {
 			return newWindow;
 		};
 
+	pubsub.sub('UIWindow.Removed', function(data) {
+		delete items[windowSets[currentSet].name][data.window.name];
+	});
+
+	screenController.getWindowSets = function()
+	{
+		return windowSets;
+	}
+
 	screenController.addWindowSet = function(name, theme)
 	{
 		windowSets.unshift(Object.create(UIWindowSet));
 		windowSets[0].init(name, theme);
-		currentSet = 0;
+		items[name] = [];
+		currentSet++;
 		pubsub.pub('ScreenController.SetAdded', {
 			windowSet: windowSets[0]
 		});
