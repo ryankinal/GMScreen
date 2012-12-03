@@ -19,7 +19,7 @@ ScreenController = (function(parent, pubsub) {
 			newWindow.render();
 			set.addWindow(newWindow);
 
-			pubsub.pub('WindowAdded');
+			pubsub.pub('ScreenController.WindowAdded');
 
 			return newWindow;
 		};
@@ -29,7 +29,7 @@ ScreenController = (function(parent, pubsub) {
 		windowSets.unshift(Object.create(UIWindowSet));
 		windowSets[0].init(name, theme);
 		currentSet = 0;
-		pubsub.pub('SetAdded');
+		pubsub.pub('ScreenController.SetAdded');
 		return windowSets[0];
 	}
 
@@ -41,7 +41,7 @@ ScreenController = (function(parent, pubsub) {
 		}
 
 		currentSet = index;
-		pubsub.pub('SetChanged');
+		pubsub.pub('ScreenController.SetChanged');
 
 		return sets[currentSet];
 	}
@@ -54,7 +54,7 @@ ScreenController = (function(parent, pubsub) {
 		}
 
 		currentSet = 0;
-		pubsub.pub('SetRemoved');
+		pubsub.pub('ScreenController.SetRemoved');
 
 		return windowSets.splice(index, 1);
 	}
