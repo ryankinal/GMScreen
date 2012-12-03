@@ -1,4 +1,4 @@
-UIWindow = (function(minX, minY) {
+UIWindow = (function(minX, minY, pubsub) {
 	minX = minX || 0;
 	minY = minY || 0;
 
@@ -12,6 +12,9 @@ UIWindow = (function(minX, minY) {
 			return function(e)
 			{
 				self.hide();
+				pubsub.pub('UIWindow.Removed', {
+					window: self
+				});
 				delete self;
 			}
 		},
@@ -142,11 +145,17 @@ UIWindow = (function(minX, minY) {
 	windowObject.hide = function()
 	{
 		this.container.style.display = 'none';
+		pubsub.pub('UIWindow.Hidden', {
+			window: this
+		});
 	}
 
 	windowObject.show = function()
 	{
 		this.container.style.display = 'block';
+		pubsub.pub('UIWindow.Shown', {
+			window: this
+		});
 	}
 
 	windowObject.snap = function(value)
@@ -168,14 +177,20 @@ UIWindow = (function(minX, minY) {
 			this.container.className = this.container.className.replace(/\s*\bshaded\b\s*/g, '');
 			this.content.style.display = 'block';
 			this.shaded = false;
+			pubsub.pub('UIWindow.Unshaded', {
+				window: this
+			});
 		}
 		else
 		{
 			this.container.className += ' shaded';
 			this.content.style.display = 'none';
 			this.shaded = true;
+			pubsub.pub('UIWindow.Shaded', {
+				window: this
+			});
 		}
 	}
 
 	return windowObject;
-})(0, 0);
+})(0, 0, efence);
