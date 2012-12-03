@@ -47,7 +47,7 @@ ScreenController = (function(parent, pubsub) {
 
 		currentSet = index;
 		pubsub.pub('ScreenController.SetChanged', {
-			windowSets[currentSet];
+			windowSets: windowSets[currentSet]
 		});
 
 		return windowSets[currentSet];
