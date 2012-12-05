@@ -60,6 +60,11 @@ h1, h2, h3
 	cursor: pointer;
 }
 
+.menu .current
+{
+	background-color: rgba(175, 175, 175, .25);
+}
+
 .menu ul
 {
 	position: absolute;

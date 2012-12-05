@@ -11,6 +11,7 @@
                 all = dom.create('ul'),
                 item,
                 itemLink,
+                del,
                 sets = ScreenController.getWindowSets(),
                 currentSet = ScreenController.getCurrentWindowSet(),
                 newWindow = dom.create('li');
@@ -21,9 +22,17 @@
             for (i = 0; i < sets.length; i++)
             {
                 item = dom.create('li');
+                console.log(i, currentSet.index);
                 item.className = (i === currentSet.index) ? 'window-set current' : 'window-set';
                 item.dataset.index = i;
                 item.appendChild(dom.text(sets[i].name));
+
+                del = dom.create('input');
+                del.type = 'button';
+                del.className = 'delete';
+                del.value = 'Delete';
+                item.appendChild(del);
+
                 all.appendChild(item);
             }
 
@@ -43,7 +52,7 @@
 
             var target  = e.target || e.srcElement,
                 sets = ScreenController.getWindowSets(),
-                index = target.dataset.index,
+                index = parseInt(target.dataset.index, 10),
                 set;
 
             if (target.className === 'window-set')
