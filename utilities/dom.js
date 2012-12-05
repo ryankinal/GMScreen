@@ -64,5 +64,10 @@ dom = {
     {
         context = context || document;
         return context.getElementById(id);
+    },
+    qsa: function(selector, context)
+    {
+        context = context || document;
+        return context.querySelectorAll(selector);
     }
 }
