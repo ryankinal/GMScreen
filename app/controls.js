@@ -39,6 +39,8 @@
             newWindow.appendChild(dom.text('New Screen...'));
             newWindow.className = 'new-window-set';
 
+            all.appendChild(newWindow);
+
             fragment.appendChild(all);
             dom.empty(windowSetList);
             windowSetList.appendChild(fragment);
@@ -57,9 +59,12 @@
 
             if (target.className === 'window-set')
             {
-                ScreenController.getCurrentWindowSet().set.hide();
-                ScreenController.changeWindowSet(index).show();
-                renderWindowSets(windowSetList);
+                if (index !== ScreenController.getCurrentWindowSet().index)
+                {
+                    ScreenController.getCurrentWindowSet().set.hide();
+                    ScreenController.changeWindowSet(index).show();
+                    renderWindowSets(windowSetList);    
+                }
             }
             else if (target.className === 'new-window-set')
             {
@@ -79,11 +84,11 @@
             }
             else if (target.className === 'shade')
             {
-                text = currentSetShaded ? 'Shade All' : 'Unshade All';
-                currentSetShaded = !currentSetShaded;
-                ScreenController.getCurrentWindowSet().set.shade(currentSetShaded);
-                dom.empty(target);
-                target.appendChild(dom.text(text));
+                ScreenController.getCurrentWindowSet().set.shade(true);
+            }
+            else if (target.className === 'unshade')
+            {
+                ScreenController.getCurrentWindowSet().set.shade(false);
             }
             else if (target.className === 'delete')
             {
