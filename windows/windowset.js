@@ -1,4 +1,4 @@
-UIWindowSet = (function() {
+UIWindowSet = (function(pubsub) {
 	var windowSetObj = {};
 
 	windowSetObj.init = function(name, theme)
@@ -11,6 +11,10 @@ UIWindowSet = (function() {
 	windowSetObj.addWindow = function(windowToAdd)
 	{
 		this.windows.push(windowToAdd);
+		pubsub.pub('UIWindowSet.WindowAdded', {
+			windowSet: this,
+			window: windowToAdd
+		});
 	}
 
 	windowSetObj.removeWindow = function(windowToRemove)
@@ -81,4 +85,4 @@ UIWindowSet = (function() {
 	}
 
 	return windowSetObj;
-})();
+})(efence);
