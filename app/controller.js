@@ -33,6 +33,14 @@ ScreenController = (function(parent, pubsub) {
 		delete items[windowSets[currentSet].name][data.window.name];
 	});
 
+	screenController.getCurrentWindowSet = function()
+	{
+		return {
+			set: windowSets[currentSet],
+			index: currentSet
+		};
+	}
+
 	screenController.getWindowSets = function()
 	{
 		return windowSets;
@@ -59,7 +67,7 @@ ScreenController = (function(parent, pubsub) {
 
 		currentSet = index;
 		pubsub.pub('ScreenController.SetChanged', {
-			windowSets: windowSets[currentSet]
+			windowSet: windowSets[currentSet]
 		});
 
 		return windowSets[currentSet];
@@ -72,12 +80,16 @@ ScreenController = (function(parent, pubsub) {
 			throw('Window set out of range');
 		}
 
-		currentSet = 0;
+		if (index === currentSet || index >= windowSets.length - 1)
+		{
+			currentSet = 0;
+		}
+
 		pubsub.pub('ScreenController.SetRemoved', {
 			windowSet: windowSets[currentSet]
 		});
 
-		return windowSets.splice(index, 1);
+		return windowSets.splice(index, 1)[0];
 	}
 
 	screenController.addTable = function(name, data)
