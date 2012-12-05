@@ -24,23 +24,34 @@
                     <li class="delete">Delete</li>
                 </ul>
             </div>
-            <!--div id="settings" class="settings menu">
-                <a href="#">Settings</a>
-                <ul>
-                    <li class="menu">
-                        Themes
-                        <ul>
-                            <li>Office</li>
-                            <li>Natural</li>
-                        </ul>
-                    </li>
-                    <li>Snap To</li>
-                    <li>Auto Save</li>
-                </ul>
-            </div-->
+        </div>
+
+        <div id="addWindow" class="add-window modal">
+            <h2>Add a Window</h2>
+            <div>
+                <label for="windowName">Name:</label>
+                <input type="text" name="windowName" id="windowName" />
+            </div>
+            <div>
+                <!-- window types -->
+            </div>
+        </div>
+
+        <div id="addSet" class="add-window-set modal">
+            <h2>Add a Screen</h2>
+            <div>
+                <label for="setName">Name</label>
+                <input type="text" name="setName" id="setName" />
+            </div>
+            <div>
+                <input type="button" class="okay" value="Okay" />
+                <input type="button" class="cancel" value="Cancel" />
+            </div>
         </div>
 
         <div id="screen" class="screen"></div>
+
+        <div id="blanket" class="blanket"></div>
 
     	<script type="text/javascript" src="utilities/dom.js"></script>
         <script type="text/javascript" src="utilities/efence.js"></script>

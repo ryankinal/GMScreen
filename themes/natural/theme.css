@@ -1,3 +1,8 @@
+html, body
+{
+	height: 100%;
+}
+
 body
 {
 	background: #FFF url(../patterns/retina_wood/retina_wood.png);
@@ -5,6 +10,12 @@ body
 	font-size: 16px;
 	font-family: Arial, sans-serif;
 	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3
+{
+	margin: 0 0 10px 0;
 	padding: 0;
 }
 
@@ -117,6 +128,41 @@ body
 {
 	margin-top: 45px;
 	position: relative;
+}
+
+/* control window styles */
+.blanket
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0.25;
+	z-index: 20001;
+	display: none;
+}
+
+.modal
+{
+	position: absolute;
+	width: 500px;
+	top: 150px;
+	left: 50%;
+	margin-left: -260px;
+	z-index: 20002;
+	background: transparent url(../patterns/natural_paper/natural_paper.png);
+	box-shadow: 0 5px 15px #963;
+	padding: 10px;
+	text-align: center;
+	border-radius: 10px;
+	display: none;
+}
+
+.modal div
+{
+	margin-bottom: 10px;
 }
 
 /* window styles */
