@@ -34,20 +34,6 @@ var controller = Object.create(ScreenController),
         'Profit'
     ]);
 
-efence.sub('ScreenController.WindowAdded', function(data) {
-    console.dir(data);
-});
-
-efence.sub('ScreenController.SetAdded', function(data) {
-    console.dir(data);
-});
-efence.sub('UIWindow.Hidden', function(data) {
-    console.dir(data);
-});
-efence.sub('UIWindow.Removed', function(data) {
-    console.dir(data);
-});
-
 newWindow = controller.addTable('moar tables', {
     headers: [
         'condition',
