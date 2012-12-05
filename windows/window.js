@@ -175,8 +175,13 @@ UIWindow = (function(minX, minY, pubsub) {
 		}
 	}
 
-	windowObject.shade = function()
+	windowObject.shade = function(shade)
 	{
+		if (shade === true || shade === false)
+		{
+			this.shaded = !shade;
+		}
+
 		if (this.shaded)
 		{
 			this.shader.title = 'Shade this window';
