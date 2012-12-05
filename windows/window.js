@@ -11,11 +11,7 @@ UIWindow = (function(minX, minY, pubsub) {
 
 			return function(e)
 			{
-				self.hide();
-				pubsub.pub('UIWindow.Removed', {
-					window: self
-				});
-				delete self;
+				self.remove();
 			}
 		},
 		makeShadeHandler = function()
@@ -124,6 +120,15 @@ UIWindow = (function(minX, minY, pubsub) {
 		this.container.style.position = 'absolute';
 		this.parent.appendChild(this.container);
 		this.update();
+	}
+
+	windowObject.remove = function()
+	{
+		this.hide();
+		pubsub.pub('UIwindow.Removed', {
+			window: this
+		});
+		delete this;
 	}
 
 	windowObject.update = function()
