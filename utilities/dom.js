@@ -5,6 +5,11 @@ dom = {
 
         return context.createElement(tagName)
     },
+    fragment: function(context)
+    {
+        context = context || document;
+        return context.createDocumentFragment();
+    },
     text: function(value, context)
     {
         context = context || document;
