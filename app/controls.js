@@ -36,6 +36,7 @@
                 del = dom.create('input');
                 del.type = 'button';
                 del.className = 'delete';
+                del.title = 'Delete ' + sets[i].name;
                 del.value = 'Delete';
                 del.dataset.index = i;
                 item.appendChild(del);
