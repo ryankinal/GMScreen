@@ -37,6 +37,7 @@
                 del.type = 'button';
                 del.className = 'delete';
                 del.value = 'Delete';
+                del.dataset.index = i;
                 item.appendChild(del);
 
                 all.appendChild(item);
@@ -79,13 +80,24 @@
                     ScreenController.getCurrentWindowSet().set.hide();
                     ScreenController.changeWindowSet(index).show();
                     renderWindowSets(windowSetList);    
-                    setName.focus();
                 }
             }
             else if (target.className === 'new-window-set')
             {
                 newSetInterface.style.display = 'block';
                 blanket.style.display = 'block';
+                setName.focus();
+            }
+            else if (target.className === 'delete')
+            {
+                ScreenController.removeWindowSet(index).hide();
+                
+                if (set = ScreenController.getCurrentWindowSet().set)
+                {
+                    set.show();
+                }
+                
+                renderWindowSets();
             }
         },
         optionsClickHandler = function(e)
@@ -93,7 +105,7 @@
             e = e || window.event;
 
             var target = e.target || e.srcElement,
-                text;
+                set;
 
             if (target.className === 'new-window')
             {
@@ -112,7 +124,12 @@
             else if (target.className === 'delete')
             {
                 ScreenController.removeWindowSet(ScreenController.getCurrentWindowSet().index).hide();
-                ScreenController.getCurrentWindowSet().set.show();
+                
+                if (set = ScreenController.getCurrentWindowSet().set)
+                {
+                    set.show();
+                }
+
                 renderWindowSets(windowSetList);
             }
         },
@@ -202,7 +219,13 @@
     newWindowInterface.addEventListener('click', newWindowClickHandler);
     
     pubsub.sub('ScreenController.SetAdded', function(data) {
-        ScreenController.getCurrentWindowSet().set.hide();
+        var set = ScreenController.getCurrentWindowSet().set;
+
+        if (set)
+        {
+            set.hide();
+        }
+        
         ScreenController.changeWindowSet(data.index).show();
         renderWindowSets(windowSetList);
     });
