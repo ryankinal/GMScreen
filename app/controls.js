@@ -56,7 +56,7 @@
 
             if (sets.length)
             {
-                currentSetDisplay.appendChild(dom.text(currentSet.set.name));
+                currentSetDisplay.appendChild(dom.text('Showing: ' + currentSet.set.name));
                 optionsList.style.display = 'block';
             }
             else
