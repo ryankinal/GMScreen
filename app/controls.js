@@ -146,30 +146,46 @@
                 error.parentNode.removeChild(error);
             }
         },
+        newSet = function()
+        {
+            var name = setName.value;
+
+            if (name.replace(/(&\s+|\s+$)/g, '') === '')
+            {
+                dom.empty(error);
+                error.appendChild('Give your new screen a name');
+                newSetInterface.appendChild(error);
+                return false;
+            }
+            else
+            {
+                ScreenController.addWindowSet(name);
+                closeWindow(newSetInterface, setName);
+            }
+        },
         newSetClickHandler = function(e)
         {
             e = e || window.event;
-            var target = e.target || e.srcElement,
-                name = setName.value;
+            var target = e.target || e.srcElement;
 
             if (target.className === 'okay')
             {
-                if (name.replace(/(^\s+|\s+$)/g, '') === '')
-                {
-                    dom.empty(error);
-                    error.appendChild(dom.text('Give your new screen a name'));
-                    newSetInterface.appendChild(error);
-                    return;
-                }
-                else
-                {
-                    ScreenController.addWindowSet(name);
-                    closeWindow(newSetInterface, setName);
-                }
+                newSet();
             }
             else if (target.className === 'cancel')
             {
                 closeWindow(newSetInterface, setName);
+            }
+        },
+        newSetKeypressHandler = function(e)
+        {
+            e = e || window.event;
+            var key = e.keyCode || e.which,
+                target = e.target || e.srcElement;
+
+            if (target.tagName === 'INPUT' && target.type === 'text' && key === 13)
+            {
+                newSet();
             }
         },
         newWindowClickHandler = function(e)
@@ -219,6 +235,7 @@
     windowSetList.addEventListener('click', setListClickHandler);
     optionsList.addEventListener('click', optionsClickHandler);
     newSetInterface.addEventListener('click', newSetClickHandler);
+    newSetInterface.addEventListener('keypress', newSetKeypressHandler);
     newWindowInterface.addEventListener('click', newWindowClickHandler);
     
     pubsub.sub('ScreenController.SetAdded', function(data) {
