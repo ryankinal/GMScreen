@@ -9,79 +9,6 @@
         optionsList = dom.getById('currentSetOptions'),
         error = dom.create('div'),
         currentSetShaded = false,
-        confirmBox = function(settings)
-        {
-            settings = settings || {};
-
-            var box = dom.create('div'),
-                okay = dom.create('input'),
-                cancel = dom.create('input'),
-                buttons = dom.create('div'),
-                paragraph = dom.create('p'),
-                parent = settings.parent || document.body;
-
-            box.className = 'modal';
-
-            okay.type = 'button';
-            okay.value = settings.confirmText || 'Yes';
-
-            cancel.type = 'button';
-            cancel.value = settings.cancelText || 'No';
-
-            paragraph.appendChild(dom.text(settings.message || 'Are you sure?'));
-
-            buttons.appendChild(okay);
-            buttons.appendChild(cancel);
-
-            box.appendChild(paragraph);
-            box.appendChild(buttons);
-
-            okay.addEventListener('click', function(e) {
-                var close, handlerReturnValue;
-
-                if (typeof settings.onConfirm === 'function')
-                {
-                    handlerReturnValue = settings.onConfirm(e);
-                    close = handlerReturnValue || typeof handlerReturnValue === 'undefined';
-                }
-                else
-                {
-                    close = true;
-                }
-
-                if (close)
-                {
-                    box.style.display = 'none';
-                    blanket.style.display = 'none';
-                    bos.parentNode.removeChild(box);
-                }
-            });
-
-            cancel.addEventListener('click', function(e) {
-                var close, handlerReturnValue;
-
-                if (typeof settings.onCancel === 'function')
-                {
-                    handlerReturnValue = settings.onCancel(e);
-                    close = handlerReturnValue || typeof handlerReturnValue === 'undefined';
-                }
-                else
-                {
-                    close = true;
-                }
-
-                if (close)
-                {
-                    box.style.display = 'none';
-                    blanket.style.display = 'none';
-                    box.parentNode.removeChild(box);
-                }
-            });
-
-            parent.appendChild(box);
-            box.style.display = 'block';
-            blanket.style.display = 'block';
-        },
         renderWindowSets = function(parent)
         {
             var i,
@@ -164,7 +91,7 @@
             }
             else if (target.className === 'delete')
             {
-                confirmBox({
+                cap.confirm({
                     message: 'Are you sure you want to delete this screen?',
                     confirmText: 'Yes',
                     cancelText: 'No',
@@ -206,7 +133,7 @@
             }
             else if (target.className === 'delete')
             {
-                confirmBox({
+                cap.confirm({
                     message: 'Are you sure you want to delete this screen?',
                     confirmText: 'Yes',
                     cancelText: 'No',
