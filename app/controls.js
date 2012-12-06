@@ -52,7 +52,16 @@
             windowSetList.appendChild(fragment);
 
             dom.empty(currentSetDisplay);
-            currentSetDisplay.appendChild(dom.text(currentSet.set.name));
+
+            if (sets.length)
+            {
+                currentSetDisplay.appendChild(dom.text(currentSet.set.name));
+                optionsList.style.display = 'block';
+            }
+            else
+            {
+                optionsList.style.display = 'none';
+            }
         },
         setListClickHandler = function(e)
         {
@@ -70,6 +79,7 @@
                     ScreenController.getCurrentWindowSet().set.hide();
                     ScreenController.changeWindowSet(index).show();
                     renderWindowSets(windowSetList);    
+                    setName.focus();
                 }
             }
             else if (target.className === 'new-window-set')
@@ -89,6 +99,7 @@
             {
                 newWindowInterface.style.display = 'block';
                 blanket.style.display = 'block';
+                windowName.focus();
             }
             else if (target.className === 'shade')
             {
@@ -109,9 +120,13 @@
         {
             blanket.style.display = 'none';
             win.style.display = 'none';
-            error.parentNode.removeChild(error);
             dom.empty(error);
+            input.value = '';
 
+            if (error.parentNode)
+            {
+                error.parentNode.removeChild(error);
+            }
         },
         newSetClickHandler = function(e)
         {
@@ -198,6 +213,7 @@
         {
             blanket.style.display = 'block';
             newSetInterface.style.display = 'block';
+            setName.focus();
         }
     });
 })(efence);
