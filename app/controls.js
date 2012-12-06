@@ -85,9 +85,7 @@
             }
             else if (target.className === 'new-window-set')
             {
-                newSetInterface.style.display = 'block';
-                blanket.style.display = 'block';
-                setName.focus();
+                newSet();
             }
             else if (target.className === 'delete')
             {
@@ -166,47 +164,15 @@
         },
         newSet = function()
         {
-            var name = setName.value;
-
-            if (name.replace(/(&\s+|\s+$)/g, '') === '')
-            {
-                dom.empty(error);
-                error.appendChild('Give your new screen a name');
-                newSetInterface.appendChild(error);
-                return false;
-            }
-            else
-            {
-                ScreenController.addWindowSet(name);
-                closeWindow(newSetInterface, setName);
-            }
-        },
-        newSetClickHandler = function(e)
-        {
-            e = e || window.event;
-            var target = e.target || e.srcElement;
-
-            if (target.className === 'okay')
-            {
-                newSet();
-            }
-            else if (target.className === 'cancel')
-            {
-                closeWindow(newSetInterface, setName);
-                return false;
-            }
-        },
-        newSetKeypressHandler = function(e)
-        {
-            e = e || window.event;
-            var key = e.keyCode || e.which,
-                target = e.target || e.srcElement;
-
-            if (target.tagName === 'INPUT' && target.type === 'text' && key === 13)
-            {
-                newSet();
-                return false;
-            }
+            cap.prompt({
+                content: '<h2>Add a Screen</h2><p>Enter a name for your new screen</p>',
+                contentType: 'html',
+                confirmText: 'Create',
+                cancelText: 'Cancel',
+                onConfirm: function(e, data) {
+                    ScreenController.addWindowSet(data);
+                }
+            });
         },
         newWindowClickHandler = function(e)
         {
@@ -256,8 +222,6 @@
 
     windowSetList.addEventListener('click', setListClickHandler);
     optionsList.addEventListener('click', optionsClickHandler);
-    newSetInterface.addEventListener('click', newSetClickHandler);
-    newSetInterface.addEventListener('keypress', newSetKeypressHandler);
     newWindowInterface.addEventListener('click', newWindowClickHandler);
     
     pubsub.sub('ScreenController.SetAdded', function(data) {
@@ -276,9 +240,7 @@
         renderWindowSets(windowSetList);
         if (ScreenController.getWindowSets().length === 0)
         {
-            blanket.style.display = 'block';
-            newSetInterface.style.display = 'block';
-            setName.focus();
+            newSet();
         }
     });
 })(efence);
