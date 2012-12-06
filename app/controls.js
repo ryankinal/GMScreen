@@ -1,7 +1,13 @@
 (function(pubsub) {
-    var windowSetList = dom.getById('windowSets'),
+    var blanket = dom.getById('blanket'),
+        windowSetList = dom.getById('windowSets'),
+        newWindowInterface = dom.getById('addWindow'),
+        newWindowName = dom.getById('windowName'),
+        newSetInterface = dom.getById('addSet'),
+        newSetName = dom.getById('setName'),
         currentSetDisplay = dom.getById('currentSetName'),
         optionsList = dom.getById('currentSetOptions'),
+        error = dom.create('div'),
         currentSetShaded = false,
         renderWindowSets = function(parent)
         {
@@ -68,7 +74,8 @@
             }
             else if (target.className === 'new-window-set')
             {
-                // show interface for adding new window set
+                newSetInterface.style.display = 'block';
+                blanket.style.display = 'block';
             }
         },
         optionsClickHandler = function(e)
@@ -80,7 +87,8 @@
 
             if (target.className === 'new-window')
             {
-                // show interface for adding new window
+                newWindowInterface.style.display = 'block';
+                blanket.style.display = 'block';
             }
             else if (target.className === 'shade')
             {
@@ -96,14 +104,55 @@
                 ScreenController.getCurrentWindowSet().set.show();
                 renderWindowSets(windowSetList);
             }
+        },
+        newSetClickHandler = function(e)
+        {
+            e = e || window.event;
+            var target = e.target || e.srcElement,
+                name = setName.value;
+
+            if (target.className === 'okay')
+            {
+                if (name.replace(/(^\s+|\s+$)/g, '') === '')
+                {
+                    error.appendChild(dom.text('Give your new screen a name'));
+                    newSetInterface.appendChild(error);
+                    return;
+                }
+                else
+                {
+                    ScreenController.addWindowSet(name);
+                    blanket.style.display = 'none';
+                    newSetInterface.style.display = 'none';
+                }
+            }
+            else if (target.className === 'cancel')
+            {
+                blanket.style.display = 'none';
+                newSetInterface.style.display = 'none';
+            }
+        },
+        newWindowClickHandler = function(e)
+        {
+
         };
 
 
+    error.className = 'error';
+
     windowSetList.addEventListener('click', setListClickHandler);
     optionsList.addEventListener('click', optionsClickHandler);
+    newSetInterface.addEventListener('click', newSetClickHandler);
+    newWindowInterface.addEventListener('click', newWindowClickHandler);
     
-    
+    pubsub.sub('ScreenController.SetAdded', function(data) {
+        ScreenController.getCurrentWindowSet().set.hide();
+        ScreenController.changeWindowSet(data.index).show();
+        renderWindowSets(windowSetList);
+    });
+
     window.addEventListener('load', function(e) {
         renderWindowSets(windowSetList);
+        renderItemTypes();
     });
 })(efence);

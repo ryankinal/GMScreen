@@ -53,6 +53,7 @@ ScreenController = (function(parent, pubsub) {
 		items[name] = [];
 		currentSet++;
 		pubsub.pub('ScreenController.SetAdded', {
+			index: 0,
 			windowSet: windowSets[0]
 		});
 		return windowSets[0];
