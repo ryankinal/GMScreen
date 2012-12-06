@@ -105,6 +105,14 @@
                 renderWindowSets(windowSetList);
             }
         },
+        closeWindow = function(win, input)
+        {
+            blanket.style.display = 'none';
+            win.style.display = 'none';
+            error.parentNode.removeChild(error);
+            dom.empty(error);
+
+        },
         newSetClickHandler = function(e)
         {
             e = e || window.event;
@@ -122,19 +130,48 @@
                 else
                 {
                     ScreenController.addWindowSet(name);
-                    blanket.style.display = 'none';
-                    newSetInterface.style.display = 'none';
+                    closeWindow(newSetInterface, setName);
                 }
             }
             else if (target.className === 'cancel')
             {
-                blanket.style.display = 'none';
-                newSetInterface.style.display = 'none';
+                closeWindow(newSetInterface, setName);
             }
         },
         newWindowClickHandler = function(e)
         {
+            e = e || window.event;
+            var target = e.target || e.srcElement,
+                name = windowName.value,
+                submitRex = /\b(table|ordered-list|unordered-list)\b/;
 
+            if (submitRex.test(target.className))
+            {
+                if (name.replace(/(^\s+|\s+$)/g, '') === '')
+                {
+                    error.appendChild(dom.text('Give your new window a name'));
+                    newWindowInterface.appendChild(error);
+                    return;
+                }
+
+                if (/\btable\b/.test(target.className))
+                {
+                    ScreenController.addTable(name, {
+                        headers: [],
+                        body: []
+                    });
+                }
+                else if (/\bordered-list\b/.test(target.className))
+                {
+                    ScreenController.addOrderedList(name, []);
+                }
+                else if (/\bunordered-list\b/.test(target.className))
+                {
+                    ScreenController.addUnorderedList(name, []);
+                }
+
+                closeWindow(newWindowInterface, windowName);
+            }
         };
 
 
@@ -153,6 +190,10 @@
 
     window.addEventListener('load', function(e) {
         renderWindowSets(windowSetList);
-        renderItemTypes();
+        if (ScreenController.getWindowSets().length === 0)
+        {
+            blanket.style.display = 'block';
+            newSetInterface.style.display = 'block';
+        }
     });
 })(efence);
