@@ -275,7 +275,7 @@ itemTypes.table = (function() {
         table.appendChild(body);
         container.appendChild(table);
         container.appendChild(addRow);
-        //container.appendChild(addColumn);
+        container.appendChild(addColumn);
         parent.appendChild(container);
 
         this.element = container;
