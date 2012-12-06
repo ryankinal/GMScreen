@@ -180,6 +180,8 @@
                     }
                 });
             }
+
+            return false;
         },
         optionsClickHandler = function(e)
         {
@@ -220,6 +222,8 @@
                     }
                 });
             }
+
+            return false;
         },
         closeWindow = function(win, input)
         {
@@ -262,6 +266,7 @@
             else if (target.className === 'cancel')
             {
                 closeWindow(newSetInterface, setName);
+                return false;
             }
         },
         newSetKeypressHandler = function(e)
@@ -273,6 +278,7 @@
             if (target.tagName === 'INPUT' && target.type === 'text' && key === 13)
             {
                 newSet();
+                return false;
             }
         },
         newWindowClickHandler = function(e)
@@ -309,10 +315,12 @@
                 }
 
                 closeWindow(newWindowInterface, windowName);
+                return false;
             }
             else if (target.className === 'cancel')
             {
                 closeWindow(newWindowInterface, windowName);
+                return false;
             }
         };
 
