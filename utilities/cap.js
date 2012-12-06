@@ -184,10 +184,45 @@ cap = (function() {
             cancel,
             content,
             buttons = dom.create('div'),
+            parent = settings.parent || document.body,
             trim = settings.trim !== false,
             trimRegex = /(^\s+|\s$)/g,
             validate = settings.validate || function(data) {
                 return /.+/.test(data);
+            },
+            confirm = function(e) {
+                var value = input.value,
+                    handlerReturnValue,
+                    close;
+
+                if (trim)
+                {
+                    value = value.replace(trimRegex, '');
+                }
+
+                if (validate(value))
+                {
+                    if (typeof settings.onConfirm === 'function')
+                    {
+                        handlerReturnValue = settings.onConfirm(e, value);
+                        close = handlerReturnValue || typeof handlerReturnValue === 'undefined';
+                    }
+                    else
+                    {
+                        close = true;
+                    }
+
+                    if (close && settings.hide !== false)
+                    {
+                        closeCurrent();
+                    }
+                }
+                else
+                {
+                    dom.empty(error);
+                    error.appendChild(dom.text(settings.invalidError || 'Invalid input'));
+                    box.appendChild(error);
+                }
             };
 
         box.className = settings.className || 'modal';
@@ -209,7 +244,7 @@ cap = (function() {
         if (settings.contentType === 'html')
         {
             content = dom.create('div');
-            content.innerHtml = settings.content;
+            content.innerHTML = settings.content;
         }
         else if (settings.contentType === 'node')
         {
@@ -224,40 +259,20 @@ cap = (function() {
         box.appendChild(content);
         box.appendChild(buttons);
 
-        okay.addEventListener('click', function(e) {
-            var value = input.value,
-                handlerReturnValue,
-                close;
+        okay.addEventListener('click', confirm);
 
-            if (trim)
-            {
-                value = value.replace(trimRegex, '');
-            }
+        if (settings.submitOnEnter !== false)
+        {
+            input.addEventListener('keypress', function(e) {
+                e = e || window.event;
+                var key = e.keyCode || e.which;
 
-            if (validate(value))
-            {
-                if (typeof settings.onConfirm === 'function')
+                if (key === 13)
                 {
-                    handlerReturnValue = settings.onConfirm(e, value);
-                    close = handlerReturnValue || typeof handlerReturnValue === 'undefined';
+                    confirm(e);
                 }
-                else
-                {
-                    close = true;
-                }
-
-                if (close && settings.hide !== false)
-                {
-                    closeCurrent();
-                }
-            }
-            else
-            {
-                dom.empty(error);
-                error.appendChild(dom.text(settings.invalidError || 'Invalid input'));
-                box.appendChild(error);
-            }
-        });
+            });
+        }
 
         if (settings.allowCancel)
         {
@@ -294,6 +309,7 @@ cap = (function() {
         if (settings.show !== false)
         {
             showCurrent(parent);
+            input.focus();
         }
 
         return {
