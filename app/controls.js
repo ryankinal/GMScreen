@@ -172,6 +172,10 @@
 
                 closeWindow(newWindowInterface, windowName);
             }
+            else if (target.className === 'cancel')
+            {
+                closeWindow(newWindowInterface, windowName);
+            }
         };
 
 
