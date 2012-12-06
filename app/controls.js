@@ -156,6 +156,7 @@
             {
                 if (name.replace(/(^\s+|\s+$)/g, '') === '')
                 {
+                    dom.empty(error);
                     error.appendChild(dom.text('Give your new screen a name'));
                     newSetInterface.appendChild(error);
                     return;
@@ -182,6 +183,7 @@
             {
                 if (name.replace(/(^\s+|\s+$)/g, '') === '')
                 {
+                    dom.empty(error);
                     error.appendChild(dom.text('Give your new window a name'));
                     newWindowInterface.appendChild(error);
                     return;
