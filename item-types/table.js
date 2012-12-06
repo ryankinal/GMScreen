@@ -140,8 +140,14 @@ itemTypes.table = (function() {
 
             return function(e)
             {
-                var header = prompt('Please enter header text for your column');
-                self.addColumn(header);
+                cap.prompt({
+                    content: 'Please enter header text for your column',
+                    confirmText: 'Create',
+                    allowCancel: true,
+                    onConfirm: function(e, data) {
+                        self.addColumn(data)
+                    }
+                });
                 return false;
             }
         },
