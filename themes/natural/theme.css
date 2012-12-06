@@ -333,8 +333,8 @@ h1, h2, h3
 
 .ui-content th, .ui-content table .mark, .ui-content table .delete
 {
-	width: cursor;
-	6px: pointer;
+	width: 6px;
+	cursor: pointer;
 }
 
 .ui-content table .mark
