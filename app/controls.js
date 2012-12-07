@@ -11,8 +11,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         currentSetShaded = false,
         renderWindowSets = function(parent)
         {
-            var i,
-                fragment = dom.fragment(),
+            var fragment = dom.fragment(),
                 current = dom.create('span'),
                 all = dom.create('ul'),
                 item,
@@ -25,23 +24,22 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
             current.appendChild(dom.text('Your Screens'));
             fragment.appendChild(current);
 
-            for (i = 0; i < sets.length; i++)
-            {
+            sets.forEach(function(set, index) {
                 item = dom.create('li');
-                item.className = (i === currentSet.index) ? 'window-set current' : 'window-set';
-                item.dataset.index = i;
-                item.appendChild(dom.text(sets[i].name));
+                item.className = (index === currentSet.index) ? 'window-set current' : 'window-set';
+                item.dataset.index = index;
+                item.appendChild(dom.text(set.name));
 
                 del = dom.create('input');
                 del.type = 'button';
                 del.className = 'delete';
-                del.title = 'Delete ' + sets[i].name;
+                del.title = 'Delete ' + set.name;
                 del.value = 'Delete';
-                del.dataset.index = i;
+                del.dataset.index = index;
                 item.appendChild(del);
 
                 all.appendChild(item);
-            }
+            });
 
             newWindow.appendChild(dom.text('New Screen...'));
             newWindow.className = 'new-window-set';

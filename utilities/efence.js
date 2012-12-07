@@ -4,14 +4,11 @@ define(function() {
 	return {
 		pub: function(eventName, data)
 		{
-			var i;
-
 			if (typeof eventSubscriptions[eventName] !== 'undefined')
 			{
-				for (i = 0; i < eventSubscriptions[eventName].length; i++)
-				{
-					eventSubscriptions[eventName][i](data);
-				}
+				eventSubscriptions[eventName].forEach(function(callback, index) {
+					callback(data);
+				});
 			}
 		},
 		sub: function(eventName, callback)
@@ -27,17 +24,11 @@ define(function() {
 		},
 		unsub: function(eventName, callback)
 		{
-			var i;
-
 			if (typeof eventSubscriptions[eventName] !== 'undefined')
 			{
-				for (i = 0; i < eventSubscriptions[eventName].length; i++)
-				{
-					if (eventSubscriptions[eventName][i] === callback)
-					{
-						return eventSubscriptions[eventName].splice(i, 1);
-					}
-				}
+				eventSubscriptions[eventName] = eventSubscriptions[eventName].filter(function(value) {
+					return value !== callback;
+				});
 			}
 
 			return false;
