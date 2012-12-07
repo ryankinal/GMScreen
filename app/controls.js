@@ -226,10 +226,11 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
             }
             else if (key === 27)
             {
-                dom.getById('blanket').style.display = 'none';
-                Array.prototype.forEach.call(dom.qsa('.modal'), function(elem, index) {
-                    elem.style.display = 'none';
-                });
+                if (newWindowInterface.style.display === 'block')
+                {
+                    newWindowInterface.style.display = 'none';
+                    blanket.style.display = 'none';
+                }
             }
         },
         commandHandler = function(e)

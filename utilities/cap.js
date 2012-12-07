@@ -8,6 +8,7 @@ define(['utilities/dom'], function(dom) {
             parent.appendChild(current);
             current.style.display = 'block';
             blanket.style.display = 'block';
+            window.addEventListener('keydown', handleEscape);
         },
         closeCurrent = function()
         {
@@ -16,6 +17,18 @@ define(['utilities/dom'], function(dom) {
                 current.style.display = 'none';
                 blanket.style.display = 'none';
                 current.parentNode.removeChild(current);
+            }
+        },
+        handleEscape = function(e)
+        {
+            e = e || window.event;
+            var key = e.keyCode || e.which;
+
+            if (key === 27)
+            {
+                window.removeEventListener('keydown', handleEscape);
+                closeCurrent();
+                return false;
             }
         };
 
