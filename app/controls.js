@@ -8,6 +8,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         currentSetDisplay = dom.getById('currentSetName'),
         optionsList = dom.getById('currentSetOptions'),
         error = dom.create('div'),
+        hotKeys = false,
         currentSetShaded = false,
         renderWindowSets = function(parent)
         {
@@ -77,7 +78,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
                 {
                     ScreenController.getCurrentWindowSet().set.hide();
                     ScreenController.changeWindowSet(index).show();
-                    renderWindowSets(windowSetList);    
+                    renderWindowSets(windowSetList);
                 }
             }
             else if (target.className === 'new-window-set')
@@ -212,6 +213,49 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
                 closeWindow(newWindowInterface, windowName);
                 return false;
             }
+        },
+        hotKeyHandler = function(e)
+        {
+            e = e || window.event;
+            var key = e.keyCode || e.which,
+                character = String.fromCharCode(key);
+
+            if (e.ctrlKey && key === 186)
+            {
+                hotKeys = true;
+            }
+            else if (key === 27)
+            {
+                dom.getById('blanket').style.display = 'none';
+                Array.prototype.forEach.call(dom.qsa('.modal'), function(elem, index) {
+                    elem.style.display = 'none';
+                });
+            }
+        },
+        commandHandler = function(e)
+        {
+            e = e || window.event;
+            var key = e.keyCode || e.which,
+                character = String.fromCharCode(key);
+
+            if (hotKeys)
+            {
+                hotKeys = false;
+
+                if (character === 'w' || character == 'W')
+                {
+                    newWindowInterface.style.display = 'block';
+                    blanket.style.display = 'block';
+                    windowName.focus();
+                }
+                else if (character === 's' || character === 'S')
+                {
+                    newSet();
+                }
+
+                e.preventDefault();
+                return false;
+            }
         };
 
 
@@ -220,6 +264,8 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
     windowSetList.addEventListener('click', setListClickHandler);
     optionsList.addEventListener('click', optionsClickHandler);
     newWindowInterface.addEventListener('click', newWindowClickHandler);
+    window.addEventListener('keydown', hotKeyHandler);
+    window.addEventListener('keypress', commandHandler);
     
     pubsub.sub('ScreenController.SetAdded', function(data) {
         var set = ScreenController.getCurrentWindowSet().set;
