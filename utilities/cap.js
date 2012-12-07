@@ -227,6 +227,8 @@ define(['utilities/dom'], function(dom) {
 
         box.className = settings.className || 'modal';
 
+        error.className = 'error';
+
         if (!settings.input)
         {
             input.type = 'text';
