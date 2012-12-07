@@ -1,6 +1,4 @@
-var itemTypes = {};
-
-itemTypes.base = {
+define({
     load: function(data) {
         if (data.charAt)
         {
@@ -13,4 +11,4 @@ itemTypes.base = {
     {
         return JSON.stringify(this.data);
     }
-};
+});

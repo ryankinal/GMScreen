@@ -1,4 +1,4 @@
-UIWindowSet = (function(pubsub) {
+define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 	var windowSetObj = {};
 
 	windowSetObj.init = function(name, theme)
@@ -85,4 +85,4 @@ UIWindowSet = (function(pubsub) {
 	}
 
 	return windowSetObj;
-})(efence);
+});

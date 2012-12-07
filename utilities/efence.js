@@ -1,4 +1,4 @@
-efence = (function() {
+define(function() {
 	var eventSubscriptions = {};
 
 	return {
@@ -43,4 +43,4 @@ efence = (function() {
 			return false;
 		}
 	}
-})();
+});

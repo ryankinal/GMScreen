@@ -1,8 +1,7 @@
-UIWindow = (function(minX, minY, pubsub) {
-	minX = minX || 0;
-	minY = minY || 0;
-
-	var windowObject = {},
+define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
+	var minX = 0,
+		minY = 0,
+		windowObject = {},
 		currentMover,
 		lastPosition,
 		makeCloseHandler = function()
@@ -205,4 +204,4 @@ UIWindow = (function(minX, minY, pubsub) {
 	}
 
 	return windowObject;
-})(0, 0, efence);
+});

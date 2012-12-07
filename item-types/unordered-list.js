@@ -1,5 +1,5 @@
-itemTypes.unorderedList = (function() {
-	var ulObject = Object.create(itemTypes.list);
+define(['./list'], function(list) {
+	var ulObject = Object.create(list);
 	ulObject.tagName = 'ul';
 	return ulObject;
-})();
+});

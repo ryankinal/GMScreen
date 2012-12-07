@@ -1,5 +1,5 @@
-itemTypes.list = (function() {
-	var listObject = Object.create(itemTypes.base);
+define(['./item-types', 'utilities/dom'], function(base, dom) {
+	var listObject = Object.create(base);
 	listObject.tagName = 'ul';
 
 	var makeMoveUpHandler = function(i)
@@ -160,7 +160,7 @@ itemTypes.list = (function() {
 
 	listObject.load = function(data)
 	{
-		itemTypes.base.load.call(this, data);
+		base.load.call(this, data);
 		this.marked = [];
 	}
 
@@ -273,4 +273,4 @@ itemTypes.list = (function() {
 	}
 
 	return listObject;
-})();
+});

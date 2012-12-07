@@ -1,4 +1,4 @@
-dom = {
+define({
     create: function(tagName, context)
     {
         context = context || document;
@@ -70,4 +70,4 @@ dom = {
         context = context || document;
         return context.querySelectorAll(selector);
     }
-}
+});

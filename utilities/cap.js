@@ -1,4 +1,4 @@
-cap = (function() {
+define(['utilities/dom'], function(dom) {
     var blanket = dom.getById('blanket'),
         cap = {},
         current,
@@ -319,4 +319,4 @@ cap = (function() {
     }
 
     return cap;
-})();
+});

@@ -1,5 +1,5 @@
-itemTypes.orderedList = (function() {
-    var olObject = Object.create(itemTypes.list);
+define(['./list'], function(list) {
+    var olObject = Object.create(list);
     olObject.tagName = 'ol';
     return olObject;
-})();
+});

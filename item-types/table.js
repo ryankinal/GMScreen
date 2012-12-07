@@ -1,5 +1,5 @@
-itemTypes.table = (function() { 
-    var tableObject = Object.create(itemTypes.base);
+define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], function(base, dom, pubsub, cap) { 
+    var tableObject = Object.create(base);
 
     var makeStartEditCell = function(i, j)
         {
@@ -175,7 +175,7 @@ itemTypes.table = (function() {
 
     tableObject.load = function(data)
     {
-        itemTypes.base.load.call(this, data);
+        base.load.call(this, data);
 
         if (typeof this.data.headers === 'undefined')
         {
@@ -330,4 +330,4 @@ itemTypes.table = (function() {
     }
 
     return tableObject;
-})();
+});

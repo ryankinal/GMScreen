@@ -1,4 +1,4 @@
-(function(pubsub) {
+define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], function(dom, pubsub, cap, ScreenController) {
     var blanket = dom.getById('blanket'),
         windowSetList = dom.getById('windowSets'),
         newWindowInterface = dom.getById('addWindow'),
@@ -236,11 +236,10 @@
         renderWindowSets(windowSetList);
     });
 
-    window.addEventListener('load', function(e) {
-        renderWindowSets(windowSetList);
-        if (ScreenController.getWindowSets().length === 0)
-        {
-            newSet();
-        }
-    });
-})(efence);
+    console.log('testing');
+    renderWindowSets(windowSetList);
+    if (ScreenController.getWindowSets().length === 0)
+    {
+        newSet();
+    }
+});
