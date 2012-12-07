@@ -234,6 +234,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
     });
 
     renderWindowSets(windowSetList);
+    
     if (ScreenController.getWindowSets().length === 0)
     {
         newSet();
