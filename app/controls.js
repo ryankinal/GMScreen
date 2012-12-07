@@ -244,9 +244,12 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
 
                 if (character === 'w' || character == 'W')
                 {
-                    newWindowInterface.style.display = 'block';
-                    blanket.style.display = 'block';
-                    windowName.focus();
+                    if (ScreenController.getCurrentWindowSet().set)
+                    {
+                        newWindowInterface.style.display = 'block';
+                        blanket.style.display = 'block';
+                        windowName.focus();
+                    }
                 }
                 else if (character === 's' || character === 'S')
                 {
