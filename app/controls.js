@@ -28,7 +28,6 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
             for (i = 0; i < sets.length; i++)
             {
                 item = dom.create('li');
-                console.log(i, currentSet.index);
                 item.className = (i === currentSet.index) ? 'window-set current' : 'window-set';
                 item.dataset.index = i;
                 item.appendChild(dom.text(sets[i].name));
@@ -236,7 +235,6 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         renderWindowSets(windowSetList);
     });
 
-    console.log('testing');
     renderWindowSets(windowSetList);
     if (ScreenController.getWindowSets().length === 0)
     {
