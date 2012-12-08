@@ -9,7 +9,6 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         optionsList = dom.getById('currentSetOptions'),
         error = dom.create('div'),
         hotKeys = false,
-        currentSetShaded = false,
         renderWindowSets = function(parent)
         {
             var fragment = dom.fragment(),
@@ -237,13 +236,13 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         {
             e = e || window.event;
             var key = e.keyCode || e.which,
-                character = String.fromCharCode(key);
+                character = String.fromCharCode(key).toLowerCase();
 
             if (hotKeys)
             {
                 hotKeys = false;
 
-                if (character === 'w' || character == 'W')
+                if (character === 'w')
                 {
                     if (ScreenController.getCurrentWindowSet().set)
                     {
@@ -252,9 +251,17 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
                         windowName.focus();
                     }
                 }
-                else if (character === 's' || character === 'S')
+                else if (character === 's')
                 {
                     newSet();
+                }
+                else if (character === 'd')
+                {
+                    ScreenController.save();
+                }
+                else if (character === 'l')
+                {
+                    ScreenController.load();
                 }
 
                 e.preventDefault();
@@ -282,6 +289,8 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         ScreenController.changeWindowSet(data.index).show();
         renderWindowSets(windowSetList);
     });
+
+    ScreenController.load();
 
     renderWindowSets(windowSetList);
     
