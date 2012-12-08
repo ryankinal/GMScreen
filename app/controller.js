@@ -126,19 +126,16 @@ define(
 		{
 			if (localStorage)
 			{
-				console.dir(this.getSaveData());
 				localStorage.setItem('gmscreen', JSON.stringify(this.getSaveData()));
 			}
 		}
 
 		screenController.load = function()
 		{
-			var data;
+			var data, firstSet;
 
 			if (localStorage && (data = JSON.parse(localStorage.getItem('gmscreen'))))
 			{
-				console.dir(data);
-
 				windowSets = [];
 
 				data.windowSets.forEach(function(set, index) {
@@ -174,7 +171,11 @@ define(
 				}, this);
 
 				this.changeWindowSet(data.currentSet);
-				this.getCurrentWindowSet().set.show();
+
+				if (firstSet = this.getCurrentWindowSet().set)
+				{
+					firstSet.show();	
+				}
 			}
 		}
 
