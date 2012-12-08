@@ -1,4 +1,4 @@
-define(['./item-types', 'utilities/dom'], function(base, dom) {
+define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom, pubsub) {
 	var listObject = Object.create(base);
 	listObject.tagName = 'ul';
 
@@ -19,6 +19,11 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 				{
 					self.data.splice(i - 1, 2, self.data[i], self.data[i - 1]);
 					self.render();
+					pubsub.pub('List.ItemMoved', {
+						list: self,
+						oldIndex: i,
+						newIndex: i - 1
+					});
 					return false;
 				}
 			}
@@ -40,6 +45,11 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 				{
 					self.data.splice(i, 2, self.data[i + 1], self.data[i]);
 					self.render();
+					pubsub.pub('List.ItemMoved', {
+						list: self,
+						oldIndex: i,
+						newIndex: i + 1
+					});
 					return false;
 				}
 			}
@@ -91,6 +101,11 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 				{
 					self.data[i] = (value === '') ? '[click to edit]' : value;
 					self.render();
+					pubsub.pub('List.ItemEdited', {
+						list: self,
+						item: self.data[i],
+						value: value
+					});
 					return false;
 				}
 			}
@@ -118,8 +133,12 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 
 			return function(e)
 			{
-				self.data.splice(i, 1);
+				var item = self.data.splice(i, 1)[0];
 				self.render();
+				pubsub.pub('List.ItemDeleted', {
+					list: self,
+					item: item
+				});
 				return false;
 			}
 		},
@@ -154,6 +173,10 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 				}
 
 				self.render();
+				pubsub.pub('List.ItemMarked', {
+					list: self,
+					item: self.data[i]
+				});
 				return false;
 			}
 		};
@@ -256,9 +279,12 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 		container.appendChild(addItem);
 		parent.appendChild(container);
 
-
 		this.element = container;
 		this.parent = parent;
+
+		pubsub.pub('List.Rendered', {
+			list: this
+		});
 	}
 
 	listObject.addItem = function(data)
@@ -270,6 +296,11 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 
 		this.data.push(data);
 		this.render();
+
+		pubsub.pub('List.ItemAdded', {
+			list: self,
+			item: this.data[this.data.length - 1]
+		});
 	}
 
 	listObject.getSaveData = function()
