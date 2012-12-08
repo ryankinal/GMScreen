@@ -337,8 +337,8 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
         this.render();
 
         pubsub.pub('Table.RowAdded', {
-            table: this
-            this.data.body[this.data.body.length - 1];
+            table: this,
+            row: this.data.body[this.data.body.length - 1]
         });
     };
 

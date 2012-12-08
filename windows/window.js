@@ -174,7 +174,7 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 			this.snapTo = value;
 		}
 
-		pubsub.pub('UIWindow.SnapChanged' {
+		pubsub.pub('UIWindow.SnapChanged', {
 			window: this
 		});
 	}
