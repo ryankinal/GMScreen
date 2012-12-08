@@ -165,6 +165,7 @@ define(
 
 						newWindow.x = win.x;
 						newWindow.y = win.y;
+						newWindow.z = win.z;
 						newWindow.update();
 					}, this);
 					windowSets[index].hide();

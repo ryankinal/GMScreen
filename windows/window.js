@@ -214,6 +214,7 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 			name: this.name,
 			x: this.x,
 			y: this.y,
+			z: this.z,
 			snapTo: this.snapTo,
 			shaded: this.shaded,
 			item: this.item.getSaveData()
