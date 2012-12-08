@@ -48,6 +48,7 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 		{
 			lastPosition = null;
 			currentMover.update();
+			pubsub.pub('UIWindow.WindowMoved');
 			window.removeEventListener('mousemove', moveHandler);
 			window.removeEventListener('mouseup', mouseUpHandler);
 		},
@@ -172,6 +173,10 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 		{
 			this.snapTo = value;
 		}
+
+		pubsub.pub('UIWindow.SnapChanged' {
+			window: this
+		});
 	}
 
 	windowObject.shade = function(shade)
