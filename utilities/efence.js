@@ -1,5 +1,7 @@
 define(function() {
-	var eventSubscriptions = {};
+	var eventSubscriptions = {},
+		recentEvents = {},
+		recentLifetime = 100;
 
 	return {
 		pub: function(eventName, data)
@@ -9,6 +11,15 @@ define(function() {
 				eventSubscriptions[eventName].forEach(function(callback, index) {
 					callback(data);
 				});
+			}
+
+			if (eventName !== '*' && !recentEvents[eventName])
+			{
+				this.pub('*', data);
+				recentEvents[eventName] = true;
+				setTimeout(function() {
+					delete recentEvents[eventName];
+				}, recentLifetime);
 			}
 		},
 		sub: function(eventName, callback)
