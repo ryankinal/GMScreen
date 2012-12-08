@@ -49,6 +49,9 @@
 
         <script type="text/javascript" src="utilities/require.js"></script>
         <script type="text/javascript">
+            require.config({
+                urlArgs: "bust=" + (new Date()).getTime()
+            })
             require(['app/controls']);
         </script>
     </body>
