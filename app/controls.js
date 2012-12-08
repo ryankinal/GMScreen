@@ -282,11 +282,11 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         renderWindowSets(windowSetList);
     });
 
+    ScreenController.load();
+    
     pubsub.sub('*', function(data) {
         ScreenController.save();
     });
-
-    ScreenController.load();
 
     renderWindowSets(windowSetList);
     
