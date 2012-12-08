@@ -26,7 +26,7 @@ Whenever you do *anything* it is immediately saved to your browser. This include
 
 And, when you return to the page, your changes will be loaded for you.
 
-##Improved marking
+###Improved marking
 
 I've improved the way data is represented in tables and lists, so a marked row or item will remain marked when sorting and moving.
 
