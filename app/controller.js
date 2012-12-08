@@ -128,7 +128,6 @@ define(
 			{
 				console.dir(this.getSaveData());
 				localStorage.setItem('gmscreen', JSON.stringify(this.getSaveData()));
-				pubsub.pub('ScreenController.DataSaved');
 			}
 		}
 

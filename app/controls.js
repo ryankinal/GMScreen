@@ -255,14 +255,6 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
                 {
                     newSet();
                 }
-                else if (character === 'd')
-                {
-                    ScreenController.save();
-                }
-                else if (character === 'l')
-                {
-                    ScreenController.load();
-                }
 
                 e.preventDefault();
                 return false;
@@ -288,6 +280,10 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         
         ScreenController.changeWindowSet(data.index).show();
         renderWindowSets(windowSetList);
+    });
+
+    pubsub.sub('*', function(data) {
+        ScreenController.save();
     });
 
     ScreenController.load();
