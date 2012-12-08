@@ -272,5 +272,13 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 		this.render();
 	}
 
+	listObject.getSaveData = function()
+	{
+		return {
+			data: this.data,
+			marked: this.marked
+		}
+	}
+
 	return listObject;
 });

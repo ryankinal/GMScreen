@@ -203,5 +203,17 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 		}
 	}
 
+	windowObject.getSaveData = function()
+	{
+		return {
+			name: this.name,
+			x: this.x,
+			y: this.y,
+			snapTo: this.snapTo,
+			shaded: this.shaded,
+			item: this.item.getSaveData()
+		}
+	}
+
 	return windowObject;
 });

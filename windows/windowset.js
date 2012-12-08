@@ -84,5 +84,19 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 		this.callOnAll('shade', shade);
 	}
 
+	windowSetObj.getSaveData = function()
+	{
+		var windows = [];
+		this.windows.forEach(function(win, index) {
+			windows.push(win.getSaveData());
+		});
+
+		return {
+			windows: windows,
+			name: this.name,
+			theme: this.theme
+		}
+	}
+
 	return windowSetObj;
 });

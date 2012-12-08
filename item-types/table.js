@@ -179,8 +179,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
 
         if (typeof this.data.headers === 'undefined')
         {
-            throw('A table must contain headers');
-            return false;
+            this.data.headers = [];
         }
 
         if (typeof this.data.body === 'undefined')
@@ -327,6 +326,15 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
         }
 
         this.render();
+    }
+
+    tableObject.getSaveData = function()
+    {
+        return {
+            data: this.data,
+            sortOrder: this.sortOrder,
+            type: 'Table'
+        }
     }
 
     return tableObject;

@@ -83,16 +83,22 @@ define(
 				throw('Window set out of range');
 			}
 
-			if (index === currentSet || index >= windowSets.length - 1)
+			var set = windowSets.splice(index, 1)[0];
+
+			if (windowSets.length == 0)
+			{
+				currentSet = -1;
+			}
+			else if (index === currentSet || index >= windowSets.length - 1)
 			{
 				currentSet = 0;
 			}
 
 			pubsub.pub('ScreenController.SetRemoved', {
-				windowSet: windowSets[currentSet]
+				windowSet: set
 			});
 
-			return windowSets.splice(index, 1)[0];
+			return set;
 		}
 
 		screenController.addTable = function(name, data)
@@ -114,6 +120,76 @@ define(
 			var newList = Object.create(itemTypes.unorderedList);
 			newList.load(data);
 			return addWindow(name, newList);
+		}
+
+		screenController.save = function()
+		{
+			if (localStorage)
+			{
+				console.dir(this.getSaveData());
+				localStorage.setItem('gmscreen', JSON.stringify(this.getSaveData()));
+				pubsub.pub('ScreenController.DataSaved');
+			}
+		}
+
+		screenController.load = function()
+		{
+			var data;
+
+			if (localStorage && (data = JSON.parse(localStorage.getItem('gmscreen'))))
+			{
+				console.dir(data);
+
+				windowSets = [];
+
+				data.windowSets.forEach(function(set, index) {
+					windowSets.push(Object.create(UIWindowSet));
+					windowSets[index].init(set.name, set.theme);
+					currentSet = index;
+
+					set.windows.forEach(function(win, index) {
+						var newWindow,
+							item = win.item,
+							type = win.item.type;
+
+						if (win.item && win.item.type)
+						{
+							newWindow = this['add' + win.item.type](win.name, win.item.data);
+
+							if (win.item.marked)
+							{
+								newWindow.item.marked = win.item.marked;
+							}
+							
+							if (win.item.sortOrder)
+							{
+								newWindow.item.sortOrder = win.item.sortOrder
+							}
+						}
+
+						newWindow.x = win.x;
+						newWindow.y = win.y;
+						newWindow.update();
+					}, this);
+					windowSets[index].hide();
+				}, this);
+
+				this.changeWindowSet(data.currentSet);
+				this.getCurrentWindowSet().set.show();
+			}
+		}
+
+		screenController.getSaveData = function()
+		{
+			var sets = [];
+			windowSets.forEach(function(set, index) {
+				sets.push(set.getSaveData());
+			});
+
+			return {
+				currentSet: currentSet,
+				windowSets: sets
+			}
 		}
 
 		return screenController;
