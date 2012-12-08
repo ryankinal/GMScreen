@@ -46,6 +46,12 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
                     }
                     
                     self.render();
+                    pubsub.pub('Table.CellEdited', {
+                        table: self,
+                        i: i,
+                        j: j,
+                        value: value
+                    });
                     return false;
                 }
             };
@@ -94,6 +100,11 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
                 {
                     parentRow.className = '';
                 }
+
+                pubsub.pub('Table.RowMarked', {
+                    table: self,
+                    row: self.data.body[i]
+                });
             };
         },
         makeSortHandler = function(colIndex)
@@ -132,6 +143,12 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
                 }
                 
                 self.render();
+
+                pubsub.pub('Table.Sorted', {
+                    table: self,
+                    order: self.sortOrder[colIndex],
+                    column: colIndex
+                });
             };
         },
         makeAddColumnHandler = function(e)
@@ -167,8 +184,13 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
 
             return function(e)
             {
+                var row = self.data.body[i];
                 self.data.body.splice(i, 1);
                 self.render();
+                pubsub.pub('Table.RowDeleted', {
+                    table: self,
+                    row: row
+                });
                 return false;
             }
         };
@@ -188,6 +210,10 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
         }
 
         this.sortOrder = [];
+
+        pubsub.pub('Table.DataLoaded', {
+            table: this,
+        });
     }
 
     tableObject.render = function(parent)
@@ -285,6 +311,10 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
 
         this.element = container;
         this.parent = parent;
+
+        pubsub.pub('Table.Rendered', {
+            table: this
+        });
     };
 
     tableObject.addRow = function(data)
@@ -305,6 +335,11 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
         }
         
         this.render();
+
+        pubsub.pub('Table.RowAdded', {
+            table: this
+            this.data.body[this.data.body.length - 1];
+        });
     };
 
     tableObject.addColumn = function(header)
@@ -326,6 +361,11 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
         }
 
         this.render();
+
+        pubsub.pub('Table.ColumnAdded', {
+            table: this,
+            header: header
+        });
     }
 
     tableObject.getSaveData = function()
