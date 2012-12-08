@@ -53,7 +53,7 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 				e = e || window.event;
 
 				var target = e.target || e.srcElement,
-					value = self.data[i],
+					value = (self.data[i] == '[click to edit]') ? '' : self.data[i],
 					text = dom.create('textarea');
 
 				dom.empty(target);
@@ -89,7 +89,7 @@ define(['./item-types', 'utilities/dom'], function(base, dom) {
 
 				if (key === 13)
 				{
-					self.data[i] = value;
+					self.data[i] = (value === '') ? '[click to edit]' : value;
 					self.render();
 					return false;
 				}
