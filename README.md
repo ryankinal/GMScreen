@@ -8,6 +8,28 @@ Besides require.js, all code is my own.
 
 Some cool features that have recently been added!
 
+###Local Storage - 12/8
+
+Whenever you do *anything* it is immediately saved to your browser. This includes:
+
+* Adding a new screen
+* Adding a new window
+* Moving a window
+* Shading a window
+* Adding and editing table rows and columns
+* Adding and editing list items
+* Sorting tables
+* Moving list items
+* Marking list items and table rows
+* Deleting list items and table rows
+* **Basically anything you do**
+
+And, when you return to the page, your changes will be loaded for you.
+
+##Improved marking
+
+I've improved the way data is represented in tables and lists, so a marked row or item will remain marked when sorting and moving.
+
 ###Hotkeys - 12/6
 
 * Start by hitting `ctrl + ;` - this activates hot keys
@@ -20,10 +42,6 @@ More of these to come eventually!
 ##Future Features
 
 Awesome stuff that will be available in the future
-
-###Local Storage
-
-This will mean all your screens are saved *right in your browser*. No account. No password. Just persistent screens and windows.
 
 ###Cloud Storage
 
