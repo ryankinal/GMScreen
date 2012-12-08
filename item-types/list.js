@@ -63,7 +63,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 				e = e || window.event;
 
 				var target = e.target || e.srcElement,
-					value = (self.data[i] == '[click to edit]') ? '' : self.data[i],
+					value = (self.data[i].value == '[click to edit]') ? '' : self.data[i].value,
 					text = dom.create('textarea');
 
 				dom.empty(target);
@@ -99,12 +99,11 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 
 				if (key === 13)
 				{
-					self.data[i] = (value === '') ? '[click to edit]' : value;
+					self.data[i].value = (value === '') ? '[click to edit]' : value;
 					self.render();
 					pubsub.pub('List.ItemEdited', {
 						list: self,
-						item: self.data[i],
-						value: value
+						item: self.data[i]
 					});
 					return false;
 				}
@@ -160,19 +159,9 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 			{
 				e = e || window.event;
 
-				var target = e.target || e.srcElement,
-					marked = self.marked[i];
-
-				if (marked)
-				{
-					self.marked[i] = false;
-				}
-				else
-				{
-					self.marked[i] = true;
-				}
-
+				self.data[i].marked = !self.data[i].marked;
 				self.render();
+
 				pubsub.pub('List.ItemMarked', {
 					list: self,
 					item: self.data[i]
@@ -184,7 +173,6 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 	listObject.load = function(data)
 	{
 		base.load.call(this, data);
-		this.marked = [];
 	}
 
 	listObject.render = function(parent)
@@ -214,11 +202,11 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 		{
 			item = dom.create('li');
 			itemText = dom.create('div');
-			itemText.appendChild(dom.text(this.data[i]));
+			itemText.appendChild(dom.text(this.data[i].value));
 			item.appendChild(itemText);
 			itemText.addEventListener('click', makeStartEditHandler.call(this, i));
 
-			if (this.marked[i])
+			if (this.data[i].marked)
 			{
 				item.className = 'marked';
 			}
@@ -291,10 +279,16 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 	{
 		if (typeof data === 'undefined')
 		{
-			data = '[click to edit]';
+			data = {
+				marked: false,
+				value: '[click to edit]'
+			};
 		}
 
-		this.data.push(data);
+		this.data.push({
+			marked: false,
+			value: data
+		});
 		this.render();
 
 		pubsub.pub('List.ItemAdded', {

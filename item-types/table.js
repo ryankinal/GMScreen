@@ -9,7 +9,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
                 e = e || window.event;
 
                 var target = e.target || e.srcElement,
-                    value = self.data.body[i][j],
+                    value = self.data.body[i].values[j],
                     input = dom.create('input');
 
                 input.type = 'text';
@@ -38,11 +38,11 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
                 {
                     if (value.match(numCheck))
                     {
-                        self.data.body[i][j] = parseFloat(value);
+                        self.data.body[i].values[j] = parseFloat(value);
                     }
                     else
                     {
-                        self.data.body[i][j] = value;
+                        self.data.body[i].values[j] = value;
                     }
                     
                     self.render();
@@ -132,13 +132,13 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
                 if (self.sortOrder[colIndex] === 'desc')
                 {
                     self.data.body.sort(function(x, y) {
-                        return x[colIndex] < y[colIndex] ? 1 : -1;
+                        return x.values[colIndex] < y.values[colIndex] ? 1 : -1;
                     });
                 }
                 else
                 {
                     self.data.body.sort(function(x, y) {
-                        return x[colIndex] < y[colIndex] ? -1 : 1;
+                        return x.values[colIndex] < y.values[colIndex] ? -1 : 1;
                     });   
                 }
                 
@@ -259,7 +259,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
 
         for (i = 0; i < bodyLength; i++)
         {
-            rowLength = this.data.body[i].length;
+            rowLength = this.data.body[i].values.length;
             row = dom.create('tr');
 
             if (this.data.body[i].marked)
@@ -284,7 +284,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
             for (j = 0; j < rowLength; j++)
             {
                 cell = dom.create('td');
-                cell.appendChild(dom.text(this.data.body[i][j]));
+                cell.appendChild(dom.text(this.data.body[i].values[j]));
                 cell.addEventListener('click', makeStartEditCell.call(this, i, j));
                 row.appendChild(cell);
             }
@@ -327,11 +327,17 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
                 return false;
             }
 
-            this.data.body.push(data);
+            this.data.body.push({
+                marked: false,
+                values: data
+            });
         }
         else
         {
-            this.data.body.push(new Array(this.data.headers.length));
+            this.data.body.push({
+                marked: false,
+                values: new Array(this.data.headers.length)
+            });
         }
         
         this.render();
@@ -357,7 +363,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
         
         for (i = 0; i < bodyLength; i++)
         {
-            this.data.body[i].push('');
+            this.data.body[i].values.push('');
         }
 
         this.render();
