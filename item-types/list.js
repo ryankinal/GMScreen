@@ -277,17 +277,9 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 
 	listObject.addItem = function(data)
 	{
-		if (typeof data === 'undefined')
-		{
-			data = {
-				marked: false,
-				value: '[click to edit]'
-			};
-		}
-
 		this.data.push({
 			marked: false,
-			value: data
+			value: data || '[click to edit]'
 		});
 		this.render();
 
