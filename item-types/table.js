@@ -240,7 +240,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
             addColumn = dom.create('input');
         
         row.appendChild(cell);
-        row.appendChild(cell.cloneNode());
+        row.appendChild(cell.cloneNode(false));
 
         for (i = 0; i < headerLength; i++)
         {
