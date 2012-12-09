@@ -54,6 +54,12 @@ a:visited
     color: #333;
 }
 
+.code {
+    font-family: Monaco, Consolas, "Lucida Console", monospace;
+    background-color: rgba(150, 150, 150, .5);
+    padding: 1px;
+}
+
 .github
 {
     position: absolute;
