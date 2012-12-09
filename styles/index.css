@@ -182,7 +182,7 @@ a:visited
 
 .note
 {
-    padding: 15px 15px 15px 60px;
+    padding: 15px 15px 15px 40px;
     margin: 0 15px 10px 0;
 }
 
@@ -205,18 +205,24 @@ a:visited
 
 .beer
 {
-    display: none;
+    text-align: right;
+    font-size: 1.4em;
 }
 
 .beer img
 {
-    float: left;
-    margin: 0 10px 10px 0;
+    float: right;
+    margin: 0 0 10px 10px;
 }
 
 .beer h3
 {
     margin-top: 6px;
+}
+
+.beer a, .beer a:visited
+{
+    color: #FF7600;
 }
 
 .fake-rule
@@ -229,17 +235,30 @@ a:visited
 
 .footer
 {
-    font-size: .8em;
-    padding: 20px;
+    padding: 20px 10px;
 }
 
 .creative-commons > a
 {
     float: left;
-    margin: 0 10px 0 0;
+    width: 40px;
+    height: 100px;
+    position: relative;
 }
 
 .creative-commons > div
 {
     overflow: hidden;
+}
+
+.creative-commons img
+{
+    position: absolute;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -mx-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    left: -28px;
+    top: 30px;
 }
