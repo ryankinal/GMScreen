@@ -100,11 +100,6 @@ h1, h2, h3
 	padding: 9px 10px 8px;
 }
 
-.control-bar > div:hover a
-{
-	color: #FFF;
-}
-
 .menu:hover > ul
 {
 	display: block;
@@ -127,11 +122,6 @@ h1, h2, h3
 .menu li:hover
 {
 	background-color: rgba(255, 255, 255, 0.5);
-}
-
-.menu li:hover li
-{
-	color: #FFF;
 }
 
 .menu li li:hover
