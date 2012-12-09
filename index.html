@@ -2,10 +2,132 @@
 <html lang="en">
 <head>
     <title>Online Notes for Gamemasters | GMScreen</title>
-    <script type="text/javascript">
-        window.location = 'app.html';
-    </script>
+    <link rel="stylesheet" type="text/css" href="styles/haGrid.css" />
+    <link rel="stylesheet" type="text/css" href="styles/index.css" />
+    <meta charset="UTF-8" />
 </head>
 <body>
+    <div class="github">
+        <a href="https://github.com/ryankinal/GMScreen"><img src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    </div>
+    <div class="container">
+        <div>
+            <div class="header clearfix">
+                <div class="right quarter">
+                    <div class="try-it">
+                        <div class="triangle-right"></div>
+                        <h2><a href="app.html">Try it out!</a></h2>
+                    </div>
+                </div>
+                <div class="left three-quarters">
+                    <div class="title">
+                        <h1>GMScreen</h1>
+                        <p class="subtitle">Online notes and tables for Gamemasters</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="left divine-large">
+            <div class="features">
+                <h2>Features</h2>
+                <ul>
+                    <li class="feature">
+                        <h3>All the Screens You Need</h3>
+                        <p>GMScreen supports multiple screens, which you can switch out at will.</p>
+                        <p>Have a weekly Shadowrun game? Add a screen for it. Running a D&amp;D one-shot? Add a screen for it (and remove it when it's over, if you want).</p>
+                        <p>You could even get more granular &emdash; Add a screen for each session and you'll be able to quickly reference the grappling (or explosion) rules when you need to.</p>
+                    </li>
+                    <li class="feature">
+                        <h3>Persistent Data</h3>
+                        <p>All your screens, windows, and data will be saved across sessions. This is <em>browser-specific</em>, though. If you switch to a different computer, or a different browser, you won't see the same screens.</p>
+                    </li>
+                    <li class="feature">
+                        <h3>Hotkeys</h3>
+                        <p>Quick-and-easy hotkeys mean you can add new screens and windows with a couple keystrokes.</p>
+                        <p>Press <span class="code">ctrl + ;</span> and then use one of the following:</p>
+                        <ul>
+                            <li>Press <span class="code">s</span> to create a new screen</li>
+                            <li>Press <span class="code">w</span> to create a new window</li>
+                        </ul>
+                        <p>Pressing <span class="code">Esc</span> will close any input window (as if you had cancelled that window).</p>
+                    </li>
+                    <li class="feature">
+                        <h3>Item Types</h3>
+                        <ul>
+                            <li>Use <a href="#tables">Tables</a> for your initiative order, combat modifiers, character info-at-a-glance, or anything else you can think of.</li>
+                            <li>Use <a href="#lists">Lists</a> for plot points, party goals, equipment lists, and much much more.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="features" id="itemTypes">
+                <h2>Item Types</h2>
+                <ul>
+                    <li class="feature" id="tables">
+                        <h3>Tables</h3>
+                        <ul>
+                            <li>Add and delete columns and rows</li>
+                            <li>Sort by any column</li>
+                            <li>&quot;Mark&quot; any row</li>
+                        </ul>
+                    </li>
+                    <li class="feature" id="lists">
+                        <h3>Lists</h3>
+                        <ul>
+                            <li>Ordered or Unordered</li>
+                            <li>Add and delete items</li>
+                            <li>Move items</li>
+                            <li>&quot;Mark&quot; any item</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="left divine-small">
+            <div class="note cut-out">
+                <h3>What is a GM screen?</h3>
+                <p>A GM screen (or DM screen) is a piece of cardboard used by pencil-and-paper game&#x00AD;masters (or dungeon masters, or storytellers, or what-have-you) to hide information from players. Usually, a GM screen also has system-specific tables and charts on one side.</p>
+            </div>
+            <div class="note cut-out">
+                <h3>Why make this app?</h3>
+                <p>A lot of times, when I'm running a game, I have a computer there for notes and record-keeping anyway. This is a custom-made tool to help out with that.</p>
+                <p>In addition, it takes care of some of the tedious parts of GMing that I've come across. In particular, keeping track of initiative and combat order has always been a pain. But with the editable, sortable tables in GMScreen, it's simple.</p>
+            </div>
+            <div class="note">
+                <h3>Attribution</h3>
+                <p>GMScreen was created with the help of:</p>
+                <ul>
+                    <li><a href="http://requirejs.org">require.js</a></li>
+                    <li><a href="http://vanilla-js.org">vanilla.js</a></li>
+                    <li><a href="http://subtlepatterns.com">Subtle Patterns</a></li>
+                    <li><a href="https://github.com/ryankinal/GMScreen">GitHub</a></li>
+                    <li><a href="http://chat.stackoverflow.com/rooms/17/javascript">The StackOverflow JS room</a></li>
+                </ul>
+            </div>
+            <div class="beer note">
+                <img src="themes/icons/beer.png" alt="Buy me a beer">
+                <h3>Like what you see?<br /><a href="#paypal">Buy me a beer!</a></h3>
+            </div>
+        </div>
+        <div class="clear">
+            <div class="fake-rule">
+            </div>
+            <div class="clearfix">
+                <div class="left half">
+                    <div class="footer creative-commons">
+                        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a>
+                        <div>This work is licensed under a<br /><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a></div>
+                    </div>
+                </div>
+                <div class="left half">
+                    <div class="footer">
+                        
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

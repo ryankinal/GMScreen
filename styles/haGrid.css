@@ -1,0 +1,34 @@
+/**
+	haGrid is a flexible grid system using simple,
+	readable english class names.
+	
+	Since haGrid uses percentages, the best way to
+	use it would be to separate container and content -
+	use these classes for width and positioning, and
+	then child elements to add gutters, padding, backgrounds,
+	and borders.
+**/
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
+.clearfix { overflow: hidden; }
+
+.quarter { width: 25%; }
+.half { width: 50%; }
+.three-quarters { width: 75%; }
+
+.third { width: 33.3%; }
+.two-thirds { width: 66.7%; }
+
+.fifth { width: 20%; }
+.two-fifths { width: 40%; }
+.three-fifths { width: 60%; }
+.four-fifths { width: 80%; }
+
+.tenth { width: 10%; }
+.three-tenths { width: 30%; }
+.seven-tenths { width: 70%; }
+.nine-tenths { width: 90%; }
+
+.divine-small { width: 38%; }
+.divine-large { width: 62%; }
