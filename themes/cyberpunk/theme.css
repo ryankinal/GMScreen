@@ -1,0 +1,375 @@
+html, body
+{
+	height: 100%;
+	overflow: hidden;
+}
+
+body
+{
+	background-attachment: fixed;
+	background: #FFF url(../patterns/office/office.png) 0 0;
+	color: #000;
+	font-size: 16px;
+	font-family: "Andale Mono", AndaleMono, monospace;
+	margin: 0;
+	padding: 1px 0 0 0;
+}
+
+h1, h2, h3
+{
+	margin: 0 0 10px 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+/* control interface styles */
+.control-bar
+{
+	background: rgba(67, 168, 66, 1);
+	box-shadow: 0 5px 15px #000;
+	height: 39px;
+	color: #000;
+	padding: 0 10px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 20000;
+	width: 100%;
+	font-weight: bold;
+}
+
+.control-bar a
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.control-bar > div
+{
+	float: left;
+	border: solid #000 1px;
+	border-width: 0 1px;
+	margin-left: -1px;
+	cursor: pointer;
+}
+
+.control-bar .settings
+{
+	float: right;
+}
+
+.menu
+{
+	cursor: pointer;
+}
+
+.menu .current
+{
+	background: rgba(67, 168, 66, 0.6);
+	border: none;
+}
+
+.menu ul
+{
+	position: absolute;
+	background: url(../patterns/office/office.png) 0 0;
+	background-attachment: fixed;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	box-shadow: 0 7px 10px #000;
+	border-left: solid 1px #000;
+	display: none;
+	font-weight: normal;
+}
+
+.menu .menu ul
+{
+	left: 100%;
+	top: 0;
+}
+
+.control-bar > div:hover
+{
+	background: url(../patterns/office/office.png) 0 0;
+	background-attachment: fixed;
+	color: #FFF;
+}
+
+.control-bar > div span
+{
+	display: block;
+	padding: 11px 10px 10px;
+}
+
+.menu:hover > ul
+{
+	display: block;
+	margin-left: -1px;
+}
+
+.menu li
+{
+	padding: 10px 10px;
+	border-bottom: solid #666 1px;
+	position: relative;
+	padding-right: 30px;
+}
+
+.menu li:last-child
+{
+	border: none;
+}
+
+.menu li:hover
+{
+	background: rgba(67, 168, 66, 0.6);
+}
+
+.menu li .delete
+{
+	position: absolute;
+	top: 12px;
+	right: 5px;
+	width: 15px;
+	height: 15px;
+	border: none;
+	text-indent: -9999px;
+	overflow: hidden;
+	background: transparent url(../icons/monotone_close.png) 50% 50% no-repeat;
+	cursor: pointer;
+}
+
+.window-set-options
+{
+	display: none;
+}
+
+.control-bar .settings > ul
+{
+	right: 0;
+}
+
+.screen
+{
+	margin-top: 45px;
+	position: relative;
+}
+
+/* control window styles */
+.blanket
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 1);
+	opacity: 0.6;
+	z-index: 20001;
+	display: none;
+}
+
+.modal
+{
+	position: absolute;
+	width: 500px;
+	top: 150px;
+	left: 50%;
+	margin-left: -260px;
+	z-index: 20002;
+	border-radius: 5px;
+	background: #FFF url(../patterns/office/office.png) 0 0;
+	background-attachment: fixed;
+	box-shadow: 0 5px 15px #000;
+	padding: 10px;
+	text-align: center;
+	display: none;
+	color: #FFF;
+}
+
+.modal div
+{
+	margin-bottom: 10px;
+}
+
+.modal .type
+{
+	width: 80px;
+	height: 80px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: rgba(255, 255, 255, 0.25);
+	box-shadow: 0 3px 9px #000;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.modal a
+{
+	color: #FFF;
+}
+
+/* window styles */
+.ui-window
+{
+	box-shadow: 0 0px 15px #000;
+	background: rgba(0, 0, 0, 0.7);
+	background-attachment: fixed;
+	color: rgba(67, 168, 66, 1);
+	border: solid 1px #000;
+}
+
+.ui-header
+{
+	background: rgba(67, 168, 66, 1);
+	color: #000;
+	padding: 5px 48px 5px 10px;
+	cursor: move;
+	font-weight: bold;
+}
+
+.ui-shader, .ui-closer
+{
+	text-indent: -9999px;
+	overflow: : hidden;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	cursor: pointer;
+	top: 9px;
+}
+
+.ui-shader
+{
+	right: 27px;
+	background: transparent url(../icons/monotone_arrow_up.png) 50% 50% no-repeat;
+}
+
+.shaded .ui-shader
+{
+	background-image: url(../icons/monotone_arrow_down.png);
+}
+
+.ui-closer
+{
+	right: 7px;
+	background: transparent url(../icons/monotone_close.png) 50% 50% no-repeat;
+}
+
+.shaded .ui-header
+{
+	border-bottom: none;
+}
+
+.ui-content
+{
+	padding: 10px;
+	overflow: hidden;
+}
+
+.ui-content .marked
+{
+	opacity: 0.5;
+}
+
+/* List styles */
+.ui-content ul
+{
+	padding: 0;
+	margin: -11px -10px 10px -10px;
+	list-style-type: none;
+	border-top: solid #999 1px;
+}
+
+.ui-content ul li
+{
+	padding: 5px 10px;
+	border-bottom: solid #999 1px;
+}
+
+.ui-content ol
+{
+	margin: -6px -10px 10px -10px;
+	border-bottom: solid #999 1px;
+}
+
+.ui-content ol li
+{
+	padding: 5px 10px 5px 0;
+	margin: 0;
+}
+
+.ui-content .list .controls
+{
+	margin: 5px 0;
+}
+
+.ui-content .controls input
+{
+	border: none;
+	background: transparent 50% 50% no-repeat;
+	text-indent: -9999px;
+	width: 15px;
+	height: 15px;
+	margin: 0px 2px;
+	cursor: pointer;
+}
+
+.ui-content .list .move-down
+{
+	background-image: url(../icons/monotone_arrow_down.png);
+}
+
+.ui-content .list .move-up
+{
+	background-image: url(../icons/monotone_arrow_up.png);
+}
+
+.ui-content .list .mark
+{
+	background-image: url(../icons/monotone_check_inverted.png);
+}
+
+.ui-content .list .delete
+{
+	background-image: url(../icons/monotone_close.png);
+}
+
+/* table styles */
+.ui-content table
+{
+	margin: -11px -11px 10px -11px;
+	border-collapse: collapse;
+}
+
+.ui-content td, .ui-content th
+{
+	border: solid rgba(67, 168, 66, 1) 1px;
+	padding: 5px 10px;
+}
+
+.ui-content th:empty
+{
+	border: none;
+}
+
+.ui-content th, .ui-content table .mark, .ui-content table .delete
+{
+	width: 6px;
+	cursor: pointer;
+}
+
+.ui-content table .mark
+{
+	text-indent: -9999px;
+	background: url(../icons/monotone_check_inverted.png) 50% 50% no-repeat;
+}
+
+.ui-content table .delete
+{
+	text-indent: -9999px;
+	background: url(../icons/monotone_close.png) 50% 50% no-repeat;
+}
