@@ -1,4 +1,4 @@
-define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
+define(['utilities/efence', 'utilities/dom', 'utilities/cap'], function(pubsub, dom, cap) {
 	var minX = 0,
 		minY = 0,
 		windowObject = {},
@@ -124,11 +124,18 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 
 	windowObject.remove = function()
 	{
-		this.hide();
-		pubsub.pub('UIWindow.Removed', {
-			window: this
-		});
-		delete this;
+		var self = this;
+		cap.confirm({
+            message: 'Are you sure you want to delete this window?',
+            confirmText: 'Yes',
+            cancelText: 'No',
+            onConfirm: function(e) {
+                self.hide();
+				pubsub.pub('UIWindow.Removed', {
+					window: self
+				});
+            }
+        });
 	}
 
 	windowObject.update = function()
