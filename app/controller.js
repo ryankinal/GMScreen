@@ -6,7 +6,8 @@ define(
 		'utilities/efence',
 		'item-types/all'
 	],
-	function(UIWindow, UIWindowSet, dom, pubsub, itemTypes) {
+	function(UIWindow, UIWindowSet, dom, pubsub, itemTypes)
+	{
 		var parent = dom.getById('screen'),
 			screenController = {},
 			windowSets = [],
@@ -193,5 +194,10 @@ define(
 			}
 		}
 
+		pubsub.sub('UIWindow.Removed', function(data) {
+			windowSets[currentSet].removeWindow(data.window);
+		});
+
 		return screenController;
-});
+	}
+);

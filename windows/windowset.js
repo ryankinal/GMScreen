@@ -21,7 +21,7 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 	{
 		var i = 0,
 			returnValue = [];
-		
+
 		for (i = 0; i < this.windows.length; i++)
 		{
 			if (this.windows[i].title === windowToRemove)
