@@ -218,6 +218,7 @@ a:visited
 .beer h3
 {
     margin-top: 6px;
+    overflow: hidden;
 }
 
 .beer a, .beer a:visited
@@ -248,7 +249,10 @@ a:visited
 
 .creative-commons > div
 {
+    text-align: left;
     overflow: hidden;
+    font-size: 1.2em;
+    margin-top: 10px;
 }
 
 .creative-commons img
