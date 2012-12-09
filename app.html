@@ -2,8 +2,9 @@
 <html lang="en">
     <head>
         <title>GMScreen</title>
-        <link rel="stylesheet" type="text/css" href="themes/home/theme.css" />
-        <link rel="alternate stylesheet" type="text/css" href="themes/natural/theme.css" />
+        <link rel="stylesheet" data-name="dark" data-display="Dark" type="text/css" href="themes/home/theme.css" />
+        <link rel="alternate stylesheet" data-name="natural" data-display="Natural" type="text/css" href="themes/natural/theme.css" />
+        <link rel="alternate stylesheet" data-name="ice" data-display="Ice" type="text/css" href="themes/ice/theme.css" />
     </head>
     <body>
         <div id="controlBar" class="control-bar">
@@ -19,6 +20,11 @@
             <div id="currentSetOptions" class="window-set-options menu">
                 <span id="currentSetName"></span>
                 <ul>
+                    <li class="menu">
+                        Theme
+                        <ul id="themeList">
+                        </ul>
+                    </li>
                     <li class="shade">Shade All</li>
                     <li class="unshade">Unshade All</li>
                     <li class="delete">Delete</li>
@@ -50,7 +56,7 @@
         <script type="text/javascript" src="utilities/require.js"></script>
         <script type="text/javascript">
             require.config({
-                urlArgs: "bust=2"
+                urlArgs: "bust=5"
             })
             require(['app/controls']);
         </script>

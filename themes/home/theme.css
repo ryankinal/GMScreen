@@ -81,6 +81,12 @@ h1, h2, h3
 	font-weight: normal;
 }
 
+.menu .menu ul
+{
+	left: 100%;
+	top: 0;
+}
+
 .control-bar > div:hover
 {
 	background: #000 url(../patterns/cartographer/cartographer.png);
@@ -90,7 +96,7 @@ h1, h2, h3
 .control-bar > div span
 {
 	display: block;
-	padding: 10px 10px;
+	padding: 9px 10px 8px;
 }
 
 .control-bar > div span:hover
@@ -103,9 +109,10 @@ h1, h2, h3
 	color: #FFF;
 }
 
-.menu:hover ul
+.menu:hover > ul
 {
 	display: block;
+	margin-left: -1px;
 }
 
 .menu li
@@ -122,6 +129,16 @@ h1, h2, h3
 }
 
 .menu li:hover
+{
+	color: #FF7600;
+}
+
+.menu li:hover li
+{
+	color: #FFF;
+}
+
+.menu li li:hover
 {
 	color: #FF7600;
 }
@@ -223,7 +240,7 @@ h1, h2, h3
 .ui-shader, .ui-closer
 {
 	text-indent: -9999px;
-	overflow: : hidden;
+	overflow: hidden;
 	width: 15px;
 	height: 15px;
 	position: absolute;
