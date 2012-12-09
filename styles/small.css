@@ -1,0 +1,33 @@
+.left, .right
+{
+    width: 100%;
+    clear: left;
+}
+
+.header
+{
+    text-align: center;
+}
+
+.header .cut-out
+{
+    margin-left: -30px;
+}
+
+.note
+{
+    padding-left: 10px;
+}
+
+.cut-out
+{
+    border-radius: 0;
+    margin-left: -10px;
+}
+
+.features > h2
+{
+    border-radius: 0;
+    margin-right: -30px;
+}
+
