@@ -1,0 +1,365 @@
+html, body
+{
+	height: 100%;
+	overflow: hidden;
+}
+
+body
+{
+	background: #FFF url(../patterns/cartographer/cartographer.png);
+	color: #000;
+	font-size: 18px;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	margin: 0;
+	padding: 1px 0 0 0;
+}
+
+h1, h2, h3
+{
+	margin: 0 0 10px 0;
+	padding: 0;
+	font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+	font-weight: normal;
+}
+
+/* control interface styles */
+.control-bar
+{
+	background: #EEE url(../patterns/bedge_grunge/bedge_grunge.png);
+	box-shadow: 0 5px 15px #000;
+	height: 39px;
+	color: #000;
+	padding: 0 10px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 20000;
+	width: 100%;
+	font-weight: bold;
+}
+
+.control-bar a
+{
+	color: #000;
+	text-decoration: none;
+}
+
+.control-bar > div
+{
+	float: left;
+	border: solid #333 1px;
+	border-width: 0 1px;
+	margin-left: -1px;
+	cursor: pointer;
+}
+
+.control-bar .settings
+{
+	float: right;
+}
+
+.menu
+{
+	cursor: pointer;
+}
+
+.menu .current
+{
+	background-color: rgba(175, 175, 175, .25);
+	border: none;
+}
+
+.menu ul
+{
+	position: absolute;
+	background: #000 url(../patterns/cartographer/cartographer.png);
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	box-shadow: 0 7px 10px #000;
+	display: none;
+	font-weight: normal;
+}
+
+.control-bar > div:hover
+{
+	background: #000 url(../patterns/cartographer/cartographer.png);
+	color: #FFF;
+}
+
+.control-bar > div span
+{
+	display: block;
+	padding: 10px 10px;
+}
+
+.control-bar > div span:hover
+{
+	color: #FF7600;
+}
+
+.control-bar > div:hover a
+{
+	color: #FFF;
+}
+
+.menu:hover ul
+{
+	display: block;
+}
+
+.menu li
+{
+	padding: 10px 10px;
+	border-bottom: solid #666 1px;
+	position: relative;
+	padding-right: 30px;
+}
+
+.menu li:last-child
+{
+	border: none;
+}
+
+.menu li:hover
+{
+	color: #FF7600;
+}
+
+.menu li .delete
+{
+	position: absolute;
+	top: 12px;
+	right: 5px;
+	width: 15px;
+	height: 15px;
+	border: none;
+	text-indent: -9999px;
+	overflow: hidden;
+	background: transparent url(../icons/monotone_close.png) 50% 50% no-repeat;
+	cursor: pointer;
+}
+
+.window-set-options
+{
+	display: none;
+}
+
+.control-bar .settings > ul
+{
+	right: 0;
+}
+
+.screen
+{
+	margin-top: 45px;
+	position: relative;
+}
+
+/* control window styles */
+.blanket
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0.8;
+	z-index: 20001;
+	display: none;
+}
+
+.modal
+{
+	position: absolute;
+	width: 500px;
+	top: 150px;
+	left: 50%;
+	margin-left: -260px;
+	z-index: 20002;
+	background: transparent url(../patterns/bedge_grunge/bedge_grunge.png);
+	box-shadow: 0 5px 15px #000;
+	padding: 10px;
+	text-align: center;
+	display: none;
+}
+
+.modal div
+{
+	margin-bottom: 10px;
+}
+
+.modal .type
+{
+	width: 80px;
+	height: 80px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: rgba(255, 255, 255, 0.25);
+	box-shadow: 0 3px 9px #999;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+/* window styles */
+.ui-window
+{
+	box-shadow: 0 0px 15px #000;
+	background: #FFF url(../patterns/bedge_grunge/bedge_grunge.png);
+}
+
+.ui-header
+{
+	background: #EEE url(../patterns/cartographer/cartographer.png);
+	color: #FFF;
+	border-bottom: solid #000 1px;
+	padding: 5px 48px 5px 10px;
+	cursor: move;
+}
+
+.ui-shader, .ui-closer
+{
+	text-indent: -9999px;
+	overflow: : hidden;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	cursor: pointer;
+}
+
+.ui-shader
+{
+	top: 7px;
+	right: 27px;
+	background: transparent url(../icons/monotone_arrow_up.png) 50% 50% no-repeat;
+}
+
+.shaded .ui-shader
+{
+	background-image: url(../icons/monotone_arrow_down.png);
+}
+
+.ui-closer
+{
+	top: 7px;
+	right: 7px;
+	background: transparent url(../icons/monotone_close.png) 50% 50% no-repeat;
+}
+
+.shaded .ui-header
+{
+	border-bottom: none;
+}
+
+.ui-content
+{
+	padding: 10px;
+	overflow: hidden;
+}
+
+.ui-content .marked
+{
+	opacity: 0.5;
+}
+
+/* List styles */
+.ui-content ul
+{
+	padding: 0;
+	margin: -11px -10px 10px -10px;
+	list-style-type: none;
+	border-top: solid #999 1px;
+}
+
+.ui-content ul li
+{
+	padding: 5px 10px;
+	border-bottom: solid #999 1px;
+}
+
+.ui-content ol
+{
+	margin: -6px -10px 10px -10px;
+	border-bottom: solid #999 1px;
+}
+
+.ui-content ol li
+{
+	padding: 5px 10px 5px 0;
+	margin: 0;
+}
+
+.ui-content .list .controls
+{
+	margin: 5px 0;
+}
+
+.ui-content .controls input
+{
+	border: none;
+	background: transparent 50% 50% no-repeat;
+	text-indent: -9999px;
+	width: 15px;
+	height: 15px;
+	margin: 0px 2px;
+	cursor: pointer;
+}
+
+.ui-content .list .move-down
+{
+	background-image: url(../icons/monotone_arrow_down.png);
+}
+
+.ui-content .list .move-up
+{
+	background-image: url(../icons/monotone_arrow_up.png);
+}
+
+.ui-content .list .mark
+{
+	background-image: url(../icons/monotone_check_inverted.png);
+}
+
+.ui-content .list .delete
+{
+	background-image: url(../icons/monotone_close.png);
+}
+
+/* table styles */
+.ui-content table
+{
+	margin: -11px -11px 10px -11px;
+	border-collapse: collapse;
+}
+
+.ui-content td, .ui-content th
+{
+	border: solid #000 1px;
+	padding: 5px 10px;
+}
+
+.ui-content th:empty
+{
+	border: none;
+}
+
+.ui-content th, .ui-content table .mark, .ui-content table .delete
+{
+	width: 6px;
+	cursor: pointer;
+}
+
+.ui-content table .mark
+{
+	text-indent: -9999px;
+	background: url(../icons/monotone_check_inverted.png) 50% 50% no-repeat;
+}
+
+.ui-content table .delete
+{
+	text-indent: -9999px;
+	background: url(../icons/monotone_close.png) 50% 50% no-repeat;
+}
