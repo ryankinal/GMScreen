@@ -1,10 +1,10 @@
-define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
+define(['utilities/efence', 'utilities/dom', 'app/themes'], function(pubsub, dom, ThemeManager) {
 	var windowSetObj = {};
 
 	windowSetObj.init = function(name, theme)
 	{
 		this.name = name;
-		this.theme = theme || 'natural';
+		this.theme = theme || ThemeManager.getCurrent();
 		this.windows = [];
 	}
 
@@ -71,6 +71,7 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 
 	windowSetObj.show = function()
 	{
+		ThemeManager.changeTheme(this.theme);
 		this.callOnAll('show');
 	}
 
@@ -82,6 +83,16 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 	windowSetObj.shade = function(shade)
 	{
 		this.callOnAll('shade', shade);
+	}
+
+	windowSetObj.changeTheme = function(name)
+	{
+		this.theme = name;
+		ThemeManager.changeTheme(this.theme);
+		pubsub.pub('UIWindowSet.ThemeChanged', {
+			set: this,
+			name: this.theme
+		});
 	}
 
 	windowSetObj.getSaveData = function()

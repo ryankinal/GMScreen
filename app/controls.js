@@ -1,4 +1,4 @@
-define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], function(dom, pubsub, cap, ScreenController) {
+define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', './themes'], function(dom, pubsub, cap, ScreenController, ThemeManager) {
     var blanket = dom.getById('blanket'),
         windowSetList = dom.getById('windowSets'),
         newWindowInterface = dom.getById('addWindow'),
@@ -7,6 +7,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         newSetName = dom.getById('setName'),
         currentSetDisplay = dom.getById('currentSetName'),
         optionsList = dom.getById('currentSetOptions'),
+        themeList = dom.getById('themeList'),
         error = dom.create('div'),
         hotKeys = false,
         renderWindowSets = function(parent)
@@ -62,6 +63,21 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
                 optionsList.style.display = 'none';
             }
         },
+        renderThemeList = function()
+        {
+            var currentSet = ScreenController.getCurrentWindowSet().set;
+
+            dom.empty(themeList);
+
+            ThemeManager.themes.forEach(function(theme) {
+                var item = dom.create('li');
+
+                item.className = (currentSet && theme.name === currentSet.theme) ? 'theme current' : 'theme';
+                item.dataset.name = theme.name;
+                item.appendChild(dom.text(theme.display || theme.name));
+                themeList.appendChild(item);
+            });
+        },
         setListClickHandler = function(e)
         {
             e = e || window.event;
@@ -110,13 +126,14 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
             e = e || window.event;
 
             var target = e.target || e.srcElement,
-                set;
+                set,
+                name;
 
             if (target.className === 'new-window')
             {
                 newWindowInterface.style.display = 'block';
                 blanket.style.display = 'block';
-                windowName.focus();
+                newWindowName.focus();
             }
             else if (target.className === 'shade')
             {
@@ -143,6 +160,10 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
                         renderWindowSets(windowSetList);
                     }
                 });
+            }
+            else if (target.className === 'theme' || target.className === 'theme current')
+            {
+                ScreenController.getCurrentWindowSet().set.changeTheme(target.dataset.name);
             }
 
             return false;
@@ -175,7 +196,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         {
             e = e || window.event;
             var target = e.target || e.srcElement,
-                name = windowName.value,
+                name = newWindowName.value,
                 submitRex = /\b(table|ordered-list|unordered-list)\b/;
 
             if (submitRex.test(target.className))
@@ -204,12 +225,12 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
                     ScreenController.addUnorderedList(name, []);
                 }
 
-                closeWindow(newWindowInterface, windowName);
+                closeWindow(newWindowInterface, newWindowName);
                 return false;
             }
             else if (target.className === 'cancel')
             {
-                closeWindow(newWindowInterface, windowName);
+                closeWindow(newWindowInterface, newWindowName);
                 return false;
             }
         },
@@ -248,7 +269,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
                     {
                         newWindowInterface.style.display = 'block';
                         blanket.style.display = 'block';
-                        windowName.focus();
+                        newWindowName.focus();
                     }
                 }
                 else if (character === 's')
@@ -288,7 +309,12 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller'], f
         ScreenController.save();
     });
 
+    pubsub.sub('UIWindowSet.ThemeChanged', function(data) {
+        renderThemeList();
+    });
+
     renderWindowSets(windowSetList);
+    renderThemeList();
     
     if (ScreenController.getWindowSets().length === 0)
     {
