@@ -93,6 +93,11 @@ a:visited
     margin-top: 13px;
 }
 
+.try-it-button
+{
+    float: left;
+}
+
 .triangle-right
 {
     width: 0;
@@ -101,7 +106,7 @@ a:visited
     border-left: 30px solid #FF7600;
     border-bottom: 30px solid transparent;
     float: left;
-    margin: 0 15px 0 10px;
+    margin: 5px 10px 0 10px;
 }
 
 .try-it h2
@@ -117,9 +122,10 @@ a:visited
     height: 100%;
     color: #FF7600;
     position: relative;
-    padding: 22px 0 22px 0;
+    padding: 10px 41px 10px 0;
     text-align: left;
-    margin: -15px -30px -15px -20px;
+    margin: 0 -30px 0 10px;
+    white-space: nowrap;
 }
 
 .subtitle

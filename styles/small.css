@@ -1,3 +1,16 @@
+.try-it-button
+{
+    position: relative;
+    left: 50%;
+    margin-left: -115px;
+    float: left;
+}
+
+.try-it a
+{
+    white-space: nowrap;
+}
+
 .left, .right
 {
     width: 100%;
