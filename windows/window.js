@@ -125,7 +125,7 @@ define(['utilities/efence', 'utilities/dom'], function(pubsub, dom) {
 	windowObject.remove = function()
 	{
 		this.hide();
-		pubsub.pub('UIwindow.Removed', {
+		pubsub.pub('UIWindow.Removed', {
 			window: this
 		});
 		delete this;
