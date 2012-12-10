@@ -6,7 +6,8 @@ html, body
 
 body
 {
-	background: #FFF url(../patterns/cartographer/cartographer.png);
+	background: #FFF url(../patterns/cartographer/cartographer.png) 0 0;
+	background-attachment: fixed;
 	color: #000;
 	font-size: 18px;
 	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
@@ -72,7 +73,8 @@ h1, h2, h3
 .menu ul
 {
 	position: absolute;
-	background: #000 url(../patterns/cartographer/cartographer.png);
+	background: #000 url(../patterns/cartographer/cartographer.png) 0 0;
+	background-attachment: fixed;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -89,7 +91,8 @@ h1, h2, h3
 
 .control-bar > div:hover
 {
-	background: #000 url(../patterns/cartographer/cartographer.png);
+	background: #000 url(../patterns/cartographer/cartographer.png) 0 0;
+	background-attachment: fixed;
 	color: #FFF;
 }
 
@@ -230,7 +233,8 @@ h1, h2, h3
 
 .ui-header
 {
-	background: #EEE url(../patterns/cartographer/cartographer.png);
+	background: #EEE url(../patterns/cartographer/cartographer.png) 0 0;
+	background-attachment: fixed;
 	color: #FFF;
 	border-bottom: solid #000 1px;
 	padding: 5px 48px 5px 10px;
