@@ -6,11 +6,11 @@ html, body
 
 body
 {
-	background-attachment: fixed;
-	background: #FFF url(../patterns/office/office.png) 0 0;
+	background: url(../patterns/office/office.png) 0 0;
+	background-attachment: fixed, fixed;
 	color: #000;
-	font-size: 16px;
-	font-family: "Andale Mono", AndaleMono, monospace;
+	font-size: 18px;
+	font-family: "Hoefler Text", "Baskerville old face", Garamond, "Times New Roman", serif;
 	margin: 0;
 	padding: 1px 0 0 0;
 }
@@ -20,22 +20,23 @@ h1, h2, h3
 	margin: 0 0 10px 0;
 	padding: 0;
 	font-weight: normal;
+	color: #F18608;
 }
 
 /* control interface styles */
 .control-bar
 {
-	background: rgba(67, 168, 66, 1);
+	background: #0B181E;
 	box-shadow: 0 5px 15px #000;
 	height: 39px;
-	color: #000;
+	color: #FFF;
 	padding: 0 10px;
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 20000;
 	width: 100%;
-	font-weight: bold;
+	font-variant: small-caps;
 }
 
 .control-bar a
@@ -65,20 +66,21 @@ h1, h2, h3
 
 .menu .current
 {
-	background: rgba(67, 168, 66, 0.6);
-	border: none;
+	color: #FBA434;
 }
 
 .menu ul
 {
 	position: absolute;
-	background: url(../patterns/office/office.png) 0 0;
+	background: #2B3F4F;
 	background-attachment: fixed;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	box-shadow: 0 7px 10px #000;
-	border-left: solid 1px #000;
+	border-top: solid 1px #000;
+	margin-top: -1px;
+	margin-left: 0;
 	display: none;
 	font-weight: normal;
 }
@@ -87,31 +89,32 @@ h1, h2, h3
 {
 	left: 100%;
 	top: 0;
+	box-shadow: 7px 7px 10px #000;
+	border-left: none;
+	background: #475E76;
 }
 
 .control-bar > div:hover
 {
-	background: url(../patterns/office/office.png) 0 0;
-	background-attachment: fixed;
+	background: #2B3F4F;
 	color: #FFF;
 }
 
 .control-bar > div span
 {
 	display: block;
-	padding: 11px 10px 10px;
+	padding: 10px 10px 9px;
 }
 
 .menu:hover > ul
 {
 	display: block;
-	margin-left: -1px;
 }
 
 .menu li
 {
 	padding: 10px 10px;
-	border-bottom: solid #666 1px;
+	border-bottom: solid #000 1px;
 	position: relative;
 	padding-right: 30px;
 }
@@ -124,6 +127,28 @@ h1, h2, h3
 .menu li:hover
 {
 	background: rgba(67, 168, 66, 0.6);
+	background: #475E76;
+	color: #F18608;
+}
+
+.menu li:hover li
+{
+	color: #FFF;
+	border-left: solid #000 1px;
+}
+
+.menu li:hover li:first-child
+{
+}
+
+.menu li:hover .current
+{
+	color: #F18608;	
+}
+
+.menu li li:hover
+{
+	color: #F18608;
 }
 
 .menu li .delete
@@ -178,7 +203,6 @@ h1, h2, h3
 	left: 50%;
 	margin-left: -260px;
 	z-index: 20002;
-	border-radius: 5px;
 	background: #FFF url(../patterns/office/office.png) 0 0;
 	background-attachment: fixed;
 	box-shadow: 0 5px 15px #000;
@@ -215,20 +239,20 @@ h1, h2, h3
 /* window styles */
 .ui-window
 {
-	box-shadow: 0 0px 15px #000;
-	background: rgba(0, 0, 0, 0.7);
+	box-shadow: 0 5px 15px #000;
+	background: #2B3F4F;;
 	background-attachment: fixed;
-	color: rgba(67, 168, 66, 1);
+	color: #FFF;
 	border: solid 1px #000;
 }
 
 .ui-header
 {
-	background: rgba(67, 168, 66, 1);
-	color: #000;
+	background: #0B181E;
+	color: #FFF;
 	padding: 5px 48px 5px 10px;
 	cursor: move;
-	font-weight: bold;
+	font-variant: small-caps;
 }
 
 .ui-shader, .ui-closer
@@ -276,6 +300,11 @@ h1, h2, h3
 }
 
 /* List styles */
+.ui-content ul, .ui-content ol
+{
+	max-width: 300px;
+}
+
 .ui-content ul
 {
 	padding: 0;
@@ -347,7 +376,7 @@ h1, h2, h3
 
 .ui-content td, .ui-content th
 {
-	border: solid rgba(67, 168, 66, 1) 1px;
+	border: solid #000 1px;
 	padding: 5px 10px;
 }
 
