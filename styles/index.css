@@ -240,7 +240,12 @@ a:visited
     padding: 20px 10px;
 }
 
-.creative-commons > a
+.license a
+{
+    color: #F45D00;
+}
+
+.license > a
 {
     float: left;
     width: 40px;
@@ -248,7 +253,7 @@ a:visited
     position: relative;
 }
 
-.creative-commons > div
+.license > div
 {
     text-align: left;
     overflow: hidden;
@@ -256,7 +261,7 @@ a:visited
     margin-top: 10px;
 }
 
-.creative-commons img
+.license img
 {
     position: absolute;
     -webkit-transform: rotate(-90deg);
