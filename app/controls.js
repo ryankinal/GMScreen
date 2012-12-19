@@ -28,7 +28,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
             sets.forEach(function(set, index) {
                 item = dom.create('li');
                 item.className = (index === currentSet.index) ? 'window-set current' : 'window-set';
-                item.dataset.index = index;
+                item.setAttribute('data-index', index);
                 item.appendChild(dom.text(set.name));
 
                 del = dom.create('input');
@@ -36,7 +36,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
                 del.className = 'delete';
                 del.title = 'Delete ' + set.name;
                 del.value = 'Delete';
-                del.dataset.index = index;
+                del.setAttribute('data-index', index);
                 item.appendChild(del);
 
                 all.appendChild(item);
@@ -73,7 +73,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
                 var item = dom.create('li');
 
                 item.className = (currentSet && theme.name === currentSet.theme) ? 'theme current' : 'theme';
-                item.dataset.name = theme.name;
+                item.setAttribute('data-name', theme.name);
                 item.appendChild(dom.text(theme.display || theme.name));
                 themeList.appendChild(item);
             });
@@ -84,7 +84,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
 
             var target  = e.target || e.srcElement,
                 sets = ScreenController.getWindowSets(),
-                index = parseInt(target.dataset.index, 10),
+                index = parseInt(target.getAttribute('data-index', 10)),
                 set;
 
             if (target.className === 'window-set')
@@ -163,7 +163,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
             }
             else if (target.className === 'theme' || target.className === 'theme current')
             {
-                ScreenController.getCurrentWindowSet().set.changeTheme(target.dataset.name);
+                ScreenController.getCurrentWindowSet().set.changeTheme(target.getAttribute('data-name'));
             }
 
             return false;
@@ -242,7 +242,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
                 key = e.keyCode || e.which,
                 character = String.fromCharCode(key).toLowerCase();
 
-            if (target.tagName !== 'input' && target.tagName !== 'textarea' && blanket.style.display !== 'block')
+            if (tagName !== 'input' && tagName !== 'textarea' && blanket.style.display !== 'block')
             {
                 if (character === 'w' && ScreenController.getCurrentWindowSet().set)
                 {

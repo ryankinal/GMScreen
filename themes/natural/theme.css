@@ -237,7 +237,7 @@ h1, h2, h3
 .ui-shader, .ui-closer
 {
 	text-indent: -9999px;
-	overflow: : hidden;
+	overflow: hidden;
 	width: 15px;
 	height: 15px;
 	position: absolute;

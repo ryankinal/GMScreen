@@ -17,6 +17,7 @@ define(['utilities/dom'], function(dom) {
                 current.style.display = 'none';
                 blanket.style.display = 'none';
                 current.parentNode.removeChild(current);
+                current = null;
             }
         },
         handleEscape = function(e)

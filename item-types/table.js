@@ -17,8 +17,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
                 dom.empty(target);
                 target.appendChild(input);
 
-                input.addEventListener('keypress', makeEndEditCell.call(self, i, j));
-                input.addEventListener('keyup', makeCancelEditCell.call(self, i, j));
+                input.addEventListener('keyup', makeEndEditCell.call(self, i, j));
                 input.focus();
             };
         },
@@ -54,30 +53,11 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
                     });
                     return false;
                 }
-            };
-        },
-        makeCancelEditCell = function(i, j)
-        {
-            var self = this;
-
-            return function(e) {
-                e = e || window.event;
-
-                var key = e.keyCode || e.which;
-
-                if (key === 27)
+                else if (key === 27)
                 {
                     self.render();
                     return false;
                 }
-            };
-        },
-        makeBlurEditCell = function(i, j)
-        {
-            var self = this;
-
-            return function(e) {
-                self.render();
             };
         },
         makeMarkHandler = function(i)

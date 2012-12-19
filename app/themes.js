@@ -10,8 +10,8 @@ define(['utilities/dom', 'utilities/efence'], function(dom, pubsub) {
 
     Array.prototype.forEach.call(styleLinks, function(link) {
         themes.push({
-            name: link.dataset.name,
-            display: link.dataset.display
+            name: link.getAttribute('data-name'),
+            display: link.getAttribute('data-display')
         });
     });
 
@@ -20,17 +20,17 @@ define(['utilities/dom', 'utilities/efence'], function(dom, pubsub) {
     themeManager.changeTheme = function(name)
     {
         Array.prototype.forEach.call(styleLinks, function(link, index) {
-            if (link.dataset.name === name)
+            if (link.getAttribute('data-name') === name)
             {
                 setTimeout(function() {
                     link.disabled = false;
-                    link.rel = 'stylesheet';    
+                    link.rel = 'stylesheet';
                 }, 50)
             }
             else
             {
                 setTimeout(function() {
-                    link.disabled = true;
+                    link.disabled = 'disabled';
                     link.rel = 'alternate stylesheet';    
                 }, 65)
             }
