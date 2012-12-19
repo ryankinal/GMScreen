@@ -8,6 +8,14 @@ Besides require.js, all code is my own.
 
 Some cool features that have recently been added!
 
+###Hotkeys - 12/18
+
+The way hotkeys work has been changed to be simpler, and cross-browser. These hotkeys will work any time you're not typing in a text input or a textarea. No modifier keys, and no activation keys.
+
+* Hit `w` to add a window to the current screen
+* Hit `s` to add a new screen
+* Hit `Esc` to close any modal window
+
 ###Local Storage - 12/8
 
 Whenever you do *anything* it is immediately saved to your browser. This includes:
@@ -30,13 +38,6 @@ And, when you return to the page, your changes will be loaded for you.
 
 I've improved the way data is represented in tables and lists, so a marked row or item will remain marked when sorting and moving.
 
-###Hotkeys - 12/6
-
-* Start by hitting `ctrl + ;` - this activates hot keys
-* Hit `w` to add a window to the current screen
-* Hit `s` to add a new screen
-* Hit `esc` to close any modal window (whether hotkeys are active or not)
-
 More of these to come eventually!
 
 ##Future Features
@@ -54,3 +55,21 @@ Yep.
 ###Dice
 
 Yep
+
+##Licensing
+
+This work is licensed under [WTFPL](http://sam.zoy.org/wtfpl/)
+
+              DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+                        Version 2, December 2004 
+
+     Copyright (C) 2004 Sam Hocevar <sam@hocevar.net> 
+
+     Everyone is permitted to copy and distribute verbatim or modified 
+     copies of this license document, and changing it is allowed as long 
+     as the name is changed. 
+
+                DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+      TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION 
+
+      0. You just DO WHAT THE FUCK YOU WANT TO. 

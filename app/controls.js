@@ -237,48 +237,31 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
         hotKeyHandler = function(e)
         {
             e = e || window.event;
-            var key = e.keyCode || e.which,
-                character = String.fromCharCode(key);
-
-            if (e.ctrlKey && key === 186)
-            {
-                hotKeys = true;
-            }
-            else if (key === 27)
-            {
-                if (newWindowInterface.style.display === 'block')
-                {
-                    newWindowInterface.style.display = 'none';
-                    blanket.style.display = 'none';
-                }
-            }
-        },
-        commandHandler = function(e)
-        {
-            e = e || window.event;
-            var key = e.keyCode || e.which,
+            var target = e.target || e.srcElement,
+                tagName = target.tagName.toLowerCase(),
+                key = e.keyCode || e.which,
                 character = String.fromCharCode(key).toLowerCase();
 
-            if (hotKeys)
+            if (target.tagName !== 'input' && target.tagName !== 'textarea' && blanket.style.display !== 'block')
             {
-                hotKeys = false;
-
-                if (character === 'w')
+                if (character === 'w' && ScreenController.getCurrentWindowSet().set)
                 {
-                    if (ScreenController.getCurrentWindowSet().set)
-                    {
-                        newWindowInterface.style.display = 'block';
-                        blanket.style.display = 'block';
-                        newWindowName.focus();
-                    }
+                    newWindowInterface.style.display = 'block';
+                    blanket.style.display = 'block';
+                    newWindowName.focus();
+                    return false;
                 }
                 else if (character === 's')
                 {
                     newSet();
+                    return false;
                 }
-
-                e.preventDefault();
-                return false;
+            }
+            else if (key === 27 && newWindowInterface.style.display === 'block')
+            {
+                newWindowInterface.style.display = 'none';
+                blanket.style.display = 'none';
+                newWindowName.value = '';
             }
         };
 
@@ -288,8 +271,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
     windowSetList.addEventListener('click', setListClickHandler);
     optionsList.addEventListener('click', optionsClickHandler);
     newWindowInterface.addEventListener('click', newWindowClickHandler);
-    window.addEventListener('keydown', hotKeyHandler);
-    window.addEventListener('keypress', commandHandler);
+    window.addEventListener('keyup', hotKeyHandler);
     
     pubsub.sub('ScreenController.SetAdded', function(data) {
         var set = ScreenController.getCurrentWindowSet().set;
