@@ -242,7 +242,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
                 key = e.keyCode || e.which,
                 character = String.fromCharCode(key).toLowerCase();
 
-            if (target.tagName !== 'input' && target.tagName !== 'textarea' && blanket.style.display !== 'block')
+            if (tagName !== 'input' && tagName !== 'textarea' && blanket.style.display !== 'block')
             {
                 if (character === 'w' && ScreenController.getCurrentWindowSet().set)
                 {
