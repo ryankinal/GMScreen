@@ -70,8 +70,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 				text.value = value || '';
 				target.appendChild(text);
 
-				text.addEventListener('keypress', makeEndEditHandler.call(self, i));
-				text.addEventListener('keyup', makeCancelEditHandler.call(self, i));
+				text.addEventListener('keyup', makeEndEditHandler.call(self, i));
 				text.addEventListener('click', function(e) {
 					e = e || window.event;
 					e.cancelBubble = true;
@@ -107,19 +106,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 					});
 					return false;
 				}
-			}
-		},
-		makeCancelEditHandler = function(i)
-		{
-			var self = this;
-
-			return function(e)
-			{
-				e = e || window.event;
-
-				var key = e.keyCode || e.which;
-
-				if (key === 27)
+				else if (key === 27)
 				{
 					self.render();
 					return false;
