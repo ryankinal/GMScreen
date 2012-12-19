@@ -8,6 +8,14 @@ Besides require.js, all code is my own.
 
 Some cool features that have recently been added!
 
+###Hotkeys - 12/18
+
+The way hotkeys work has been changed to be simpler, and cross-browser. These hotkeys will work any time you're not typing in a text input or a textarea. No modifier keys, and no activation keys.
+
+* Hit `w` to add a window to the current screen
+* Hit `s` to add a new screen
+* Hit `Esc` to close any modal window
+
 ###Local Storage - 12/8
 
 Whenever you do *anything* it is immediately saved to your browser. This includes:
@@ -29,13 +37,6 @@ And, when you return to the page, your changes will be loaded for you.
 ###Improved marking - 12/8
 
 I've improved the way data is represented in tables and lists, so a marked row or item will remain marked when sorting and moving.
-
-###Hotkeys - 12/6
-
-* Start by hitting `ctrl + ;` - this activates hot keys
-* Hit `w` to add a window to the current screen
-* Hit `s` to add a new screen
-* Hit `esc` to close any modal window (whether hotkeys are active or not)
 
 More of these to come eventually!
 
