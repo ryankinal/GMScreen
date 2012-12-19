@@ -20,19 +20,14 @@ define(['utilities/dom', 'utilities/efence'], function(dom, pubsub) {
     themeManager.changeTheme = function(name)
     {
         Array.prototype.forEach.call(styleLinks, function(link, index) {
+            console.log(link.getAttribute('data-name'), name);
             if (link.getAttribute('data-name') === name)
             {
-                setTimeout(function() {
-                    link.disabled = false;
-                    link.rel = 'stylesheet';
-                }, 50)
+                link.disabled = false;
             }
             else
             {
-                setTimeout(function() {
-                    link.disabled = 'disabled';
-                    link.rel = 'alternate stylesheet';    
-                }, 65)
+                link.disabled = 'disabled';
             }
         });
 
