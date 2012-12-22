@@ -157,11 +157,6 @@ define(
 							{
 								newWindow.item.marked = win.item.marked;
 							}
-							
-							if (win.item.sortOrder)
-							{
-								newWindow.item.sortOrder = win.item.sortOrder
-							}
 						}
 
 						newWindow.x = win.x;
