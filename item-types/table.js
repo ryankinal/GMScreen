@@ -96,22 +96,23 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
             return function(e) {
                 e = e || window.event;
 
-                var target = e.target || e.srcElement;
+                var target = e.target || e.srcElement,
+                    currentSort = self.data.sortOrder[colIndex];
 
-                if (typeof self.sortOrder[colIndex] === 'undefined')
+                console.log(colIndex, currentSort);
+
+                self.data.sortOrder = [];
+
+                if (!currentSort || currentSort === 'asc')
                 {
-                    self.sortOrder[colIndex] = 'desc';
+                    currentSort = 'desc';
                 }
-                else if (self.sortOrder[colIndex] === 'desc')
+                else if (currentSort === 'desc')
                 {
-                    self.sortOrder[colIndex] = 'asc';
-                }
-                else
-                {
-                    self.sortOrder[colIndex] = 'desc';
+                    currentSort = 'asc';
                 }
 
-                if (self.sortOrder[colIndex] === 'desc')
+                if (currentSort === 'desc')
                 {
                     self.data.body.sort(function(x, y) {
                         return x.values[colIndex] < y.values[colIndex] ? 1 : -1;
@@ -123,12 +124,14 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
                         return x.values[colIndex] < y.values[colIndex] ? -1 : 1;
                     });   
                 }
-                
+
+                self.data.sortOrder[colIndex] = currentSort;
+                console.log(self.data.sortOrder[colIndex]);
                 self.render();
 
                 pubsub.pub('Table.Sorted', {
                     table: self,
-                    order: self.sortOrder[colIndex],
+                    order: self.data.sortOrder[colIndex],
                     column: colIndex
                 });
             };
@@ -181,7 +184,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
     {
         base.load.call(this, data);
 
-        if (typeof this.data.headers === 'undefined')
+        if (typeof this.data.headers === 'undefined') 
         {
             this.data.headers = [];
         }
@@ -191,7 +194,10 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
             this.data.body = [];
         }
 
-        this.sortOrder = [];
+        if (typeof this.data.sortOrder === 'undefined')
+        {
+            this.data.sortOrder = [];
+        }
 
         pubsub.pub('Table.DataLoaded', {
             table: this,
@@ -219,7 +225,8 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
             row = dom.create('tr'),
             cell = dom.create('th'),
             addRow = dom.create('input'),
-            addColumn = dom.create('input');
+            addColumn = dom.create('input'),
+            sortElement;
         
         row.appendChild(cell);
         row.appendChild(cell.cloneNode(false));
@@ -231,9 +238,12 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
             cell.addEventListener('click', makeSortHandler.call(this, i));
             row.appendChild(cell);
 
-            if (typeof this.sortOrder[i] !== 'undefined')
+            if (this.data.sortOrder[i])
             {
-                cell.className = this.sortOrder[i];
+                sortElement = dom.create('div');
+                sortElement.className = 'sort';
+                cell.appendChild(sortElement);
+                cell.className = this.data.sortOrder[i];
             }
         }
 
@@ -360,7 +370,6 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
     {
         return {
             data: this.data,
-            sortOrder: this.sortOrder,
             type: 'Table'
         }
     }
