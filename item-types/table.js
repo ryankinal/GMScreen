@@ -165,7 +165,17 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
         },
         sortFunction = function(x, y, invert)
         {
-            if (typeof x === 'undefined' || x === null || x === '')
+            if (typeof x === 'string' && typeof y === 'string')
+            {
+                x = x.toLowerCase();
+                y = y.toLowerCase();
+            }
+
+            if (x === y)
+            {
+                return 0;
+            }
+            else if (typeof x === 'undefined' || x === null || x === '')
             {
                 return 1;
             }
