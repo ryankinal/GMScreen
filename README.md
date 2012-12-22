@@ -8,6 +8,10 @@ Besides require.js, all code is my own.
 
 Some cool features that have recently been added!
 
+###Sort Order Indicators - 12/22
+
+I got tired of guessing which table column I had last sorted by. So I added some sort order indicators to the table headers.
+
 ###Dice - 12/22
 
 When editing an item, use `roll(dice, flags)`. Here's what that all means:
