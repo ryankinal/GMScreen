@@ -248,19 +248,19 @@ h1, h2, h3
 {
 	top: 7px;
 	right: 27px;
-	background: transparent url(../icons/monotone_arrow_up.png) 50% 50% no-repeat;
+	background: transparent url(../icons/monotone_arrow_up_white.png) 50% 50% no-repeat;
 }
 
 .shaded .ui-shader
 {
-	background-image: url(../icons/monotone_arrow_down.png);
+	background-image: url(../icons/monotone_arrow_down_white.png);
 }
 
 .ui-closer
 {
 	top: 7px;
 	right: 7px;
-	background: transparent url(../icons/monotone_close.png) 50% 50% no-repeat;
+	background: transparent url(../icons/monotone_close_white.png) 50% 50% no-repeat;
 }
 
 .shaded .ui-header
@@ -370,6 +370,32 @@ h1, h2, h3
 {
 	width: 6px;
 	cursor: pointer;
+}
+
+.ui-content table .asc, .ui-content table .desc
+{
+	position: relative;
+	padding-right: 25px;
+}
+
+.ui-content table .sort
+{
+	width: 15px;
+	height: 11px;
+	position: absolute;
+	right: 5px;
+	top: 50%;
+	margin-top: -5px;
+}
+
+.ui-content table .asc .sort
+{
+	background: url(../icons/arrow_up_black.png) right center no-repeat;
+}
+
+.ui-content table .desc .sort
+{
+	background: url(../icons/arrow_down_black.png) right center no-repeat;
 }
 
 .ui-content table .mark
