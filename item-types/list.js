@@ -1,4 +1,4 @@
-define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom, pubsub) {
+define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/dice'], function(base, dom, pubsub, dice) {
 	var listObject = Object.create(base);
 	listObject.tagName = 'ul';
 
@@ -98,6 +98,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence'], function(base, dom
 
 				if (key === 13)
 				{
+					value = dice.replace(value);
 					self.data[i].value = (value === '') ? '[click to edit]' : value;
 					self.render();
 					pubsub.pub('List.ItemEdited', {
