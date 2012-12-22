@@ -99,8 +99,6 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
                 var target = e.target || e.srcElement,
                     currentSort = self.data.sortOrder[colIndex];
 
-                console.log(colIndex, currentSort);
-
                 self.data.sortOrder = [];
 
                 if (!currentSort || currentSort === 'asc')
@@ -112,21 +110,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
                     currentSort = 'asc';
                 }
 
-                if (currentSort === 'desc')
-                {
-                    self.data.body.sort(function(x, y) {
-                        return x.values[colIndex] < y.values[colIndex] ? 1 : -1;
-                    });
-                }
-                else
-                {
-                    self.data.body.sort(function(x, y) {
-                        return x.values[colIndex] < y.values[colIndex] ? -1 : 1;
-                    });   
-                }
-
                 self.data.sortOrder[colIndex] = currentSort;
-                console.log(self.data.sortOrder[colIndex]);
                 self.render();
 
                 pubsub.pub('Table.Sorted', {
@@ -177,6 +161,25 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
                     row: row
                 });
                 return false;
+            }
+        },
+        sortFunction = function(x, y, invert)
+        {
+            if (typeof x === 'undefined' || x === null || x === '')
+            {
+                return 1;
+            }
+            else if (typeof y === 'undefined' || y === null || y === '')
+            {
+                return -1;
+            }
+            else if (invert)
+            {
+                return x < y ? 1 : -1;
+            }
+            else
+            {
+                return x < y ? -1 : 1;
             }
         };
 
@@ -244,6 +247,19 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
                 sortElement.className = 'sort';
                 cell.appendChild(sortElement);
                 cell.className = this.data.sortOrder[i];
+
+                if (this.data.sortOrder[i] === 'desc')
+                {
+                    this.data.body.sort(function(x, y) {
+                        return sortFunction(x.values[i], y.values[i], true);
+                    });
+                }
+                else
+                {
+                    this.data.body.sort(function(x, y) {
+                        return sortFunction(x.values[i], y.values[i], false);
+                    });   
+                }
             }
         }
 
