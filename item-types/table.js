@@ -1,4 +1,4 @@
-define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], function(base, dom, pubsub, cap) { 
+define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'utilities/dice'], function(base, dom, pubsub, cap, dice) { 
     var tableObject = Object.create(base);
 
     var makeStartEditCell = function(i, j)
@@ -24,7 +24,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
         makeEndEditCell = function(i, j)
         {
             var self = this,
-                numCheck = /[\d]+\.?[\d]+/;
+                numCheck = /^[\d]+\.?[\d]*$/;
 
             return function(e) {
                 e = e || window.event;
@@ -35,6 +35,8 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap'], f
 
                 if (key === 13)
                 {
+                    value = dice.replace(value);
+
                     if (value.match(numCheck))
                     {
                         self.data.body[i].values[j] = parseFloat(value);
