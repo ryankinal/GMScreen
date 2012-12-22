@@ -41,6 +41,29 @@
                         <p>You could even get more granular &ndash; Add a screen for each session and you'll be able to quickly reference the grappling (or explosion) rules when you need to.</p>
                     </li>
                     <li class="feature">
+                        <h3>Dice</h3>
+                        <p>When editing an item, use <span class="code">roll(dice, flags)</span>. Here's what that all means:
+                        <ul>
+                            <li><strong>dice</strong> is, of course, any dice and bonuses you need. Some examples:
+                                <ul>
+                                    <li><span class="code">1d20+5</span></li>
+                                    <li><span class="code">4d6</span></li>
+                                    <li><span class="code">1d8+1d6</span></li>
+                                </ul>
+                            <li>
+                                <p><strong>flags</strong> let you modify how the dice work. It's any combination of the following:</p>
+                                <ul>
+                                    <li><strong>v</strong> &ndash; show the results of every die rolled, as well as the total. Will output something like <span class="code">25 (20)</span> or <span class="code">16 (5, 2, 3, 6)</span></li>
+                                    <li>
+                                        <p><strong>t{number}</strong> &ndash; this will base the total on a &quot;threshold&quot; number. It will count the number of dice that came up with a result of {number} or better.</p>
+                                        <p><span class="code">roll(5d6, t5)</span> might output <span class="code">3</span> if the dice came up <span class="code">4, 5, 3, 6, 5</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>Once a die has been rolled, you'll only see the output when you try to edit that item again.</p>
+                    </li>
+                    <li class="feature">
                         <h3>Persistent Data</h3>
                         <p>All your screens, windows, and data will be saved across sessions. This is <em>browser-specific</em>, though. If you switch to a different computer, or a different browser, you won't see the same screens.</p>
                     </li>
