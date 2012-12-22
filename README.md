@@ -8,6 +8,28 @@ Besides require.js, all code is my own.
 
 Some cool features that have recently been added!
 
+###Dice - 12/22
+
+When editing an item, use `roll(dice, flags)`. Here's what that all means:
+
+**dice** is, of course, any dice and bonuses you need. Some examples:
+
+* `1d20+5`
+* `4d6`
+* `1d8+1d6`
+
+**flags** let you modify how the dice work. It's any combination of the following:</p>
+
+* **v** &ndash; show the results of every die rolled, as well as the total. Will output something like `25 (20)` or `16 (5, 2, 3, 6)`
+* **t{number}** &ndash; this will base the total on a &quot;threshold&quot; number. It will count the number of dice that came up with a result of {number} or better.
+
+Some examples:
+
+* `roll(5d6, t5)` might output `3` if the dice came up `4, 5, 3, 6, 5`
+* `roll(5d6, vt5)` would output `3 [4, 5, 3, 6, 5]`
+
+Once a die has been rolled, you'll only see the output when you try to edit that item again.
+
 ###Hotkeys - 12/18
 
 The way hotkeys work has been changed to be simpler, and cross-browser. These hotkeys will work any time you're not typing in a text input or a textarea. No modifier keys, and no activation keys.
