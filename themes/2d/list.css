@@ -18,27 +18,26 @@
     border-bottom: solid #000 1px;
 }
 
+.ui-content ul .number
+{
+    float: left;
+    margin-right: 10px;
+}
+
+.ui-content ul .number::after
+{
+    content: '.';
+}
+
+.ui-content ul .text
+{
+    overflow: hidden;
+}
+
 .ui-content ul .marked
 {
     background-color: #000;
     color: #FFF;
-}
-
-.ui-content ol
-{
-    margin: -6px -10px 10px -10px;
-    border-bottom: solid #000 1px;
-}
-
-.ui-content ol li
-{
-    padding: 5px 10px 5px 0;
-    margin: 0;
-}
-
-.ui-content ol .marked
-{
-    text-decoration: line-through;
 }
 
 .ui-content .list .controls
@@ -99,6 +98,6 @@
 
 .ui-content .list textarea
 {
-    width: 250px;
+    width: 230px;
     height: 65px;
 }
