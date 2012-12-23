@@ -291,6 +291,10 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
         ScreenController.save();
     });
 
+    pubsub.sub('ScreenController.SetChanged', function(data) {
+        renderThemeList();
+    });
+
     pubsub.sub('UIWindowSet.ThemeChanged', function(data) {
         renderThemeList();
     });
