@@ -1,0 +1,98 @@
+/* List styles */
+.ui-content ul, .ui-content ol
+{
+    max-width: 300px;
+}
+
+.ui-content ul
+{
+    padding: 0;
+    margin: -11px -10px 10px -10px;
+    list-style-type: none;
+    border-top: solid #000 1px;
+}
+
+.ui-content ul li
+{
+    padding: 5px 10px;
+    border-bottom: solid #000 1px;
+}
+
+.ui-content ul .marked
+{
+    background-color: #000;
+    color: #FFF;
+}
+
+.ui-content ol
+{
+    margin: -6px -10px 10px -10px;
+    border-bottom: solid #000 1px;
+}
+
+.ui-content ol li
+{
+    padding: 5px 10px 5px 0;
+    margin: 0;
+}
+
+.ui-content ol .marked
+{
+    text-decoration: line-through;
+}
+
+.ui-content .list .controls
+{
+    margin: 5px 0;
+}
+
+.ui-content .controls input
+{
+    border: none;
+    background: transparent 50% 50% no-repeat;
+    text-indent: -9999px;
+    width: 15px;
+    height: 15px;
+    margin: 0px 2px;
+    cursor: pointer;
+}
+
+.ui-content .list .move-down
+{
+    background-image: url(../icons/monotone_arrow_down.png);
+}
+
+.ui-content .list .move-up
+{
+    background-image: url(../icons/monotone_arrow_up.png);
+}
+
+.ui-content .list .mark
+{
+    background-image: url(../icons/monotone_check_inverted.png);
+}
+
+.ui-content .list .delete
+{
+    background-image: url(../icons/monotone_close.png);
+}
+
+.ui-content ul .marked .move-down
+{
+    background-image: url(../icons/monotone_arrow_down_white.png);
+}
+
+.ui-content ul .marked .move-up
+{
+    background-image: url(../icons/monotone_arrow_up_white.png);
+}
+
+.ui-content ul .marked .mark
+{
+    background-image: url(../icons/monotone_check_inverted_white.png);
+}
+
+.ui-content ul .marked .delete
+{
+    background-image: url(../icons/monotone_close_white.png);
+}
