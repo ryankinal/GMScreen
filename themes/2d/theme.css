@@ -22,6 +22,13 @@ h1, h2, h3
     font-weight: normal;
 }
 
+input
+{
+    background: #FFF;
+    border: solid black 1px;
+    border-radius: 5px;
+}
+
 /* control interface styles */
 .control-bar
 {
@@ -95,6 +102,8 @@ h1, h2, h3
     top: 0;
     border: solid #000 1px;
     margin-top: -1px;
+    margin-left: 4px;
+    font-size: .8em;
 }
 
 .control-bar > div:hover
@@ -205,6 +214,7 @@ h1, h2, h3
     z-index: 20002;
     background: #FFF;
     border: solid #000 1px;
+    border-radius: 10px;
     padding: 10px;
     text-align: center;
     display: none;
@@ -224,7 +234,7 @@ h1, h2, h3
     border-radius: 5px;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 3px 9px #999;
+    border: solid #000 1px;
     vertical-align: top;
     cursor: pointer;
 }
