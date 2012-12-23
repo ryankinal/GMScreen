@@ -1,7 +1,8 @@
 define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'utilities/dice'], function(base, dom, pubsub, cap, dice) { 
     var tableObject = Object.create(base);
 
-    var makeStartEditCell = function(i, j)
+    var numCheck = /^[\d]+\.?[\d]*$/,
+        makeStartEditCell = function(i, j)
         {
             var self = this;
 
@@ -18,13 +19,13 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
                 target.appendChild(input);
 
                 input.addEventListener('keyup', makeEndEditCell.call(self, i, j));
+                input.addEventListener('blur', makeBlureEditCell.call(self, i, j));
                 input.focus();
             };
         },
         makeEndEditCell = function(i, j)
         {
-            var self = this,
-                numCheck = /^[\d]+\.?[\d]*$/;
+            var self = this;
 
             return function(e) {
                 e = e || window.event;
@@ -46,6 +47,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
                         self.data.body[i].values[j] = value;
                     }
                     
+                    target.parentNode.removeChild(target);
                     self.render();
                     pubsub.pub('Table.CellEdited', {
                         table: self,
@@ -60,6 +62,37 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
                     self.render();
                     return false;
                 }
+            };
+        },
+        makeBlureEditCell = function(i, j)
+        {
+            var self = this;
+
+            return function(e) {
+                e = e || window.event;
+
+                var target = e.target || e.srcElement,
+                    value = target.value;
+
+                value = dice.replace(value);
+
+                if (value.match(numCheck))
+                {
+                    self.data.body[i].values[j] = parseFloat(value);
+                }
+                else
+                {
+                    self.data.body[i].values[j] = value;
+                }
+
+                self.render();
+                pubsub.pub('Table.CellEdited', {
+                    table: self,
+                    i: i,
+                    j: j,
+                    value: value
+                });
+                return false;
             };
         },
         makeMarkHandler = function(i)
@@ -219,12 +252,9 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/cap', 'u
 
     tableObject.render = function(parent)
     {
-        if (this.element)
-        {
-            this.element.parentNode.removeChild(this.element);
-        }
-
         parent = parent || this.parent || document.body;
+
+        dom.empty(parent);
 
         var i,
             j,
