@@ -187,6 +187,7 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
                 contentType: 'html',
                 confirmText: 'Create',
                 cancelText: 'Cancel',
+                allowCancel: true,
                 onConfirm: function(e, data) {
                     ScreenController.addWindowSet(data);
                 }
