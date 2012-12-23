@@ -101,11 +101,13 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/dice'], 
 				{
 					value = dice.replace(value);
 					self.data[i].value = (value === '') ? '[click to edit]' : value;
+					target.parentNode.removeChild(target);
 					self.render();
 					pubsub.pub('List.ItemEdited', {
 						list: self,
 						item: self.data[i]
 					});
+
 					return false;
 				}
 				else if (key === 27)
