@@ -9,5 +9,10 @@ define(['./list'], function(list) {
         return data; 
     }
 
+    olObject.render = function(parent)
+    {
+        list.render.call(this, parent, true);
+    }
+
     return olObject;
 });
