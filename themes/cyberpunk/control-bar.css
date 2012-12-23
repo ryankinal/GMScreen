@@ -1,0 +1,94 @@
+.control-bar
+{
+    background: #0B181E;
+    box-shadow: 0 5px 15px #000;
+    height: 39px;
+    color: #FFF;
+    padding: 0 10px;
+    font-variant: small-caps;
+}
+
+.control-bar > div
+{
+    border: solid #000 1px;
+    border-width: 0 1px;
+    margin-left: -1px;
+}
+
+.menu
+{
+    cursor: pointer;
+}
+
+.menu ul
+{
+    background: #2B3F4F;
+    box-shadow: 0 7px 10px #000;
+    border-top: solid 1px #000;
+    margin-top: -1px;
+    font-weight: normal;
+}
+
+.menu .menu ul
+{
+    box-shadow: 7px 7px 10px #000;
+    background: #475E76;
+    font-size: 0.8em;
+}
+
+.control-bar > div span
+{
+    display: block;
+    padding: 10px 10px 9px;
+}
+
+.control-bar > div span:hover
+{
+    background: #2B3F4F;
+}
+
+.menu li
+{
+    padding: 10px 10px;
+    border-bottom: solid 1px #000;
+    padding-right: 30px;
+}
+
+.menu li:last-child
+{
+    border: none;
+}
+
+.menu li:hover
+{
+    background: #475E76;
+}
+
+.menu li:hover li
+{
+    color: #FFF;
+    border-left: solid 1px #000;
+}
+
+.menu li:hover .current, .menu li li:hover
+{
+    color: #F18608;
+}
+
+.menu li .delete
+{
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    border: none;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: transparent url(../icons/monotone_close.png) 50% 50% no-repeat;
+}
+
+.screen
+{
+    margin-top: 45px;
+}

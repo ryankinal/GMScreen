@@ -1,0 +1,109 @@
+html, body
+{
+    height: 100%;
+}
+
+body
+{
+    font-size: 18px;
+    margin: 0;
+    padding: 0 0 0 0;
+}
+
+h1, h2, h3
+{
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+/* control interface styles */
+.control-bar
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 20000;
+}
+
+.control-bar a
+{
+    text-decoration: none;
+}
+
+.control-bar > div
+{
+    float: left;
+    cursor: pointer;
+}
+
+.menu ul
+{
+    position: absolute;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+}
+
+.menu .menu ul
+{
+    left: 100%;
+    top: 0;
+}
+
+.menu:hover > ul
+{
+    display: block;
+}
+
+.menu li
+{
+    position: relative;
+}
+
+.menu .delete
+{
+    cursor: pointer;
+}
+
+.window-set-options
+{
+    display: none;
+}
+
+/* window display area styles */
+.screen
+{
+    position: relative;
+}
+
+/* control window styles */
+.blanket
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20001;
+    display: none;
+}
+
+.modal
+{
+    position: absolute;
+    width: 500px;
+    top: 150px;
+    left: 50%;
+    margin-left: -260px;
+    z-index: 20002;
+    padding: 10px;
+    display: none;
+}
+
+/* window styles */
+.ui-window
+{
+    position: absolute;
+}

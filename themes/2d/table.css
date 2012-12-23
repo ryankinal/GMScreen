@@ -1,0 +1,80 @@
+
+/* table styles */
+.ui-content table
+{
+    margin: -11px -11px 10px -11px;
+    border-collapse: collapse;
+}
+
+.ui-content td, .ui-content th
+{
+    border: solid #000 1px;
+    padding: 5px 10px;
+}
+
+.ui-content th:empty
+{
+    border: none;
+}
+
+.ui-content th, .ui-content table .mark, .ui-content table .delete
+{
+    width: 6px;
+    cursor: pointer;
+}
+
+.ui-content table .asc, .ui-content table .desc
+{
+    position: relative;
+    padding-right: 25px;
+}
+
+.ui-content table .sort
+{
+    width: 15px;
+    height: 11px;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    margin-top: -5px;
+}
+
+.ui-content table .marked
+{
+    background-color: #000;
+    color: #FFF;
+}
+
+.ui-content table .asc .sort
+{
+    background: url(../icons/arrow_up_black.png) right center no-repeat;
+}
+
+.ui-content table .desc .sort
+{
+    background: url(../icons/arrow_down_black.png) right center no-repeat;
+}
+
+.ui-content table .mark
+{
+    text-indent: -9999px;
+    background: url(../icons/monotone_check_inverted.png) 50% 50% no-repeat;
+}
+
+.ui-content table .delete
+{
+    text-indent: -9999px;
+    background: url(../icons/monotone_close.png) 50% 50% no-repeat;
+}
+
+.ui-content table .marked .mark
+{
+    text-indent: -9999px;
+    background: url(../icons/monotone_check_inverted_white.png) 50% 50% no-repeat;
+}
+
+.ui-content table .marked .delete
+{
+    text-indent: -9999px;
+    background: url(../icons/monotone_close_white.png) 50% 50% no-repeat;
+}

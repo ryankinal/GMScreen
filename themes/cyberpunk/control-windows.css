@@ -1,0 +1,38 @@
+.blanket
+{
+    background: #000;
+    opacity: 0.6;
+}
+
+.modal
+{
+    background: #FFF url(../patterns/office/office.png) 0 0;
+    background-attachment: fixed;
+    color: #FFF;
+    box-shadow: 0 5px 15px #000;
+    text-align: center;
+
+}
+
+.modal div
+{
+    margin-bottom: 10px;
+}
+
+.modal .type
+{
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 3px 9px #000;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.modal a
+{
+    color: #FFF;
+}

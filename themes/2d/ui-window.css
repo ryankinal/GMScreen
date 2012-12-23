@@ -1,0 +1,54 @@
+/* window styles */
+.ui-window
+{
+    background: #FFF;
+    border: solid #000 1px;
+    border-radius: 10px;
+}
+
+.ui-header
+{
+    border-bottom: solid #000 1px;
+    padding: 5px 48px 5px 10px;
+    cursor: move;
+}
+
+.ui-shader, .ui-closer
+{
+    text-indent: -9999px;
+    overflow: hidden;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.ui-shader
+{
+    top: 7px;
+    right: 27px;
+    background: transparent url(../icons/monotone_arrow_up.png) 50% 50% no-repeat;
+}
+
+.shaded .ui-shader
+{
+    background-image: url(../icons/monotone_arrow_down.png);
+}
+
+.ui-closer
+{
+    top: 7px;
+    right: 7px;
+    background: transparent url(../icons/monotone_close.png) 50% 50% no-repeat;
+}
+
+.shaded .ui-header
+{
+    border-bottom: none;
+}
+
+.ui-content
+{
+    padding: 10px;
+    overflow: hidden;
+}
