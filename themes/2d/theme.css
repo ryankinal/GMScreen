@@ -68,6 +68,13 @@ h1, h2, h3
     background-color: #000;
     color: #FFF;
     border: none;
+    border-right: solid #FFF 5px;
+}
+
+.menu .menu .current
+{
+    border: none;
+    border-right: solid #000 5px;
 }
 
 .menu ul
@@ -106,6 +113,7 @@ h1, h2, h3
 {
     color: #FFF;
 }
+
 .menu:hover > ul
 {
     display: block;
