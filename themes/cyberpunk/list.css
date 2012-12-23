@@ -17,16 +17,20 @@
     border-bottom: solid 1px #999;
 }
 
-.ui-content ol
+.ui-content ul .number
 {
-    margin: -6px -10px 10px -10px;
-    border-bottom: solid #999 1px;
+    float: left;
+    margin-right: 10px;
 }
 
-.ui-content ol li
+.ui-content ul .number::after
 {
-    padding: 5px 10px 5px 0;
-    margin: 0;
+    content: '.';
+}
+
+.ui-content ul .text
+{
+    overflow: hidden;
 }
 
 .ui-content .list .controls
