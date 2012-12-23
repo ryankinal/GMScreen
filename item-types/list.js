@@ -71,6 +71,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/dice'], 
 				target.appendChild(text);
 
 				text.addEventListener('keyup', makeEndEditHandler.call(self, i));
+				text.addEventListener('blur', makeBlurHandler.call(self, i));
 				text.addEventListener('click', function(e) {
 					e = e || window.event;
 					e.cancelBubble = true;
@@ -112,6 +113,27 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/dice'], 
 					self.render();
 					return false;
 				}
+			}
+		},
+		makeBlurHandler = function(i)
+		{
+			var self = this;
+
+			return function(e)
+			{
+				e = e || window.event;
+
+				var target = e.target || e.srcElement,
+					value = target.value;
+
+				value = dice.replace(value);
+				self.data[i].value = (value === '') ? '[click to edit]' : value;
+				self.render();
+				pubsub.pub('List.ItemEdited', {
+					list: self,
+					item: self.data[i]
+				});
+				return false;
 			}
 		},
 		makeDeleteHandler = function(i)
