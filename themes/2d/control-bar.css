@@ -41,13 +41,14 @@
     background: #000;
     font-weight: normal;
     border: solid #000 1px;
+    margin-left: -1px;
 }
 
 .menu .menu ul
 {
     border: solid #000 1px;
     margin-top: -1px;
-    margin-left: -1px;
+    margin-left: 0;
     font-size: .8em;
 }
 
