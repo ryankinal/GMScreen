@@ -163,7 +163,7 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/dice'], 
 		base.load.call(this, data);
 	}
 
-	listObject.render = function(parent)
+	listObject.render = function(parent, ordered)
 	{
 		if (this.element && dom.inDocument(this.element))
 		{
@@ -176,8 +176,9 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/dice'], 
 		var i,
 			dataLength = this.data.length,
 			container = dom.create('div'),
-			list = dom.create(this.tagName),
+			list = dom.create('ul'),
 			item,
+			itemNumber,
 			itemText,
 			addItem = dom.create('input'),
 			moveUp,
@@ -189,7 +190,17 @@ define(['./item-types', 'utilities/dom', 'utilities/efence', 'utilities/dice'], 
 		for (i = 0; i < dataLength; i++)
 		{
 			item = dom.create('li');
+			
+			if (ordered)
+			{
+				itemNumber = dom.create('div');
+				itemNumber.className = 'number';
+				itemNumber.appendChild(dom.text(i + 1));
+				item.appendChild(itemNumber);
+			}
+
 			itemText = dom.create('div');
+			itemText.className = 'text';
 			itemText.appendChild(dom.text(this.data[i].value));
 			item.appendChild(itemText);
 			itemText.addEventListener('click', makeStartEditHandler.call(this, i));
