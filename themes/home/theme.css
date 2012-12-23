@@ -87,6 +87,7 @@ h1, h2, h3
 {
 	left: 100%;
 	top: 0;
+	font-size: 0.8em;
 }
 
 .control-bar > div:hover
