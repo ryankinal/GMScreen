@@ -20,7 +20,6 @@ define(['utilities/dom', 'utilities/efence'], function(dom, pubsub) {
     themeManager.changeTheme = function(name)
     {
         Array.prototype.forEach.call(styleLinks, function(link, index) {
-            console.log(link.getAttribute('data-name'), name);
             if (link.getAttribute('data-name') === name)
             {
                 link.disabled = false;
