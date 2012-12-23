@@ -226,13 +226,18 @@ define(['utilities/dom', 'utilities/efence', 'utilities/cap', './controller', '.
                 }
 
                 closeWindow(newWindowInterface, newWindowName);
-                return false;
             }
             else if (target.className === 'cancel')
             {
                 closeWindow(newWindowInterface, newWindowName);
-                return false;
             }
+
+            if (e.preventDefault)
+            {
+                e.preventDefault();
+            }
+            
+            return false;
         },
         hotKeyHandler = function(e)
         {

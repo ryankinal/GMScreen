@@ -85,6 +85,8 @@ define(['utilities/dom'], function(dom) {
             {
                 closeCurrent();
             }
+
+            return false;
         });
 
         cancel.addEventListener('click', function(e) {
@@ -104,6 +106,8 @@ define(['utilities/dom'], function(dom) {
             {
                 closeCurrent();
             }
+
+            return false;
         });
 
         current = box;
@@ -173,6 +177,8 @@ define(['utilities/dom'], function(dom) {
             {
                 closeCurrent();
             }
+
+            return false;
         });
 
         current = box;
@@ -237,6 +243,8 @@ define(['utilities/dom'], function(dom) {
                     error.appendChild(dom.text(settings.invalidError || 'Invalid input'));
                     box.appendChild(error);
                 }
+
+                return false;
             };
 
         box.className = settings.className || 'modal';
@@ -286,6 +294,7 @@ define(['utilities/dom'], function(dom) {
                 if (key === 13)
                 {
                     confirm(e);
+                    return false;
                 }
             });
         }
@@ -315,6 +324,8 @@ define(['utilities/dom'], function(dom) {
                 {
                     closeCurrent();
                 }
+
+                return false;
              });
 
              buttons.appendChild(cancel);
