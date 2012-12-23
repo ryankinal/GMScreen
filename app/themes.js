@@ -15,12 +15,15 @@ define(['utilities/dom', 'utilities/efence'], function(dom, pubsub) {
         });
     });
 
+    themes.sort(function(x, y) {
+        return x.display < y.display ? -1 : 1;
+    });
+
     current = themes[0].name;
 
     themeManager.changeTheme = function(name)
     {
         Array.prototype.forEach.call(styleLinks, function(link, index) {
-            console.log(link.getAttribute('data-name'), name);
             if (link.getAttribute('data-name') === name)
             {
                 link.disabled = false;
