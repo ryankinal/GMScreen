@@ -107,3 +107,8 @@
     background: transparent url(../icons/monotone_close.png) 50% 50% no-repeat;
     cursor: pointer;
 }
+
+.screen
+{
+    margin-top: 45px;
+}

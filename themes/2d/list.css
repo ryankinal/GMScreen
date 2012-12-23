@@ -96,3 +96,9 @@
 {
     background-image: url(../icons/monotone_close_white.png);
 }
+
+.ui-content .list textarea
+{
+    width: 250px;
+    height: 65px;
+}
