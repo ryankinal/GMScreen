@@ -1,0 +1,58 @@
+.ui-window
+{
+    box-shadow: 0 5px 15px #000;
+    background: #2B3F4F;
+    color: #FFF;
+}
+
+.ui-header
+{
+    background: #0B181E;
+    padding: 5px 48px 5px 10px;
+    cursor: move;
+    font-variant: small-caps;
+}
+
+.ui-shader, .ui-closer
+{
+    position: absolute;
+    top: 9px;
+    text-indent: -9999px;
+    overflow: hidden;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.ui-shader
+{
+    right: 27px;
+    background: transparent url(../icons/monotone_arrow_up_white.png) 50% 50% no-repeat;
+}
+
+.shaded .ui-shader
+{
+    background-image: url(../icons/monotone_arrow_down_white.png);
+}
+
+.ui-closer
+{
+    right: 7px;
+    background: transparent url(../icons/monotone_close_white.png);
+}
+
+.shaded .ui-header
+{
+    border-bottom: none;
+}
+
+.ui-content
+{
+    padding: 10px;
+    overflow: hidden;
+}
+
+.ui-content .marked
+{
+    opacity: 0.5;
+}
