@@ -42,6 +42,13 @@ define(['utilities/efence', 'utilities/dom', 'utilities/cap'], function(pubsub, 
 				currentMover.update();
 				window.addEventListener('mousemove', moveHandler);
 				window.addEventListener('mouseup', mouseUpHandler);
+
+				if (e.preventDefault)
+				{
+					e.preventDefault();
+				}
+				
+				return false;
 			}
 		},
 		mouseUpHandler = function(e)
@@ -51,6 +58,13 @@ define(['utilities/efence', 'utilities/dom', 'utilities/cap'], function(pubsub, 
 			pubsub.pub('UIWindow.WindowMoved');
 			window.removeEventListener('mousemove', moveHandler);
 			window.removeEventListener('mouseup', mouseUpHandler);
+			
+			if (e.preventDefault)
+			{
+				e.preventDefault();
+			}
+
+			return false;
 		},
 		moveHandler = function(e)
 		{
@@ -65,6 +79,13 @@ define(['utilities/efence', 'utilities/dom', 'utilities/cap'], function(pubsub, 
 				lastPosition = position;
 				currentMover.update();
 			}
+
+			if (e.preventDefault)
+			{
+				e.preventDefault();
+			}
+
+			return false;
 		};
 
 	windowObject.init = function(name, parent)
